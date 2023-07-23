@@ -1,12 +1,20 @@
 import React from 'react';
+import SwiperLR from "./SwiperLR.js";
+import SwiperToon from "./SwiperToon.js";
 
 const MyComponent = () => {
+  const toonStyle = {
+      position: 'absolute',
+      width: '390px',
+      height: '636px',
+      left: '-12px',
+      top: '113px',
+      overflow: 'hidden',
+  };
+
     return (
-      <div>
-        <img
-          src={process.env.PUBLIC_URL + '/images/image1.png'}
-          alt="Image 1"
-          style={{ position: 'absolute', width: '404px', height: '636px', left: '-12px', top: '113px' }}/>
+      <div style={toonStyle}>
+        <SwiperToon />
       </div>
     );
   };
