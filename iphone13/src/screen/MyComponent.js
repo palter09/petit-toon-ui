@@ -1,6 +1,6 @@
 import React from 'react';
-import SwiperLR from "./SwiperLR.js";
-import SwiperToon from "./SwiperToon.js";
+import SwiperLR from "../swipe/SwiperLR.js";
+import SwiperToon from "../swipe/SwiperToon.js";
 
 const MyComponent = () => {
   const toonStyle = {
