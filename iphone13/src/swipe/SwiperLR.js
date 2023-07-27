@@ -17,6 +17,7 @@ export default function SwiperLR({webtoon}) {
     <>
       <Swiper
         spaceBetween={30}
+        direction={'horizontal'}
       >
         <SwiperSlide>Slide 1</SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>

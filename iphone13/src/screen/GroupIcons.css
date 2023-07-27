@@ -1,0 +1,17 @@
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .tab {
+    /* Add styles for each tab item */
+    /* For example: padding, margin, etc. */
+  }
+  
+  .tab.active {
+    /* Add styles for the active tab */
+  }

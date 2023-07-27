@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './Header';
-import MyComponent from './MyComponent';
-import GroupIcons from './GroupIcons';
+import Header from './screen/Header';
+import MyComponent from './screen/MyComponent';
+import GroupIcons from './screen/GroupIcons';
 import './App.css';
 
 const App = () => {
