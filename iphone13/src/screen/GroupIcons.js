@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import './GroupIcons.css'
 
-import { GroupIcons, Header } from './screen';
-
 
 const GroupIcons = () => {
   // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 currentTab 상태와 currentTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
   const [currentTab, clickTab] = useState(0);
 
   const tabData = [
-    { content: 'Love menu',imageSrc: process.env.PUBLIC_URL + '/images/love_icon.png' },
-    { content: 'Broken Heart menu', imageSrc: process.env.PUBLIC_URL + '/images/broken_heart_icon.png' },
-    { content: 'Bubble Chat menu', imageSrc: process.env.PUBLIC_URL + '/images/bubble_chat_icon.png' },
-    { content: 'Star menu', imageSrc: process.env.PUBLIC_URL + '/images/star_icon.png' },
-    { content: 'Setting menu', imageSrc: process.env.PUBLIC_URL + '/images/setting_icon.png' },
+    { name: 'Love menu',imageSrc: process.env.PUBLIC_URL + '/images/love_icon.png' },
+    { name: 'Broken Heart menu', imageSrc: process.env.PUBLIC_URL + '/images/broken_heart_icon.png' },
+    { name: 'Bubble Chat menu', imageSrc: process.env.PUBLIC_URL + '/images/bubble_chat_icon.png' },
+    { name: 'Star menu', imageSrc: process.env.PUBLIC_URL + '/images/star_icon.png' },
+    { name: 'Setting menu', imageSrc: process.env.PUBLIC_URL + '/images/setting_icon.png' },
   ];
 
   const handleClick = (index) => {
@@ -29,7 +27,7 @@ const GroupIcons = () => {
             onClick={() => handleClick(index)}
           >
             <img src={tab.imageSrc} alt={`Tab ${index + 1}`} />
-            <span>{tab.label}</span>
+          
         </div>
       ))}
     </div>

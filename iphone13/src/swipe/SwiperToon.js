@@ -72,13 +72,6 @@ export default function SwiperToon() {
         <SwiperSlide>
           <SwiperLR toon = {webtoon}/>
         </SwiperSlide>
-        <SwiperSlide>webtoon 3</SwiperSlide>
-        <SwiperSlide>webtoon 4</SwiperSlide>
-        <SwiperSlide>webtoon 5</SwiperSlide>
-        <SwiperSlide>webtoon 6</SwiperSlide>
-        <SwiperSlide>webtoon 7</SwiperSlide>
-        <SwiperSlide>webtoon 8</SwiperSlide>
-        <SwiperSlide>webtoon 9</SwiperSlide>
       </Swiper>
     </>
   );

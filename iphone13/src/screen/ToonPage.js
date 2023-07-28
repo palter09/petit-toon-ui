@@ -1,8 +1,7 @@
 import React from 'react';
-import SwiperLR from "../swipe/SwiperLR.js";
 import SwiperToon from "../swipe/SwiperToon.js";
 
-const MyComponent = () => {
+const ToonPage = () => {
   const toonStyle = {
       position: 'absolute',
       width: '390px',
@@ -19,4 +18,4 @@ const MyComponent = () => {
     );
   };
 
-  export default MyComponent;
+  export default ToonPage;
