@@ -10,9 +10,11 @@ const App = () => {
     <div className="container">
       <div className="item">
         <Header />
+        <div className='divLine1' />
       </div>
       <div className="item">
         <CenterPage />
+        <div className='divLine2' />
       </div>
       <div name="bottomBar" className="item">
         <DisLike />
