@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
+/*메뉴 바깥을 눌렀을시 메뉴 창을 닫는 용도*/
 const useDetectClose = (initialState) => {
   const [isOpen, setIsOpen] = useState(initialState);
   const ref = useRef(null);
