@@ -1,7 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import MyComponent from './MyComponent';
-import GroupIcons from './GroupIcons';
+import Header from './screen/Header';
+import CenterPage from './screen/CenterPage';
+import { DisLike, Like, Comment, Subscribe, Setting } from './Buttons/BottomButton';
+
 import './App.css';
 
 const App = () => {
@@ -11,10 +12,14 @@ const App = () => {
         <Header />
       </div>
       <div className="item">
-        <MyComponent />
+        <CenterPage />
       </div>
-      <div className="item">
-        <GroupIcons />
+      <div name="bottomBar" className="item">
+        <DisLike />
+        <Like />
+        <Comment />
+        <Subscribe />
+        <Setting />
       </div>
     </div>
   );
