@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import useDetectClose from "./useDetectClose";
 
 const menuTmp = () => {
@@ -161,6 +161,11 @@ const DropdownMenu = () => {
             </MenuButton>
           </MenuContainer>
         </Menu>
+        {/* 삼각형 요소 */}
+        <TriangleWrapper>
+          <TriangleOuter isDropped={myPageIsOpen} />
+          <TriangleInner isDropped={myPageIsOpen} />
+        </TriangleWrapper>
       </DropdownContainer>
     </Wrapper>
   );
@@ -191,11 +196,12 @@ const Wrapper = styled.div`
 const DropdownContainer = styled.div`
   position: absolute;
   text-align: center;
+  z-index: 9;
 `;
 
 const DropdownButton = styled.div`
   cursor: pointer;
-  z-index:1;
+  z-index:9;
 `;
 //dropdown button 클릭시 나오는 menu
 const Menu = styled.div`
@@ -208,13 +214,16 @@ const Menu = styled.div`
   text-align: center;
   border-radius: 32px;
   outline: 2px solid #DA5E9D;
+  //처음에 투명하고 보이지 않게 설정
   opacity: 0;
   visibility: hidden;
+  //애니메이션 효과
   transform: translate(-334px, -0px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 
-  //click시 나오는 메뉴 위 삼각형
+  /*
+  //click시 나오는 메뉴 위 삼각형 - 이거 안씀 이 코드말고 triangle wrapper triangle로 변경함 
   &:after {
     content: "";
     height: 0;
@@ -227,8 +236,8 @@ const Menu = styled.div`
     border-top-width: 0;
     border-bottom: 41px solid white;
     z-index:9;
-  }
-
+  }*/
+  //isDropped가 true면 보임
   ${({ isDropped }) =>
     isDropped &&
     css`
@@ -238,32 +247,68 @@ const Menu = styled.div`
     `};
 `;
 
-//ul형식인데 안사용
-const Ul = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+/*triangle animation*/
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+    visibility: visible;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+`;
+
+// 삼각형 요소를 감싸는 Wrapper
+const TriangleWrapper = styled.div`
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
 `;
 
-const Li = styled.li``;
-
-//<a>형식
-const LinkWrapper = styled.a`
-  position : relative
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: -0.40799999237060547px;
-  text-align: left;
-  background: transparent;
-  color: #DA5E9D;
-  text-decoration: none;
+// 테두리가 분홍색인 삼각형 (외부 삼각형)
+const TriangleOuter = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #DA5E9D;
+  position: absolute;
+  top: -20px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  animation: ${({ isDropped }) => (isDropped ? fadeIn : fadeOut)} 0.1s ease;
+  visibility: ${({ isDropped }) => (isDropped ? "visible" : "hidden")};
+  opacity: ${({ isDropped }) => (isDropped ? 1 : 0)};
+  z-index: 8;
 `;
+
+// 내부가 흰색인 삼각형 (내부 삼각형)
+const TriangleInner = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 35px solid white;
+  position: absolute;
+  top: -13px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  animation: ${({ isDropped }) => (isDropped ? fadeIn : fadeOut)} 0.1s ease;
+  visibility: ${({ isDropped }) => (isDropped ? "visible" : "hidden")};
+  opacity: ${({ isDropped }) => (isDropped ? 1 : 0)};
+  z-index: 9;
+`;
+
 //<div>형식
 const MenuTitle = styled.div`
   position : relative;
@@ -302,6 +347,7 @@ const MenuContainer = styled.div`
   padding: 0px;
 `;
 
+/*메뉴창 각각의 버튼*/
 const MenuButton = styled.div`
   background-color: white;
   border: transparent;
