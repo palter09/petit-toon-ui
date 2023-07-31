@@ -64,9 +64,9 @@ export const Menu = styled.div`
     border-bottom: 41px solid white;
     z-index:9;
   }*/
-  //isDropped가 true면 보임
-  ${({ isDropped }) =>
-    isDropped &&
+  //$isDropped가 true면 보임
+  ${({ $isDropped }) =>
+    $isDropped &&
     css`
       opacity: 1;
       visibility: visible;
@@ -115,9 +115,9 @@ export const TriangleOuter = styled.div`
   border-bottom: 40px solid #DA5E9D;
   position: absolute;
   top: -20px; /* 위쪽으로 이동하여 겹치도록 설정 */
-  animation: ${({ isDropped }) => (isDropped ? fadeIn : fadeOut)} 0.1s ease;
-  visibility: ${({ isDropped }) => (isDropped ? "visible" : "hidden")};
-  opacity: ${({ isDropped }) => (isDropped ? 1 : 0)};
+  animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
+  visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
+  opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
   z-index: 8;
 `;
 
@@ -130,9 +130,9 @@ export const TriangleInner = styled.div`
   border-bottom: 35px solid white;
   position: absolute;
   top: -13px; /* 위쪽으로 이동하여 겹치도록 설정 */
-  animation: ${({ isDropped }) => (isDropped ? fadeIn : fadeOut)} 0.1s ease;
-  visibility: ${({ isDropped }) => (isDropped ? "visible" : "hidden")};
-  opacity: ${({ isDropped }) => (isDropped ? 1 : 0)};
+  animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
+  visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
+  opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
   z-index: 9;
 `;
 

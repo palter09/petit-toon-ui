@@ -42,7 +42,7 @@ const DropdownMenu = () => {
           />
         </Styled.DropdownButton>
         {/*header menu open 오픈된 메뉴*/}
-        <Styled.Menu isDropped={myPageIsOpen}>
+        <Styled.Menu $isDropped={myPageIsOpen}>
           <Styled.MenuTitle>메뉴|Menu</Styled.MenuTitle>
           <Styled.MenuContainer>
             {/*header menu안의 buttons*/}
@@ -146,8 +146,8 @@ const DropdownMenu = () => {
         </Styled.Menu>
         {/* 삼각형 요소 */}
         <Styled.TriangleWrapper>
-          <Styled.TriangleOuter isDropped={myPageIsOpen} />
-          <Styled.TriangleInner isDropped={myPageIsOpen} />
+          <Styled.TriangleOuter $isDropped={myPageIsOpen} />
+          <Styled.TriangleInner $isDropped={myPageIsOpen} />
         </Styled.TriangleWrapper>
       </Styled.DropdownContainer>
     </Styled.Wrapper>
