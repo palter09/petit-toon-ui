@@ -53,11 +53,21 @@ export default function SwiperToon() {
 
   }
 
+  const toonStyle = {
+    position: 'absolute',
+    width: '390px',
+    height: '636px',
+    left: '-12px',
+    top: '113px',
+    overflow: 'hidden',
+};
+
   return (
     <>
       <Swiper
         spaceBetween={30}
         direction={'vertical'}
+        style={toonStyle}
         /*
         pagination={{
           clickable: true,
