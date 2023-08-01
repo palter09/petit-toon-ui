@@ -14,7 +14,7 @@ import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./ToonPage/Header.js"
 import { DisLike, Like, Comment, Subscribe, Setting } from "./ToonPage/BottomButton.js"
 
-const ToonPage = () => {
+const ToonPage = ({renderPage}) => {
   return (
     <div className="container">
       <div className="item">
@@ -30,7 +30,7 @@ const ToonPage = () => {
         <Like />
         <Comment />
         <Subscribe />
-        <Setting />
+        <Setting renderPage={renderPage} />
       </div>
     </div>
   );

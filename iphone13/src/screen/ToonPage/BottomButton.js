@@ -1,31 +1,47 @@
 import React from 'react';
-import Button from '../Buttons/Button';
 
 
-const test = () => {};
+const test = () => {
+  console.log("!")
+};
 
 const DisLike = () => {
-  return <Button src={process.env.PUBLIC_URL + '/images/love_icon.png'} left="45px" top="778px" clickEvent={test}/>;
+  return <img 
+    src={process.env.PUBLIC_URL + '/images/love_icon.png'} 
+    style={{position: "absolute", left: "45px", top: "778px"}} 
+    onClick={test}
+  />;
 };
 
 const Like = () => {
-  return <Button src={process.env.PUBLIC_URL + '/images/broken_heart_icon.png'} left="109px" top="778px" clickEvent={test}/>;
+  return <img 
+    src={process.env.PUBLIC_URL + '/images/broken_heart_icon.png'} 
+    style={{position: "absolute", left: "109px", top: "778px"}} 
+    onClick={test}
+  />;
 };
 
 const Comment = () => {
-  return <Button src={process.env.PUBLIC_URL + '/images/bubble_chat_icon.png'} left="173px" top="778px" clickEvent={test}/>;
+  return <img 
+    src={process.env.PUBLIC_URL + '/images/bubble_chat_icon.png'} 
+    style={{position: "absolute", left: "173px", top: "778px"}} 
+    onClick={test}
+  />;
 };
 
 const Subscribe = () => {
-  return <Button src={process.env.PUBLIC_URL + '/images/star_icon.png'} left="237px" top="778px" clickEvent={test}/>;
+  return <img 
+    src={process.env.PUBLIC_URL + '/images/star_icon.png'} 
+    style={{position: "absolute", left: "237px", top: "778px"}} 
+    onClick={test}
+  />;
 };
 
-const Setting = () => {
-  return <Button src={process.env.PUBLIC_URL + '/images/setting_icon.png'} left="301px" top="778px" 
-                 clickEvent={() => {
-
-                 }
-  }/>;
+const Setting = ({renderPage}) => {
+  return <img 
+    src={process.env.PUBLIC_URL + '/images/setting_icon.png'} 
+    style={{position: "absolute", left: "301px", top: "778px"}}
+    onClick={() => {renderPage('SettingPage')}}/>;
 };
 
 
