@@ -37,14 +37,11 @@ const Subscribe = () => {
   />;
 };
 
-const Setting = () => {
+const Setting = ({renderPage}) => {
   return <img 
     src={process.env.PUBLIC_URL + '/images/setting_icon.png'} 
     style={{position: "absolute", left: "301px", top: "778px"}}
-    onClick={() => {
-
-    }
-  }/>;
+    onClick={() => {renderPage('SettingPage')}}/>;
 };
 
 
