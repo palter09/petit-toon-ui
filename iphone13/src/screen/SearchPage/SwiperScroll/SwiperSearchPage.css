@@ -1,0 +1,56 @@
+/*SwiperProfiles*/
+.SwiperProf {
+  width: 100%;
+  height: 100%;
+}
+
+.SwiperProf .swiper-slide{
+  text-align: center;
+  font-size: 18px;
+  background: whitesmoke;
+  border-radius: 50%;
+  outline: 1px solid pink;
+  height: 75%;
+  top: 13%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+  
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SwiperProf.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*SwiperThumbnails*/
+.SwiperThumb {
+  width: 100%;
+  height: 100%;
+}
+
+.SwiperThumb .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: whitesmoke;
+  outline: 1px solid pink;
+  width: 30%;
+  height: 30%;
+  left: 1.5%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SwiperThumb .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,38 @@
+.inputContainerStyle {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 8px;
+  width: 90%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+}
+
+.searchInputStyle {
+  font-size: 16px;
+  padding: 4px;
+  background-color: transparent;
+  width: calc(100% - 40px);
+  height: inherit;
+  border: transparent;
+}
+
+.searchButtonStyle {
+  margin-left: 8px;
+  padding: 4px 8px;
+  background-color: transparent;
+  color: transparent;
+  border: transparent;
+  outline: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  /* 버튼의 너비를 설정 */
+  width: 40px;
+  /* 버튼의 높이를 입력창의 높이와 맞춤 */
+  height: 28px;
+  /* 버튼의 높이와 입력창의 높이를 수직 정렬 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

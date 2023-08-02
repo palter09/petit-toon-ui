@@ -18,7 +18,7 @@ const ToonPage = ({renderPage}) => {
   return (
     <div className="container">
       <div className="item">
-        <Header />
+        <Header renderPage={renderPage}/>
         <div className='divLine1' />
       </div>
       <div className="item">
