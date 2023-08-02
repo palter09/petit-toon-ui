@@ -8,6 +8,8 @@ const useIconClick = () => {
   const [petitIconClicked, setPetitIconClicked] = useState(false);
   const [eventIconClicked, setEventIconClicked] = useState(false);
   const [mypageIconClicked, setMypageIconClicked] = useState(false);
+  const [chatIconClicked, setChatIconClicked] = useState(false);
+  const [supportIconClicked, setSupportIconClicked] = useState(false);
 
   const handleIconClick = (icon) => {
     switch (icon) {
@@ -53,6 +55,17 @@ const useIconClick = () => {
           setMypageIconClicked(false);
         }, 100);
         break;
+      case 7:
+        setChatIconClicked(true);
+        setTimeout(() => {
+          setChatIconClicked(false);
+        }, 100);
+        break;
+      case 8:
+        setSupportIconClicked(true);
+        setTimeout(() => {
+          setSupportIconClicked(false);
+        }, 100);
       default:
         break;
     }
@@ -66,6 +79,8 @@ const useIconClick = () => {
     petitIconClicked,
     eventIconClicked,
     mypageIconClicked,
+    chatIconClicked,
+    supportIconClicked,
     handleIconClick,
   };
 };
