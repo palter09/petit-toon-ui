@@ -5,7 +5,7 @@ import Profiles from './SearchPage/Profiles';
 import Thumnails from './SearchPage/Thumbnails';
 import "./SearchPage/SearchPage.css"
 
-const SearchPage = ({renderPage}) => {
+const SearchPage = () => {
   return (
     <div className="container">
       <div className="item">
