@@ -15,8 +15,8 @@ export const Wrapper = styled.div`
   position: absolute;
   width: 45px;
   height: 45px;
-  left: 320px;
-  top: 47px;
+  left: 173px;
+  top: 780px;
   font-weight: bold;
 `;
 
@@ -34,8 +34,8 @@ export const DropdownButton = styled.div`
 export const Menu = styled.div`
   background: white;
   position: absolute;
-  top: 68px;
-  left: 50%;
+  top: -483px;
+  left: 23px;
   width: 373px;
   height: 458px;
   text-align: center;
@@ -45,10 +45,25 @@ export const Menu = styled.div`
   opacity: 0;
   visibility: hidden;
   //애니메이션 효과
-  transform: translate(-334px, -0px);
+  transform: translate(-187px, -0px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 
+  /*
+  //click시 나오는 메뉴 위 삼각형 - 이거 안씀 이 코드말고 triangle wrapper triangle로 변경함 
+  &:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -15px;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    border: 25px solid transparent;
+    border-top-width: 0;
+    border-bottom: 41px solid white;
+    z-index:9;
+  }*/
   //$isDropped가 true면 보임
   ${({ $isDropped }) =>
     $isDropped &&
@@ -57,6 +72,8 @@ export const Menu = styled.div`
       visibility: visible;
       left: 50%;
     `};
+    resize: vertical;
+    overflow: auto;
 `;
 
 /*triangle animation*/
@@ -99,11 +116,12 @@ export const TriangleOuter = styled.div`
   border-right: 20px solid transparent;
   border-bottom: 40px solid #DA5E9D;
   position: absolute;
-  top: -20px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
   animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
   visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
   opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
   z-index: 8;
+  transform: scaleY(-1);
 `;
 
 // 내부가 흰색인 삼각형 (내부 삼각형)
@@ -114,11 +132,12 @@ export const TriangleInner = styled.div`
   border-right: 16px solid transparent;
   border-bottom: 35px solid white;
   position: absolute;
-  top: -13px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
   animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
   visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
   opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
   z-index: 9;
+  transform: scaleY(-1);
 `;
 
 //<div>형식
@@ -126,11 +145,11 @@ export const MenuTitle = styled.div`
   position : relative;
   font-family: Inter;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 22px;
   letter-spacing: -0.40799999237060547px;
   text-align: left;
-  width: 106px;
+  width: 120px;
   height: 22px;
   top: 5px;
   left: 22px;
@@ -180,3 +199,16 @@ export const MenuButton = styled.div`
   vertical-align: text-bottom;
 `;
 
+// 댓글 스타일
+export const CommentContainer = styled.div`
+  max-height: 200px; /* Set a maximum height to limit the comment container's size */
+  overflow-y: auto; /* Add vertical scrollbar if comments overflow */
+  padding: 60px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column-reverse; /* Reverse the direction of content */
+  line-height: 1.4;
+  color: #000000;
+`;

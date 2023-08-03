@@ -1,15 +1,15 @@
 // DropdownMenu.js
-import React, { useState } from "react";
+import React from "react";
 import useDetectClose from "./useDetectClose";
-import useIconClick from './useIconClick';
-import * as Styled from "./MenuStyles"; 
+import useIconClick from "./useIconClick";
+import * as Styled from "./MenuStyles";
 
 const menuTmp = () => {
   // ...
 };
 
-const DropdownMenu = () => {
-  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+const DropdownMenu = ({ renderPage }) => {
+  const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
   const {
     menuIconClicked,
     storeIconClicked,
@@ -21,17 +21,24 @@ const DropdownMenu = () => {
     handleIconClick,
   } = useIconClick();
 
+  //iconclick효과가 페이지 이동보다 먼저 일어나게
+  const handleSearchIconClick = () => {
+    handleIconClick(2);
+    setTimeout(() => {
+      renderPage("SearchPage");
+    }, 150);
+  };
+
   return (
     <Styled.Wrapper>
-      <Styled.DropdownContainer>
+      <Styled.DropdownContainer className="dropdown-container">
         {/*header menu button 헤더상의 메뉴 버튼*/}
         {/*0. menu button*/}
-        <Styled.DropdownButton 
+        <Styled.DropdownButton
           onClick={() => {
-            myPageHandler();
+            myPageToggleHandler();
             handleIconClick(0);
           }}
-          ref={myPageRef}
         >
           <img
             src={
@@ -65,8 +72,7 @@ const DropdownMenu = () => {
             {/*2. search-engine icon */}
             <Styled.MenuButton
               onClick={() => {
-                menuTmp();
-                handleIconClick(2);
+                handleSearchIconClick();
               }}
             >
               <img
@@ -146,8 +152,8 @@ const DropdownMenu = () => {
         </Styled.Menu>
         {/* 삼각형 요소 */}
         <Styled.TriangleWrapper>
-          <Styled.TriangleOuter $isDropped={myPageIsOpen} />
-          <Styled.TriangleInner $isDropped={myPageIsOpen} />
+          {myPageIsOpen && <Styled.TriangleOuter $isDropped={myPageIsOpen} />}
+          {myPageIsOpen && <Styled.TriangleInner $isDropped={myPageIsOpen} />}
         </Styled.TriangleWrapper>
       </Styled.DropdownContainer>
     </Styled.Wrapper>
