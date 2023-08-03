@@ -49,21 +49,6 @@ export const Menu = styled.div`
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 
-  /*
-  //click시 나오는 메뉴 위 삼각형 - 이거 안씀 이 코드말고 triangle wrapper triangle로 변경함 
-  &:after {
-    content: "";
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: -15px;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    border: 25px solid transparent;
-    border-top-width: 0;
-    border-bottom: 41px solid white;
-    z-index:9;
-  }*/
   //$isDropped가 true면 보임
   ${({ $isDropped }) =>
     $isDropped &&

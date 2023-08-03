@@ -1,18 +1,17 @@
-import { useEffect, useState, useRef } from "react";
+// useDetectClose.js
+import { useEffect, useState } from "react";
 
-/*메뉴 바깥을 눌렀을시 메뉴 창을 닫는 용도*/
 const useDetectClose = (initialState) => {
   const [isOpen, setIsOpen] = useState(initialState);
-  const ref = useRef(null);
 
-  const removeHandler = () => {
-    setIsOpen(!isOpen);
+  const toggleHandler = () => {
+    setIsOpen((prev) => !prev);
   };
 
   useEffect(() => {
     const onClick = (e) => {
-      if (ref.current !== null && !ref.current.contains(e.target)) {
-        setIsOpen(!isOpen);
+      if (isOpen && e.target.closest(".dropdown-container") === null) {
+        setIsOpen(false);
       }
     };
 
@@ -25,7 +24,7 @@ const useDetectClose = (initialState) => {
     };
   }, [isOpen]);
 
-  return [isOpen, ref, removeHandler];
+  return [isOpen, toggleHandler];
 };
 
 export default useDetectClose;
