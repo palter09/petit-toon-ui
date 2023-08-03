@@ -27,7 +27,7 @@ const DisLike = () => {
   />;
 };
 
-const Comment = () => {
+const Comment = ({renderPage}) => {
   const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
@@ -87,8 +87,7 @@ const Comment = () => {
               {/* 후원 아이콘 */}
               <Styled.MenuButton
                 onClick={() => {
-                  chatTmp();
-                  handleIconClick(8);
+                  renderPage('SupportPage')
                 }}
               >
                 <img
