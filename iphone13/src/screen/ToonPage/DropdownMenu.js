@@ -4,11 +4,15 @@ import useDetectClose from "./useDetectClose";
 import useIconClick from "./useIconClick";
 import * as Styled from "./MenuStyles";
 
+import { useNavigate } from 'react-router-dom';
+
 const menuTmp = () => {
   // ...
 };
 
-const DropdownMenu = ({ renderPage }) => {
+const DropdownMenu = () => {
+  const navigate = useNavigate();
+  
   const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
   const {
     menuIconClicked,
@@ -25,7 +29,7 @@ const DropdownMenu = ({ renderPage }) => {
   const handleSearchIconClick = () => {
     handleIconClick(2);
     setTimeout(() => {
-      renderPage("SearchPage");
+      navigate('/search');
     }, 150);
   };
 

@@ -14,23 +14,19 @@ import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./ToonPage/Header.js"
 import { DisLike, Like, Comment, Subscribe, Setting } from "./ToonPage/BottomButton.js"
 
-const ToonPage = ({renderPage}) => {
+const ToonPage = () => {
   return (
     <div className="container">
       <div className="item">
-        <Header renderPage={renderPage}/>
-        <div className='divLine1' />
-      </div>
-      <div className="item">
+        <Header />
+        <div className='divLineHeader' />
         <SwiperToon />
-        <div className='divLine2' />
-      </div>
-      <div className="item">
+        <div className='divLineBottom' />
         <DisLike />
         <Like />
         <Comment />
         <Subscribe />
-        <Setting renderPage={renderPage} />
+        <Setting />
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const SupportPage = ({renderPage}) => {
+const SupportPage = () => {
 	return (
 		<div>
 			sample
-			<button onClick={() => {renderPage('ToonPage')}}>ToonPage</button>
+			<button onClick={() => {}}>ToonPage</button>
 		</div>
 	);
 };

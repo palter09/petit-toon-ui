@@ -1,10 +1,10 @@
 import React from 'react';
 
-const SettingPage = ({renderPage}) => {
+const SettingPage = () => {
 	return (
 		<div>
 			sample
-			<button onClick={() => {renderPage('ToonPage')}}>ToonPage</button>
+			<button onClick={() => {}}>ToonPage</button>
 		</div>
 	);
 };

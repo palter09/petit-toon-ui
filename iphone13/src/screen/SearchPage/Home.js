@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchPage.css';
 import useIconClick from './useIconClick';
 
-const Home = ({renderPage}) => {
+const Home = () => {
   const {
     homeIconClicked,
     handleIconClick,
@@ -12,7 +12,7 @@ const Home = ({renderPage}) => {
   const handleHomeIconClick = () => {
     handleIconClick(0);
     setTimeout(() => {
-      renderPage("ToonPage");
+      
     }, 150);
   };
   return (

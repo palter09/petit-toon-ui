@@ -34,7 +34,7 @@ body {
   overflow: hidden;
 }
 
-.divLine1 {
+.divLineHeader {
   position: absolute;
   top: 105px;
   width: 383px;
@@ -44,7 +44,17 @@ body {
   background-color: #DA5E9D;
 }
 
-.divLine2 {
+.divLineMid {
+  position: absolute;
+  top: 256px;
+  width: 383px;
+  height: 0px;
+  left: 0px;
+  border: 2px solid #DA5E9D;
+  background-color: #DA5E9D;
+}
+
+.divLineBottom {
   position: absolute;
   top: 753px;
   width: 383px;

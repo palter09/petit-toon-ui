@@ -1,28 +1,24 @@
 import React, { useState } from 'react';
+import { Route, Routes, Link } from 'react-router-dom';
+
 import ToonPage from './screen/ToonPage'
 import SettingPage from './screen/SettingPage'
-
-import './App.css';
+import UserinfoPage from './screen/UserinfoPage';
 import SearchPage from './screen/SearchPage';
 
+import './App.css';
+
 const App = () => {
-  const [renderPage, setRenderPage] = useState('ToonPage');
-  const pageMap = {
-    'SettingPage': SettingPage,
-    'ToonPage': ToonPage,
-    'SearchPage': SearchPage,
-    // 여기에 필요한 다른 페이지들을 추가할 수 있음
-  };
-
-  const handleRenderPage = (pageName) => {
-    setRenderPage(pageName);
-  };
-
   return (
     <div>
-      {React.createElement(pageMap[renderPage], {
-        renderPage: handleRenderPage,
-      })}
+      <Routes>
+        <Route path="/setting" element={<SettingPage />} />
+        <Route path="/toon" element={<ToonPage />} />
+        <Route path="/userinfo" element={<UserinfoPage />} />
+        <Route path="/search" element={<SearchPage />} />
+
+        {/* 다른 라우트들을 여기에 추가할 수 있습니다. */}
+      </Routes>
     </div>
   );
 };

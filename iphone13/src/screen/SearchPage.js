@@ -9,7 +9,7 @@ const SearchPage = ({renderPage}) => {
   return (
     <div className="container">
       <div className="item">
-        <Home renderPage = {renderPage}/>
+        <Home />
       </div>
       <div className="item">
         <SearchEngine/>
