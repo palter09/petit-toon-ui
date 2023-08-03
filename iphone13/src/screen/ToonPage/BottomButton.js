@@ -28,7 +28,7 @@ const DisLike = () => {
 };
 
 const Comment = () => {
-  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+  const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
 
@@ -47,14 +47,13 @@ const Comment = () => {
 
   return (
     <Styled.Wrapper>
-      <Styled.DropdownContainer>
+      <Styled.DropdownContainer className="dropdown-container">
         {/* 채팅 아이콘 */}
         <Styled.DropdownButton
           onClick={() => {
-            myPageHandler();
+            myPageToggleHandler();
             handleIconClick(7);
           }}
-          ref={myPageRef}
           >
             <img
               src={
@@ -62,7 +61,6 @@ const Comment = () => {
                 (chatIconClicked ? '/images/bubble_chat_icon.png' : '/images/bubble_chat_icon.png')
               }
               alt="채팅 아이콘"
-              // style={{position: "absolute", left: "-170px", top: "708px"}} // 이거 위치 왜 이런지 모르겠음
             />
           </Styled.DropdownButton>
           <Styled.Menu $isDropped={myPageIsOpen}>
@@ -113,16 +111,6 @@ const Comment = () => {
     </Styled.Wrapper>
   )
 }
-
-/*
-const Comment = () => {
-  return <img 
-    src={process.env.PUBLIC_URL + '/images/bubble_chat_icon.png'} 
-    style={{position: "absolute", left: "173px", top: "778px"}} 
-    onClick={test}
-  />;
-};
-*/
 
 const Subscribe = () => {
   return <img 
