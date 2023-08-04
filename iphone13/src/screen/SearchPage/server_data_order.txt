@@ -1,0 +1,57 @@
+1. SearchPage
+
+  const [searchResults, setSearchResults] = useState({ users: [], toons: [] });
+
+  return (
+    <div className="container">
+      <div className="item">
+        <Home />
+      </div>
+      <div className="item">
+        <SearchEngine onSearchResults={handleSearchResults} />
+
+2. SearchEngine
+
+  const handleSearch = () => {//api에서 최종적으로 가져오는
+    const encodedQuery = encodeURIComponent(searchQuery); // 검색어 한글 인코딩
+    // 검색 API 호출
+    fetch(`http://34.105.97.215/api/v1/search?keyword=${encodedQuery}&page=0&size=5` )
+      .then((response) => {
+        if(!response.ok){
+          throw new Error(`오류 발생: ${response.status}`);
+        }
+        return response.json();//
+      })
+      .then((json) => {
+        onSearchResults(json); // API 응답 결과를 SearchPage로 전달
+      })
+      .catch((error) => {
+        console.error('검색 오류:', error);
+        onSearchResults({ users: [], toons: [] }); // 오류 발생 시, 빈 결과로 초기화
+      });
+  };
+
+3. SearchPage
+
+  const [searchResults, setSearchResults] = useState({ users: [], toons: [] });
+
+  // Function to handle search results from SearchEngine
+  const handleSearchResults = (results) => {
+    
+    console.log(results.users);
+    console.log(results.toons);
+    setSearchResults(results);
+  };
+
+  4. SwiperProfiles, SwiperThumbnails
+        {users.map((user) => (
+          <SwiperSlide key={user.id}>
+            <img src={user.profileImagePath} alt={user.nickname} />
+          </SwiperSlide>
+        ))}
+
+          {toons.map((toon) => (//map은 안에 function 모두 적용
+          <SwiperSlide key={toon.id}>
+            <img src={toon.thumbnailUrl} alt={toon.title} />
+          </SwiperSlide>
+        ))}

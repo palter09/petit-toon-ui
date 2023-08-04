@@ -1,10 +1,8 @@
-// DropdownMenu.js
 import React from "react";
 import useDetectClose from "./useDetectClose";
 import useIconClick from "./useIconClick";
-import * as Styled from "./MenuStyles";
-
 import { useNavigate } from 'react-router-dom';
+import "./DropdownMenu.css";
 
 const menuTmp = () => {
   // ...
@@ -34,11 +32,12 @@ const DropdownMenu = () => {
   };
 
   return (
-    <Styled.Wrapper>
-      <Styled.DropdownContainer className="dropdown-container">
+    <div className="Wrapper">
+      <div className="dropdown-container">
         {/*header menu button 헤더상의 메뉴 버튼*/}
         {/*0. menu button*/}
-        <Styled.DropdownButton
+        <div
+          className="dropdown-button"
           onClick={() => {
             myPageToggleHandler();
             handleIconClick(0);
@@ -51,14 +50,15 @@ const DropdownMenu = () => {
             }
             alt="메뉴 아이콘"
           />
-        </Styled.DropdownButton>
+        </div>
         {/*header menu open 오픈된 메뉴*/}
-        <Styled.Menu $isDropped={myPageIsOpen}>
-          <Styled.MenuTitle>메뉴|Menu</Styled.MenuTitle>
-          <Styled.MenuContainer>
+        <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
+          <div className="menu-title">메뉴|Menu</div>
+          <div className="menu-container">
             {/*header menu안의 buttons*/}
             {/*1. store icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 menuTmp();
                 handleIconClick(1);
@@ -72,9 +72,10 @@ const DropdownMenu = () => {
                 alt="store icon"
               />
               <span>스토어</span>
-            </Styled.MenuButton>
+            </div>
             {/*2. search-engine icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 handleSearchIconClick();
               }}
@@ -87,9 +88,10 @@ const DropdownMenu = () => {
                 alt="search-engine icon"
               />
               <span>검색</span>
-            </Styled.MenuButton>
+            </div>
             {/*3 map icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 menuTmp();
                 handleIconClick(3);
@@ -103,9 +105,10 @@ const DropdownMenu = () => {
                 alt="map icon"
               />
               <span>탐색</span>
-            </Styled.MenuButton>
+            </div>
             {/*4. petit icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 menuTmp();
                 handleIconClick(4);
@@ -119,9 +122,10 @@ const DropdownMenu = () => {
                 alt="petit icon"
               />
               <span>이주의 쁘띠</span>
-            </Styled.MenuButton>
+            </div>
             {/*5. event icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 menuTmp();
                 handleIconClick(5);
@@ -135,9 +139,10 @@ const DropdownMenu = () => {
                 alt="event icon"
               />
               <span>공지/이벤트</span>
-            </Styled.MenuButton>
+            </div>
             {/*6. mypage icon */}
-            <Styled.MenuButton
+            <div
+              className="menu-button"
               onClick={() => {
                 menuTmp();
                 handleIconClick(6);
@@ -151,16 +156,16 @@ const DropdownMenu = () => {
                 alt="mypage icon"
               />
               <span>마이페이지</span>
-            </Styled.MenuButton>
-          </Styled.MenuContainer>
-        </Styled.Menu>
+            </div>
+          </div>
+        </div>
         {/* 삼각형 요소 */}
-        <Styled.TriangleWrapper>
-          {myPageIsOpen && <Styled.TriangleOuter $isDropped={myPageIsOpen} />}
-          {myPageIsOpen && <Styled.TriangleInner $isDropped={myPageIsOpen} />}
-        </Styled.TriangleWrapper>
-      </Styled.DropdownContainer>
-    </Styled.Wrapper>
+        <div className="triangle-wrapper">
+          {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+          {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,59 +1,77 @@
-import React, {useState} from 'react';
-import './SearchPage.css'
-import './SearchEngine.css'
+import React, { useState } from 'react';
+import './SearchPage.css';
+import './SearchEngine.css';
+import useIconClick from './useIconClick';
 
 
-
-const SearchResult = ({ results }) => {
-  return (
-    <div>
-      <h2>검색 결과:</h2>
-      <ul>
-        {results.map((result, index) => (
-          <li key={index}>{result}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const SearchEngine = () => {
+const SearchEngine = ({ onSearchResults }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    // 실제로 검색 동작을 수행하고 결과를 setSearchResults를 통해 저장합니다.
-    // 이 예시에서는 간단히 검색어를 저장하는 것으로 대체합니다.
-    setSearchResults([searchQuery]);
+  const handleSearch = () => {//api에서 최종적으로 가져오는
+    const encodedQuery = encodeURIComponent(searchQuery); // 검색어 한글 인코딩
+    // 검색 API 호출
+    fetch(`http://34.105.97.215/api/v1/search?keyword=${encodedQuery}&page=0&size=5` )//api fetch
+      .then((response) => {
+        if(!response.ok){
+          throw new Error(`오류 발생: ${response.status}`);
+        }
+        return response.json();//reponse받으면 json형태로
+      })
+      .then((json) => {
+        onSearchResults(json); // API 응답 결과를 SearchPage로 전달
+      })
+      .catch((error) => {
+        console.error('검색 오류:', error);
+        onSearchResults({ users: [], toons: [] }); // 오류 발생 시, 빈 결과로 초기화
+      });
   };
 
+    //icon 클릭시 변경
+  const {
+      searchButtonIconClicked,
+      handleIconClick,
+  } = useIconClick();
+  
+    //iconclick효과가 페이지 이동보다 먼저 일어나게
+  const handleSearchButtonIconClick = () => {
+      handleIconClick(1);
+      setTimeout(() => {
+        handleSearch();
+      }, 150);
+    };
+ 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleSearch();
+      handleSearchButtonIconClick();
     }
   };
-  
+
   return (
     <div>
-      <div className='SearchEngine'>
-        <div className='inputContainerStyle'>
-          <input className='searchInputStyle'
-            type='text'
-            placeholder=''
+      <div className="SearchEngine">
+        <div className="inputContainerStyle">
+          <input
+            className="searchInputStyle"
+            type="text"
+            placeholder=""
             value={searchQuery}
             onChange={handleInputChange}
-            onKeyDown={handleKeyDown}/>
-          <button className='searchButtonStyle'  onClick={()=>handleSearch(searchQuery)}>
-            <img  src={process.env.PUBLIC_URL + '/images/search_engine_button_icon.png'} 
-                  alt = 'search_engine_button'/> 
+            onKeyDown={handleKeyDown}
+          />
+          <button className="searchButtonStyle" onClick={handleSearchButtonIconClick}>
+            <img
+              src={process.env.PUBLIC_URL +
+                (searchButtonIconClicked ? "./images/search_button_clicked.png" : "./images/search_button.png")}
+              alt="search_engine_button"
+            />
           </button>
         </div>
       </div>
-      <SearchResult results={searchResults} />
     </div>
   );
 };

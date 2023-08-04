@@ -1,18 +1,20 @@
 import React from 'react';
 import './SearchPage.css';
 import useIconClick from './useIconClick';
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   const {
     homeIconClicked,
     handleIconClick,
   } = useIconClick();
+  const navigate = useNavigate();
 
   //iconclick효과가 페이지 이동보다 먼저 일어나게
   const handleHomeIconClick = () => {
     handleIconClick(0);
     setTimeout(() => {
-      
+      navigate('/toon');
     }, 150);
   };
   return (

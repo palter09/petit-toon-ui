@@ -1,18 +1,16 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { FreeMode } from 'swiper/modules';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
-
 import './SwiperSearchPage.css';
+import '../SearchPage.css';
 
-// import required modules
-import { FreeMode } from 'swiper/modules';
 
-export default function SwiperProfiles() {
+
+const SwiperProfiles = ({ users }) => {
   return (
-    <>
+    <div className='ProfilesContainer'>
       <Swiper
         slidesPerView={4}
         spaceBetween={8}
@@ -20,16 +18,14 @@ export default function SwiperProfiles() {
         modules={[FreeMode]}
         className="SwiperProf"
       >
-        <SwiperSlide><img src={process.env.PUBLIC_URL + '/images/profilesEx/profile1.png'} alt='profile1'/> </SwiperSlide>
-        <SwiperSlide><img src={process.env.PUBLIC_URL + '/images/profilesEx/profile2.png'} alt='profile2'/></SwiperSlide>
-        <SwiperSlide><img src={process.env.PUBLIC_URL + '/images/profilesEx/profile3.png'} alt='profile3'/></SwiperSlide>
-        <SwiperSlide><img src={process.env.PUBLIC_URL + '/images/profilesEx/profile2.png'} alt='profile2'/></SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+        {users.map((user) => (
+          <SwiperSlide key={user.id}>
+            <img src={user.profileImagePath} alt={user.nickname} />
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </>
+    </div>
   );
-}
+};
+
+export default SwiperProfiles;

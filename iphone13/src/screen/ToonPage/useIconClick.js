@@ -66,6 +66,7 @@ const useIconClick = () => {
         setTimeout(() => {
           setSupportIconClicked(false);
         }, 100);
+        break;
       default:
         break;
     }
