@@ -46,7 +46,7 @@ const DropdownMenu = () => {
           <img
             src={
               process.env.PUBLIC_URL +
-              (menuIconClicked ? "./images/menu_icon_clicked.png" : "./images/menu_icon.png")
+              (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")
             }
             alt="메뉴 아이콘"
           />
@@ -67,7 +67,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (storeIconClicked ? "./images/store_clicked.png" : "./images/store.png")
+                  (storeIconClicked ? "/images/store_clicked.png" : "/images/store.png")
                 }
                 alt="store icon"
               />
@@ -83,7 +83,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (searchIconClicked ? "./images/search-engine_clicked.png" : "./images/search-engine.png")
+                  (searchIconClicked ? "/images/search-engine_clicked.png" : "/images/search-engine.png")
                 }
                 alt="search-engine icon"
               />
@@ -100,7 +100,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (mapIconClicked ? "./images/map_clicked.png" : "./images/map.png")
+                  (mapIconClicked ? "/images/map_clicked.png" : "/images/map.png")
                 }
                 alt="map icon"
               />
@@ -117,7 +117,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (petitIconClicked ? "./images/petit_clicked.png" : "./images/petit.png")
+                  (petitIconClicked ? "/images/petit_clicked.png" : "/images/petit.png")
                 }
                 alt="petit icon"
               />
@@ -134,7 +134,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (eventIconClicked ? "./images/event_clicked.png" : "./images/event.png")
+                  (eventIconClicked ? "/images/event_clicked.png" : "/images/event.png")
                 }
                 alt="event icon"
               />
@@ -151,7 +151,7 @@ const DropdownMenu = () => {
               <img
                 src={
                   process.env.PUBLIC_URL +
-                  (mypageIconClicked ? "./images/mypage_clicked.png" : "./images/mypage.png")
+                  (mypageIconClicked ? "/images/mypage_clicked.png" : "/images/mypage.png")
                 }
                 alt="mypage icon"
               />

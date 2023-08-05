@@ -21,7 +21,7 @@ const Home = () => {
     <div>
 			<button className='HomeBox' onClick={() => {handleHomeIconClick()}}>
         <img src = {process.env.PUBLIC_URL +
-                  (homeIconClicked ? "./images/logo_small_clicked.png" : "./images/logo_small.png")}
+                  (homeIconClicked ? "/images/logo_small_clicked.png" : "/images/logo_small.png")}
         alt = "홈으로"
         />
       </button>

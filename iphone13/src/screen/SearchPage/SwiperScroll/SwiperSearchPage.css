@@ -2,7 +2,7 @@
 .SwiperProf {
   width: 100%;
   height: 100%;
-  background-color: beige;
+  background-color: whitesmoke;
 }
 
 .SwiperProf .swiper-slide{
@@ -32,8 +32,7 @@
 .SwiperThumb {
   width: 100%;
   height: 100%;
-  background-color: rgb(224, 253, 162);
-
+  background-color: whitesmoke;
 }
 
 .SwiperThumb .swiper-slide {

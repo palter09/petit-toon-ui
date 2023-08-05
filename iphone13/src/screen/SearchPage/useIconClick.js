@@ -17,16 +17,17 @@ const useIconClick = () => {
         setTimeout(() => {
           setSearchButtonIconClicked(false);
         }, 50);
-        break;    
+        break;
       default:
         break;
     }
   };
 
+
   return {
-   homeIconClicked,
-   searchButtonIconClicked,
-   handleIconClick,
+    homeIconClicked,
+    searchButtonIconClicked,
+    handleIconClick,
   };
 };
 
