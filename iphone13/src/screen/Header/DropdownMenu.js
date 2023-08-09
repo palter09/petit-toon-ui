@@ -10,7 +10,6 @@ const menuTmp = () => {
 
 const DropdownMenu = () => {
   const navigate = useNavigate();
-  
   const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
   const {
     menuIconClicked,

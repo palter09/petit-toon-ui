@@ -4,7 +4,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/grid';
 import 'swiper/css/pagination';
 import './SwiperSearchPage.css';
-import '../SearchPage.css';
+import './Swiper.css';
 import { FreeMode, Grid, Pagination, Mousewheel} from 'swiper/modules';
 
 const SwiperThumbnails = ({ toons }) => {

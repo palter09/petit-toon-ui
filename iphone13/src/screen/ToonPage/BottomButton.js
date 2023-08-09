@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import useDetectClose from "./useDetectClose";
-import useIconClick from './useIconClick';
+import useDetectClose from "../Header/useDetectClose";
+import useIconClick from '../Header/useIconClick';
 import * as Styled from "./ChatStyles";
 import { useNavigate } from 'react-router-dom';
 

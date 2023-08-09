@@ -1,19 +1,15 @@
 import { useState } from "react";
-import Header from "./ToonPage/Header.js"
+import Header from "./Header/Header.js"
 import Profile from './UserinfoPage/Profile.js'
-import Works from './UserinfoPage/Profile.js'
+import Works from './UserinfoPage/Works.js'
 
-const divLineMidStyle = {
-  position: 'absolute',
-  top: '753px',
-  width: '383px',
-  height: '0px',
-  left: '0px',
-  border: '4px solid #DA5E9D',
-  backgroundColor: '#DA5E9D',
-}
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 const UserinfoPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
+
   return (
     <div className="container">
       <div className="item">

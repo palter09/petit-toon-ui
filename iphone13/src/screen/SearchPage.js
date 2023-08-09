@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Home from "./SearchPage/Home";
 import SearchEngine from './SearchPage/SearchEngine';
-import Profiles from './SearchPage/SwiperScroll/SwiperProfiles'; 
-import Thumbnails from './SearchPage/SwiperScroll/SwiperThumbnails'; 
+import Profiles from './SwiperScroll/SwiperProfiles'; 
+import Thumbnails from './SwiperScroll/SwiperThumbnails'; 
 import "./SearchPage/SearchPage.css"
 
 const SearchPage = () => {
