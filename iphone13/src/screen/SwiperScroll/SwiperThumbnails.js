@@ -7,9 +7,9 @@ import './SwiperSearchPage.css';
 import './Swiper.css';
 import { FreeMode, Grid, Pagination, Mousewheel} from 'swiper/modules';
 
-const SwiperThumbnails = ({ toons }) => {
+const SwiperThumbnails = ({ toons, style }) => {
   return (
-    <div className='ThumbnailsContainer'>
+    <div className='ThumbnailsContainer' style={style}>
       <Swiper
         slidesPerView={3}
         spaceBetween={5}

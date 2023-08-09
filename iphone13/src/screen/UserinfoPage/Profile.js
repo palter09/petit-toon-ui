@@ -15,8 +15,9 @@ const textStyle = {
 
 
 const Profile = (userinfo) => {
-  return (
-    <table style={profileStyle}>
+	console.log(userinfo);
+	return (
+	<table style={profileStyle}>
 			<tbody><tr>
 				<td align= "center" style= {{ width: "128px", height: "128px"}}>
 					<img
@@ -32,9 +33,9 @@ const Profile = (userinfo) => {
 						<p style={{margin:5}}><b>팔로잉  :&nbsp;</b>{userinfo.following || 0}</p>
 					</div>
 				</td>
-    	</tr></tbody>
+		</tr></tbody>
 		</table>
-  );
+	);
 };
 
 export default Profile;
