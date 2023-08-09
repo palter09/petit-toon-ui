@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const useIconClick = () => {
   const [homeIconClicked, setHomeIconClicked] = useState(false);
-  
+  const [searchButtonIconClicked, setSearchButtonIconClicked] = useState(false);
 
   const handleIconClick = (icon) => {
     switch (icon) {
@@ -12,14 +12,22 @@ const useIconClick = () => {
           setHomeIconClicked(false);
         }, 50);
         break;
+      case 1:
+        setSearchButtonIconClicked(true);
+        setTimeout(() => {
+          setSearchButtonIconClicked(false);
+        }, 50);
+        break;
       default:
         break;
     }
   };
 
+
   return {
-   homeIconClicked,
-   handleIconClick,
+    homeIconClicked,
+    searchButtonIconClicked,
+    handleIconClick,
   };
 };
 

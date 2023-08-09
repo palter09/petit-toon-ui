@@ -46,7 +46,7 @@
   outline: 2px solid transparent;
 }
 
-.searchLine1 {
+.searchLineUp {
   position: absolute;
   top: 147px;
   width: 388px;
@@ -57,9 +57,9 @@
   z-index: 9;;
 }
 
-.searchLine2 {
+.searchLineDown {
   position: absolute;
-  top: 265px;
+  top: 255px;
   width: 388px;
   height: 0px;
   left: 0px;
