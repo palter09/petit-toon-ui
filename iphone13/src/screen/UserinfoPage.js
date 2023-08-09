@@ -10,14 +10,16 @@ const UserinfoPage = () => {
   const location = useLocation();
   const params = useParams();
 
+  const userinfo = {nickname: "nickname_test", tag: "tag_test", works: [], following: []};
+
   return (
     <div className="container">
       <div className="item">
         <Header />
         <div className='divLineHeader' />
-        <Profile />
+        <Profile userinfo={userinfo}/>
         <div className='divLineMid' />
-        <Works />
+        <Works userinfo={userinfo}/>
         <div className='divLineBottom' />
       </div>
     </div>

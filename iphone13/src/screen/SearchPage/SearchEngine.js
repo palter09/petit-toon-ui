@@ -31,7 +31,7 @@ const SearchEngine = ({ onSearchResults }) => {
     navigate(`/search/${searchQuery}`, { replace: true });
   
     // 검색 API 호출
-    fetch(`http://34.105.97.215/api/v1/search?keyword=${searchQuery}&page=0&size=5`)
+    fetch(`${process.env.REACT_APP_SERVER_IP}/api/v1/search?keyword=${searchQuery}&page=0&size=5`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`오류 발생: ${response.status}`);

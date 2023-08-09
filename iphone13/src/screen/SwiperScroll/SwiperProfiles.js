@@ -7,9 +7,9 @@ import './SwiperSearchPage.css';
 import './Swiper.css';
 
 
-const SwiperProfiles = ({ users }) => {
+const SwiperProfiles = ({ users, style }) => {
   return (
-    <div className='ProfilesContainer'>
+    <div className='ProfilesContainer' stlye={style}>
       <Swiper
         slidesPerView={4}
         spaceBetween={8}
