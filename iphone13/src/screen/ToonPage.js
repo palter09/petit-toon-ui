@@ -11,7 +11,7 @@
 
 import React from 'react';
 import SwiperToon from "./ToonPage/SwiperToon.js";
-import Header from "./ToonPage/Header.js"
+import Header from "./Header/Header.js"
 import { DisLike, Like, Comment, Subscribe, Setting } from "./ToonPage/BottomButton.js"
 
 const ToonPage = () => {

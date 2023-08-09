@@ -2,6 +2,7 @@ import React from 'react';
 
 const profileStyle = {
 	position: "absolute",
+	backgroundColor: "#FFEDFE",
 	width:"390px",
 	height: "140px",
 	top: "115px",
@@ -26,7 +27,7 @@ const Profile = (userinfo) => {
 				<td align= "left" valign="top" style={textStyle}>
 					<div>
 						<p style={{marginBottom:10}}><b>{userinfo.nickname || "Unknown"}의 정보</b></p>
-						<p style={{margin:5}}><b>@{userinfo.id || "unknown_id"}</b></p>
+						<p style={{margin:5}}><b>@{userinfo.tag || "unknown_tag"}</b></p>
 						<p style={{margin:5}}><b>작품 수 :&nbsp;</b>{userinfo.works || 0}</p>
 						<p style={{margin:5}}><b>팔로잉  :&nbsp;</b>{userinfo.following || 0}</p>
 					</div>

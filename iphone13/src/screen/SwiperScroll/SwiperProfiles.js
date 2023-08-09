@@ -4,8 +4,7 @@ import { FreeMode } from 'swiper/modules';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 import './SwiperSearchPage.css';
-import '../SearchPage.css';
-
+import './Swiper.css';
 
 
 const SwiperProfiles = ({ users }) => {
