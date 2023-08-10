@@ -1,34 +1,47 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css/free-mode';
-import 'swiper/css/grid';
-import 'swiper/css/pagination';
-import './SwiperSearchPage.css';
-import './Swiper.css';
-import { FreeMode, Grid, Pagination, Mousewheel} from 'swiper/modules';
+import './SwiperThumbnails.css';
 
 const SwiperThumbnails = ({ toons, style }) => {
+
+
   return (
     <div className='ThumbnailsContainer' style={style}>
-      <Swiper
-        slidesPerView={3}
-        spaceBetween={5}
-        direction={'vertical'}
-        mousewheel={true}
-        grid={{
-          rows: 3,
-          fill: 'row',
-        }}
-        freeMode={true}
-        modules={[Grid, FreeMode, Pagination, Mousewheel]}
-        className="SwiperThumb"
-      >
-        {toons.map((toon) => (//map은 안에 function 모두 적용
-          <SwiperSlide key={toon.id}>
+      <div className='thumbnails_scrollbar' > {/*스크롤 바 + 안에 컨텐츠 */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', 
+                          position: 'relative', padding: '0.1rem',
+                          justifyContent: 'flex-start', alignItems: 'flex-start', 
+                          height: '32%',
+                           transition: 'margin-top 0.3s' 
+                          }}> {/*가로 줄 */}
+        {toons.map((toon) => (
+          <div className = 'thumbnails_box' key={toon.id}>
             <img src={toon.thumbnailUrl} alt={toon.title} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+        ))} 
+        {/*
+        <div className  = 'thumbnails_box'>
+          <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+        </div>
+
+        <div className  = 'thumbnails_box'>
+          <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+        </div>
+        <div className  = 'thumbnails_box'>
+          <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+        </div>
+        <div className  = 'thumbnails_box'>
+          <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+      </div> */}
+      </div>
+    </div>
     </div>
   );
 };

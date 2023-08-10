@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './StoreItemsList.css';
 
 const StoreItemsList = ({ columns }) => {
-  const [scrollY, setScrollY] = useState(0);
   const [images, setImages] = useState([]);
 
   useEffect(() => {//처음 렌더링될때 api호출
@@ -13,16 +12,14 @@ const StoreItemsList = ({ columns }) => {
       .catch((error) => console.error('Error fetching images:', error));
   }, []);
 
-  const handleScroll = (e) => {
-    setScrollY(e.target.scrollTop);
-  };
+
 
   return (
-    <div className='store_scrollbar' onScroll={handleScroll}> {/*스크롤 바 + 안에 컨텐츠 */}
+    <div className='store_scrollbar'> {/*스크롤 바 + 안에 컨텐츠 */}
       <div style={{ display: 'flex', flexWrap: 'wrap', 
                     position: 'relative', padding: '0.5rem',
                     justifyContent: 'flex-start', alignItems: 'flex-start', 
-                    marginTop: `${scrollY}px`, transition: 'margin-top 0.3s' 
+                    transition: 'margin-top 0.3s' 
                     }}> {/*가로 줄 */}
       {/*
         {images.map((image) => (
