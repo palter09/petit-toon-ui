@@ -1,0 +1,9 @@
+.tab-button {
+    border: 2px solid #DA5E9D;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+}

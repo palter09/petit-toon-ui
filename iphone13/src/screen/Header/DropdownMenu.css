@@ -1,0 +1,147 @@
+.Wrapper{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 19px;
+  background: white;
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  left: 320px;
+  top: 47px;
+  font-weight: bold;
+}
+
+.dropdown-container {
+  position: absolute;
+  text-align: center;
+  z-index: 9;
+}
+
+.dropdown-button {
+  cursor: pointer;
+  z-index: 9;
+}
+
+.menu {
+  background: white;
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  width: 373px;
+  height: 458px;
+  text-align: center;
+  border-radius: 32px;
+  outline: 2px solid #DA5E9D;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-334px, -0px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 9;
+}
+
+.menu.open {
+  opacity: 1;
+  visibility: visible;
+  left: 50%;
+}
+
+/* triangle animation */
+.triangle-wrapper {
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.triangle-outer {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #DA5E9D;
+  position: absolute;
+  top: -20px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 8;
+}
+
+.triangle-outer.fade-in {
+  visibility: visible;
+  opacity: 1;
+}
+
+.triangle-inner {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 35px solid white;
+  position: absolute;
+  top: -13px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9;
+}
+
+.triangle-inner.fade-in {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu-title {
+  position: relative;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: left;
+  width: 106px;
+  height: 22px;
+  top: 5px;
+  left: 22px;
+  background: transparent;
+  color: #DA5E9D;
+}
+
+.menu-container {
+  position: relative;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 0px;
+  letter-spacing: -0.40799999237060547px;
+  background: transparent;
+  color: #DA5E9D;
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 0.5rem;
+  margin: 1.5rem;
+  padding: 0px;
+}
+
+.menu-button {
+  background-color: white;
+  border: transparent;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  letter-spacing: -0.40799999237060547px;
+  background: transparent;
+  color: #DA5E9D;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  vertical-align: text-bottom;
+}

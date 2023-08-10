@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import useDetectClose from "./useDetectClose";
-import useIconClick from './useIconClick';
-import * as Styled from "./ChatStyles"; 
+import useDetectClose from "../Header/useDetectClose";
+import useIconClick from '../Header/useIconClick';
+import * as Styled from "./ChatStyles";
+import { useNavigate } from 'react-router-dom';
 
 const test = () => {
   console.log("!")
@@ -120,11 +121,13 @@ const Subscribe = () => {
   />;
 };
 
-const Setting = ({renderPage}) => {
+const Setting = () => {
+  const navigate = useNavigate();
+
   return <img 
     src={process.env.PUBLIC_URL + '/images/setting_icon.png'} 
     style={{position: "absolute", left: "301px", top: "778px"}}
-    onClick={() => {renderPage('SettingPage')}}/>;
+    onClick={() => { navigate('/setting'); }}/>;
 };
 
 
