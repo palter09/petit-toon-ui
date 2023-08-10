@@ -13,18 +13,58 @@ const chatTmp = () => {
 };
 
 const Like = () => {
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    // Make API call to like or unlike based on the 'liked' state
+    const userId = 'user123'; // Replace with actual user ID
+    const toonId = 'toon456'; // Replace with actual toon ID
+
+    fetch(`/api/v1/like/${userId}/${toonId}`, {
+      method: liked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response data if needed
+        setLiked(!liked); // Toggle the liked state
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+  };
+
   return <img 
     src={process.env.PUBLIC_URL + '/images/broken_heart_icon.png'} 
     style={{position: "absolute", left: "109px", top: "778px"}} 
-    onClick={test}
+    onClick={toggleLike}
   />;
 };
 
 const DisLike = () => {
+  const [disLiked, setDisLiked] = useState(false);
+
+  const toggleDisLike = () => {
+    // Make API call to like or unlike based on the 'liked' state
+    const userId = 'user123'; // Replace with actual user ID
+    const toonId = 'toon456'; // Replace with actual toon ID
+
+    fetch(`/api/v1/dislike/${userId}/${toonId}`, {
+      method: disLiked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response data if needed
+        setDisLiked(!disLiked); // Toggle the liked state
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+  };
+
   return <img 
     src={process.env.PUBLIC_URL + '/images/love_icon.png'} 
     style={{position: "absolute", left: "45px", top: "778px"}} 
-    onClick={test}
+    onClick={toggleDisLike}
   />;
 };
 
