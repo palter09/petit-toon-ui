@@ -1,0 +1,9 @@
+.StoreHeader {
+  height: 105px;
+  width: 390px;
+  border-bottom: 4px solid #DA5E9D;
+
+  align-items: center;
+  justify-content: flex-start;
+  display: flex;
+}
