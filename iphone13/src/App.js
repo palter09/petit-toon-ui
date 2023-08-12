@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/toon" element={<ToonPage />} />
         <Route path="/userinfo/:id" element={<UserinfoPage />} />
         <Route path="/search/" element={<SearchPage />}/>
-        <Route path="/search/:searchResultPage" element={<SearchPage />}/>
+        <Route path="/search/:searchQuery" element={<SearchPage />}/>
         <Route path="/store/" element={<StorePage />}/>
 
         {/* 다른 라우트들을 여기에 추가할 수 있습니다. */}

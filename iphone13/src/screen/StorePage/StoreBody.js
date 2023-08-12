@@ -5,7 +5,7 @@ import StoreItemsList from './StoreItemsList';
 const StoreBody = () => {
 	return (
 		<div className='StoreBody'>
-			<StoreItemsList columns={3} />
+			<StoreItemsList />
 		</div>
 	);
 };
