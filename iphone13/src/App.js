@@ -6,6 +6,7 @@ import SettingPage from './screen/SettingPage'
 import UserinfoPage from './screen/UserinfoPage';
 import SearchPage from './screen/SearchPage';
 import StorePage from './screen/StorePage';
+import LoginPage from './screen/LoginPage';
 
 import './App.css';
 
@@ -13,6 +14,7 @@ const App = () => {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<LoginPage />} />
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/toon" element={<ToonPage />} />
         <Route path="/userinfo/:id" element={<UserinfoPage />} />
