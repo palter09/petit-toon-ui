@@ -26,10 +26,11 @@ const Works = ({userinfo}) => {
           title={<div style={textStyle}><b>내 작품</b></div>} 
           content={
             <Thumbnails 
-              toons={userinfo.works} 
+              //toons={[userinfo.works]} 
+              toons={["f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f",]} 
               style={{
                 top:"40px",
-                border: "1px solid black"
+                height: "445px",
               }}
             />}
         />
@@ -37,8 +38,12 @@ const Works = ({userinfo}) => {
           title={<div style={textStyle}><b>내 구독</b></div>} 
           content={
             <Profiles 
-              users={userinfo.following}
-              style={{top:"266px"}}
+              //users={userinfo.following}
+              users={["f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f","f",]}
+              style={{
+                top:"40px",
+                height: "445px",
+              }}
             />}
         />
       </TabWrapper>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Home from "./SearchPage/Home";
 import SearchEngine from './SearchPage/SearchEngine';
-import Profiles from './SwiperScroll/SwiperProfiles'; 
+import Profiles from './SwiperScroll/SwiperProfilesLR'; 
 import Thumbnails from './SwiperScroll/SwiperThumbnails'; 
 import "./SearchPage/SearchPage.css"
 import { useParams } from 'react-router';
