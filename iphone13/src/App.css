@@ -7,6 +7,10 @@
   width: 390px; 
   background: white;
   overflow: hidden;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 1rem;
 }
 
 /* Optional styles for the items to control spacing */

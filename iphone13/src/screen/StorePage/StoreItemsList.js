@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './StoreItemsList.css';
 
-const StoreItemsList = ({ columns }) => {
+const StoreItemsList = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {//처음 렌더링될때 api호출
@@ -16,11 +16,7 @@ const StoreItemsList = ({ columns }) => {
 
   return (
     <div className='store_scrollbar'> {/*스크롤 바 + 안에 컨텐츠 */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', 
-                    position: 'relative', padding: '0.5rem',
-                    justifyContent: 'flex-start', alignItems: 'flex-start', 
-                    transition: 'margin-top 0.3s' 
-                    }}> {/*가로 줄 */}
+      <div className='store_row'>
       {/*
         {images.map((image) => (
           <div key={image.id} style={{ flex: `0 0 ${100/columns}%`, padding: '5px' }}>
@@ -36,66 +32,31 @@ const StoreItemsList = ({ columns }) => {
             />
           </div>                         <이하 이미지는 테스트용>
             ))} */}
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-                  <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-                  <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
-        <img 
-          src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
-          alt = '임시' />
+          <div className='store_item'>
+            <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+          </div>
+          <div className='store_item'>
+            <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+          </div>
+
+          <div className='store_item'>
+            <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+          </div>
+          <div className='store_item'>
+            <img 
+            src = {process.env.PUBLIC_URL + '/images/store/storeItemsEx/01.png'}
+            alt = '임시' />
+          </div>
+
+
+
+
       </div>
     </div>
   );
