@@ -1,56 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback} from 'react';
 import './SearchPage.css';
 import './SearchEngine.css';
 import useIconClick from './useIconClick';
 import { useNavigate } from 'react-router-dom';
 
 
-const SearchEngine = ({ onSearchResults }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+const SearchEngine = ({urlQuery, fetchSearchResults }) => {
+  const [searchQuery, setSearchQuery] = useState(urlQuery||'');//url로 입력시 input창에도 검색어 뜨게
   const navigate = useNavigate();
 
-  //input에서 onChange할때마다 searchQuery update
+  /*
+  검색
+  */
+
+  //검색창 input에서 onChange할때마다 searchQuery update
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
+  //검색창에 입력시 url 변경 + fetch search result호출
+  const handleSearch = useCallback(() => {
+    if (!searchQuery.trim()) return;
+
+    navigate(`/search/${searchQuery}`, { replace: true });
+
+    fetchSearchResults(searchQuery);
+  }, [fetchSearchResults, navigate, searchQuery]);
+  
+  /*
+  버튼 아이콘
+  */
+ 
+  const handleSearchButtonIconClick = () => {
+    handleIconClick(1);
+    handleSearch();
+  };
   //icon 클릭시 변경
   const {
     searchButtonIconClicked,
     handleIconClick,
   } = useIconClick();
-
-  //api 호출 -> 응답 
-  const handleSearch = () => {
-    // 검색어가 비어있으면 아무 동작도 하지 않음
-    if (!searchQuery.trim()) return;
-  
-    onSearchResults({ users: [], toons: [] }); // 초기화
-  
-    // 검색어를 그대로 사용하여 URL 업데이트
-    navigate(`/search/${searchQuery}`, { replace: true });
-  
-    // 검색 API 호출
-    fetch(`${process.env.REACT_APP_SERVER_IP}/api/v1/search?keyword=${searchQuery}&page=0&size=5`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`오류 발생: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((json) => {
-        onSearchResults(json);
-      })
-      .catch((error) => {
-        console.error('검색 오류:', error);
-        onSearchResults({ users: [], toons: [] });
-      });
-  };
-
-  const handleSearchButtonIconClick = () => {
-    handleIconClick(1);
-    handleSearch();
-  };
  
   //KeyDown에서 Enter시에도 검색가능하도록
   const handleKeyDown = (event) => {
