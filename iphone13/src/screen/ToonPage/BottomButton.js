@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useDetectClose from "../Header/useDetectClose";
 import useIconClick from '../Header/useIconClick';
-import * as Styled from "./ChatStyles";
+import "./ChatStyles.css";
 import { useNavigate } from 'react-router-dom';
 
 const test = () => {
@@ -13,18 +13,58 @@ const chatTmp = () => {
 };
 
 const Like = () => {
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = () => {
+    // Make API call to like or unlike based on the 'liked' state
+    const userId = 'user123'; // Replace with actual user ID
+    const toonId = 'toon456'; // Replace with actual toon ID
+
+    fetch(`/api/v1/like/${userId}/${toonId}`, {
+      method: liked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response data if needed
+        setLiked(!liked); // Toggle the liked state
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+  };
+
   return <img 
     src={process.env.PUBLIC_URL + '/images/broken_heart_icon.png'} 
     style={{position: "absolute", left: "109px", top: "778px"}} 
-    onClick={test}
+    onClick={toggleLike}
   />;
 };
 
 const DisLike = () => {
+  const [disLiked, setDisLiked] = useState(false);
+
+  const toggleDisLike = () => {
+    // Make API call to like or unlike based on the 'liked' state
+    const userId = 'user123'; // Replace with actual user ID
+    const toonId = 'toon456'; // Replace with actual toon ID
+
+    fetch(`/api/v1/dislike/${userId}/${toonId}`, {
+      method: disLiked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle response data if needed
+        setDisLiked(!disLiked); // Toggle the liked state
+      })
+      .catch(error => {
+        // Handle error if needed
+      });
+  };
+
   return <img 
     src={process.env.PUBLIC_URL + '/images/love_icon.png'} 
     style={{position: "absolute", left: "45px", top: "778px"}} 
-    onClick={test}
+    onClick={toggleDisLike}
   />;
 };
 
@@ -47,10 +87,10 @@ const Comment = () => {
   } = useIconClick();
 
   return (
-    <Styled.Wrapper>
-      <Styled.DropdownContainer className="dropdown-container">
+    <div className='Wrapper'>
+      <div className="dropdown-container">
         {/* 채팅 아이콘 */}
-        <Styled.DropdownButton
+        <div className='dropdown-button'
           onClick={() => {
             myPageToggleHandler();
             handleIconClick(7);
@@ -63,30 +103,30 @@ const Comment = () => {
               }
               alt="채팅 아이콘"
             />
-          </Styled.DropdownButton>
-          <Styled.Menu $isDropped={myPageIsOpen}>
-            <Styled.MenuTitle>댓글 및 후원</Styled.MenuTitle>
-            <Styled.MenuContainer>
+          </div> {/* dropdown-button */}
+          <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
+            <div className='menu-title'>댓글 및 후원</div>
+            <div className='menu-container'>
               {/* 댓글 입력 폼 */}
               <input
                 type="text"
                 placeholder="댓글을 입력하세요."
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
-                style={{position: "absolute", top: "405px"}}
+                style={{position: "absolute", top: "350px"}}
               />
               <button 
                 onClick={handleCommentSubmit}
-                style={{position: "absolute", left: "220px", top: "405px"}}
+                style={{position: "absolute", left: "200px", top: "355px"}}
                 >댓글달기</button>
               {/* 댓글 표시 */}
-              <Styled.CommentContainer>
+              <div className='comment-container'>
                 {comments.slice().reverse().map((comment, index) => (
                   <div key={index}>{comment}</div>
                 ))}
-              </Styled.CommentContainer>
+              </div>
               {/* 후원 아이콘 */}
-              <Styled.MenuButton
+              <div className='support-button'
                 onClick={() => {
                   chatTmp();
                   handleIconClick(8);
@@ -98,20 +138,20 @@ const Comment = () => {
                     (supportIconClicked ? '/images/support.png' : '/images/support.png')
                   }
                   alt="support icon"
-                  style={{position: "absolute", left: "312px", top: "405px"}} 
+                  style={{position: "absolute", left: "280px", top: "350px"}} 
                 />
-              </Styled.MenuButton>
-            </Styled.MenuContainer>
-          </Styled.Menu>
+              </div>
+            </div>
+          </div>
           {/* 삼각형 */}
-          <Styled.TriangleWrapper>
-            <Styled.TriangleInner $isDropped={myPageIsOpen} />
-            <Styled.TriangleOuter $isDropped={myPageIsOpen} />
-          </Styled.TriangleWrapper>
-      </Styled.DropdownContainer>
-    </Styled.Wrapper>
+          <div className='triangle-wrapper'>
+            {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+            {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
+          </div>
+      </div>
+    </div>
   )
-}
+};
 
 const Subscribe = () => {
   return <img 
