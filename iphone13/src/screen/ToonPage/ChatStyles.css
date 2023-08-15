@@ -1,11 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
-
-/*****************************
- styled-components 이용한 css
- *****************************/
-//위치 -118 -18
-//dropdown button 
-export const Wrapper = styled.div`
+.Wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -18,20 +11,21 @@ export const Wrapper = styled.div`
   left: 173px;
   top: 780px;
   font-weight: bold;
-`;
+}
 
-export const DropdownContainer = styled.div`
+.dropdown-container {
   position: absolute;
   text-align: center;
   z-index: 9;
-`;
+}
 
-export const DropdownButton = styled.div`
+.dropdown-button {
   cursor: pointer;
   z-index:9;
-`;
-//dropdown button 클릭시 나오는 menu
-export const Menu = styled.div`
+}
+
+/*dropdown button 클릭시 나오는 menu*/
+.menu {
   background: white;
   position: absolute;
   top: -483px;
@@ -41,60 +35,29 @@ export const Menu = styled.div`
   text-align: center;
   border-radius: 32px;
   outline: 2px solid #DA5E9D;
-  //처음에 투명하고 보이지 않게 설정
   opacity: 0;
   visibility: hidden;
-  //애니메이션 효과
   transform: translate(-187px, -0px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
+}
 
-  //$isDropped가 true면 보임
-  ${({ $isDropped }) =>
-    $isDropped &&
-    css`
-      opacity: 1;
-      visibility: visible;
-      left: 50%;
-    `};
-    resize: vertical;
-    overflow: auto;
-`;
+.menu.open {
+  opacity: 1;
+  visibility: visible;
+  left: 50%;
+}
 
-/*triangle animation*/
-const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    visibility: hidden;
-  }
-  to {
-    opacity: 1;
-    visibility: visible;
-  }
-`;
-const fadeOut = keyframes`
-  from {
-    opacity: 1;
-    visibility: visible;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-`;
-
-// 삼각형 요소를 감싸는 Wrapper
-export const TriangleWrapper = styled.div`
+.triangle-wrapper {
   position: relative;
   width: 0;
   height: 0;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-`;
+}
 
-// 테두리가 분홍색인 삼각형 (외부 삼각형)
-export const TriangleOuter = styled.div`
+.triangle-outer {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -102,15 +65,19 @@ export const TriangleOuter = styled.div`
   border-bottom: 40px solid #DA5E9D;
   position: absolute;
   top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
-  animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
-  visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
-  opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
+  visibility: hidden;
+  opacity: 0;
   z-index: 8;
   transform: scaleY(-1);
-`;
+}
 
-// 내부가 흰색인 삼각형 (내부 삼각형)
-export const TriangleInner = styled.div`
+.triangle-outer.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.triangle-inner {
   width: 0;
   height: 0;
   border-left: 16px solid transparent;
@@ -118,15 +85,19 @@ export const TriangleInner = styled.div`
   border-bottom: 35px solid white;
   position: absolute;
   top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
-  animation: ${({ $isDropped }) => ($isDropped ? fadeIn : fadeOut)} 0.1s ease;
-  visibility: ${({ $isDropped }) => ($isDropped ? "visible" : "hidden")};
-  opacity: ${({ $isDropped }) => ($isDropped ? 1 : 0)};
+  visibility: hidden;
+  opacity: 0;
   z-index: 9;
   transform: scaleY(-1);
-`;
+}
 
-//<div>형식
-export const MenuTitle = styled.div`
+.triangle-inner.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.menu-title {
   position : relative;
   font-family: Inter;
   font-size: 20px;
@@ -140,10 +111,10 @@ export const MenuTitle = styled.div`
   left: 22px;
   background: transparent;
   color: #DA5E9D;
-`;
+}
 
-export const MenuContainer = styled.div`
-  position : relative
+.menu-container {
+  position : relative;
   font-family: Inter;
   font-size: 20px;
   font-weight: 700;
@@ -152,19 +123,16 @@ export const MenuContainer = styled.div`
   background: transparent;
   color: #DA5E9D;
   text-decoration: none;
-
-
-  //grid로 메뉴창 분할 가로 373px 세로 480px - 메뉴title 가:106 세:22
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 0.5rem;
   margin: 1.5rem;
   padding: 0px;
-`;
+}
 
-/*메뉴창 각각의 버튼*/
-export const MenuButton = styled.div`
+/*후원 버튼*/
+.support-button {
   background-color: white;
   border: transparent;
 
@@ -182,11 +150,13 @@ export const MenuButton = styled.div`
   align-items: center;
   justify-content : center;
   vertical-align: text-bottom;
-`;
+}
 
-// 댓글 스타일
-export const CommentContainer = styled.div`
-  max-height: 200px; /* Set a maximum height to limit the comment container's size */
+/* 댓글 스타일 */
+.comment-container {
+  height: 200px;
+  width: 200px;
+  max-height: 400px; /* Set a maximum height to limit the comment container's size */
   overflow-y: auto; /* Add vertical scrollbar if comments overflow */
   padding: 60px;
   margin-top: 10px;
@@ -196,4 +166,4 @@ export const CommentContainer = styled.div`
   flex-direction: column-reverse; /* Reverse the direction of content */
   line-height: 1.4;
   color: #000000;
-`;
+}
