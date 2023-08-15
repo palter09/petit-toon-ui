@@ -3,7 +3,13 @@ import { Route, Routes, Link } from 'react-router-dom';
 
 import ToonPage from './screen/ToonPage'
 import SettingPage from './screen/SettingPage'
+<<<<<<< HEAD
 import UserinfoPage from './screen/UserinfoPage';
+=======
+import SupportPage from './screen/SupportPage'
+
+import './App.css';
+>>>>>>> 69418a1282e041960946c94d6e0186ea9e81f2b8
 import SearchPage from './screen/SearchPage';
 import StorePage from './screen/StorePage';
 import LoginPage from './screen/LoginPage';
@@ -11,6 +17,22 @@ import LoginPage from './screen/LoginPage';
 import './App.css';
 
 const App = () => {
+<<<<<<< HEAD
+=======
+  const [renderPage, setRenderPage] = useState('ToonPage');
+  const pageMap = {
+    'SettingPage': SettingPage,
+    'ToonPage': ToonPage,
+    'SearchPage': SearchPage,
+    'SupportPage': SupportPage,
+    // 여기에 필요한 다른 페이지들을 추가할 수 있음
+  };
+
+  const handleRenderPage = (pageName) => {
+    setRenderPage(pageName);
+  };
+
+>>>>>>> 69418a1282e041960946c94d6e0186ea9e81f2b8
   return (
     <div>
       <Routes>

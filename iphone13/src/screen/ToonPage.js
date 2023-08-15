@@ -24,7 +24,7 @@ const ToonPage = () => {
         <div className='divLineBottom' />
         <DisLike />
         <Like />
-        <Comment />
+        <Comment renderPage={renderPage} />
         <Subscribe />
         <Setting />
       </div>
