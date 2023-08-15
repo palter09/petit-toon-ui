@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
 
 const menuTmp = () => {
-  // ...
+  // ...이건 그냥 예시
 };
 
 const DropdownMenu = () => {
@@ -27,6 +27,13 @@ const DropdownMenu = () => {
     handleIconClick(2);
     setTimeout(() => {
       navigate('/search');
+    }, 150);
+  };
+  //iconclick효과가 페이지 이동보다 먼저 일어나게
+  const handleStoreIconClick = () => {
+    handleIconClick(1);
+    setTimeout(() => {
+      navigate('/store');
     }, 150);
   };
 
@@ -59,8 +66,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(1);
+                handleStoreIconClick();
               }}
             >
               <img

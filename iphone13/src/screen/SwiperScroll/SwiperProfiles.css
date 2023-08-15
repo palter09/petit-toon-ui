@@ -1,0 +1,55 @@
+.ProfilesContainer{
+    position: absolute;
+    /*썸네일 들어갈 영역 크기 지정*/
+    top: 260px;
+    left: 0px;
+    width: 390px;
+    height: 570px;
+    
+    background:whitesmoke;
+    outline: 2px solid transparent;
+    overflow: hidden;
+  }
+  
+  .Profiles_scrollbar{
+    overflow-y: scroll;
+    /*스크롤 기능은 썸네일 컨테이너 전체 영역*/
+    height: 100%;
+    width: 100%;
+  }
+  ::-webkit-scrollbar { 
+    display: none;
+  }
+  
+  .profiles_row{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.1rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /*썸네일 1 row 상의 영역 height*/
+    height: 175px;
+    transition: margin-top 0.3s;
+  }
+  
+  .profiles_box {
+    text-align: center;
+    font-size: 18px;
+    background: whitesmoke;
+    outline: 1px solid pink;
+    width: 120px;
+    height: 120px;
+    box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+    margin: 4px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  .profiles_box img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }

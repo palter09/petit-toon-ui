@@ -1,0 +1,32 @@
+.store_scrollbar{
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; 
+}
+::-webkit-scrollbar { 
+  display: none;
+}
+
+.store_row{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.1rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: margin-top 0.3s;
+}
+
+.store_item{
+  text-align: center;
+  font-size: 18px;
+  background: whitesmoke;
+  outline: 1px solid pink;
+  width: calc(33% - 0.3rem); /* 이 부분을 수정해서 간격 조절 */
+  height: 100%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+  margin: 3px; /* 추가: 각 박스 사이의 간격을 조절 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

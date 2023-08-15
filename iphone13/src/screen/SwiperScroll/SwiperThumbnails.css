@@ -1,0 +1,56 @@
+.ThumbnailsContainer{
+  position: absolute;
+  /*썸네일 들어갈 영역 크기 지정*/
+  top: 260px;
+  left: 0px;
+  width: 390px;
+  height: 570px;
+  
+  background:whitesmoke;
+  outline: 2px solid transparent;
+  overflow: hidden;
+}
+
+.thumbnails_scrollbar{
+  overflow-y: scroll;
+  /*스크롤 기능은 썸네일 컨테이너 전체 영역*/
+  height: 100%;
+  width: 100%;
+}
+::-webkit-scrollbar { 
+  display: none;
+}
+
+.thumbnails_row{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.1rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /*썸네일 1 row 상의 영역 height*/
+  height: 175px;
+  transition: margin-top 0.3s;
+}
+
+.thumbnails_box {
+  text-align: center;
+  font-size: 18px;
+  background: whitesmoke;
+  outline: 1px solid pink;
+  /*썸네일 하나하나의 크기 지정*/
+  width: calc(33% - 0.5rem); /* 이 부분을 수정해서 간격 조절 */
+  height: 100%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+  margin: 4px; /* 추가: 각 박스 사이의 간격을 조절 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.thumbnails_box img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
