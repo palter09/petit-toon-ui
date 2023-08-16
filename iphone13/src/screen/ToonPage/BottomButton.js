@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useDetectClose from "../Header/useDetectClose";
+import chatDetectClose from "./chatDetectClose";
 import useIconClick from '../Header/useIconClick';
 import "./ChatStyles.css";
 import { useNavigate } from 'react-router-dom';
@@ -69,7 +69,7 @@ const DisLike = () => {
 };
 
 const Comment = () => {
-  const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
+  const [myPageIsOpen, myPageToggleHandler] = chatDetectClose(false);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
 
@@ -80,6 +80,12 @@ const Comment = () => {
     }
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleCommentSubmit();
+    }
+  };
+
   const {
     chatIconClicked,
     supportIconClicked,
@@ -87,10 +93,10 @@ const Comment = () => {
   } = useIconClick();
 
   return (
-    <div className='Wrapper'>
-      <div className="dropdown-container">
+    <div className='comment-wrapper'>
+      <div className="comment-container">
         {/* 채팅 아이콘 */}
-        <div className='dropdown-button'
+        <div className='comment-button'
           onClick={() => {
             myPageToggleHandler();
             handleIconClick(7);
@@ -104,15 +110,16 @@ const Comment = () => {
               alt="채팅 아이콘"
             />
           </div> {/* dropdown-button */}
-          <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
-            <div className='menu-title'>댓글 및 후원</div>
-            <div className='menu-container'>
+          <div className={`comment-menu ${myPageIsOpen ? 'open' : ''}`}>
+            <div className='comment-menu-title'>댓글 및 후원</div>
+            <div className='comment-menu-container'>
               {/* 댓글 입력 폼 */}
               <input
                 type="text"
                 placeholder="댓글을 입력하세요."
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
+                onKeyDown={handleKeyPress}
                 style={{position: "absolute", top: "350px"}}
               />
               <button 
@@ -120,7 +127,7 @@ const Comment = () => {
                 style={{position: "absolute", left: "200px", top: "355px"}}
                 >댓글달기</button>
               {/* 댓글 표시 */}
-              <div className='comment-container'>
+              <div className='comment-section-container'>
                 {comments.slice().reverse().map((comment, index) => (
                   <div key={index}>{comment}</div>
                 ))}
@@ -144,9 +151,9 @@ const Comment = () => {
             </div>
           </div>
           {/* 삼각형 */}
-          <div className='triangle-wrapper'>
-            {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
-            {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
+          <div className='comment-triangle-wrapper'>
+            {myPageIsOpen && <div className={`comment-triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+            {myPageIsOpen && <div className={`comment-triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
           </div>
       </div>
     </div>
