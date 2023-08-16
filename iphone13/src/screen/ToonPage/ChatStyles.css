@@ -1,4 +1,4 @@
-.Wrapper {
+.comment-wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -13,19 +13,19 @@
   font-weight: bold;
 }
 
-.dropdown-container {
+.comment-container {
   position: absolute;
   text-align: center;
   z-index: 9;
 }
 
-.dropdown-button {
+.comment-button {
   cursor: pointer;
   z-index:9;
 }
 
 /*dropdown button 클릭시 나오는 menu*/
-.menu {
+.comment-menu {
   background: white;
   position: absolute;
   top: -483px;
@@ -42,13 +42,13 @@
   z-index: 9;
 }
 
-.menu.open {
+.comment-menu.open {
   opacity: 1;
   visibility: visible;
   left: 50%;
 }
 
-.triangle-wrapper {
+.comment-triangle-wrapper {
   position: relative;
   width: 0;
   height: 0;
@@ -57,7 +57,7 @@
   justify-content: center;
 }
 
-.triangle-outer {
+.comment-triangle-outer {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -71,13 +71,13 @@
   transform: scaleY(-1);
 }
 
-.triangle-outer.fade-in {
+.comment-triangle-outer.fade-in {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.triangle-inner {
+.comment-triangle-inner {
   width: 0;
   height: 0;
   border-left: 16px solid transparent;
@@ -91,13 +91,13 @@
   transform: scaleY(-1);
 }
 
-.triangle-inner.fade-in {
+.comment-triangle-inner.fade-in {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.menu-title {
+.comment-menu-title {
   position : relative;
   font-family: Inter;
   font-size: 20px;
@@ -113,7 +113,7 @@
   color: #DA5E9D;
 }
 
-.menu-container {
+.comment-menu-container {
   position : relative;
   font-family: Inter;
   font-size: 20px;
@@ -153,7 +153,7 @@
 }
 
 /* 댓글 스타일 */
-.comment-container {
+.comment-section-container {
   height: 200px;
   width: 200px;
   max-height: 400px; /* Set a maximum height to limit the comment container's size */
