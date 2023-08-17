@@ -1,0 +1,33 @@
+/*thumbnail*/
+
+.thumbnail_file_wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  height: 70%;
+  margin: 1.5rem;
+
+  background-color: 	#FFE6EB;
+  outline: 1px solid #FFD2D7;
+}
+.thumbnail_file_wrapper:hover{
+  background-color:	#FFE1E6;
+  outline: 1px solid 	#FF98A3;
+}
+.thumbnail_file_wrapper label{
+  outline: 1px solid #FFD2D7;
+  background-color: #FFBBC6;
+  border-radius: .2rem;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.thumbnail_file_wrapper img {
+  width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+  border: 1px solid #FFD2D7;
+  border-radius: 0.2rem;
+}
