@@ -1,0 +1,17 @@
+/*info*/
+
+.info_title{
+  width:100%;
+  margin: .5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.info_title label{
+  margin: .5rem;
+  font-size: 15px;
+  font-weight: bold;
+}
+.info_title input{
+  width: 70%;
+}
