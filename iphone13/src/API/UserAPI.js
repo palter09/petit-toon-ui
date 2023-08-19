@@ -1,7 +1,7 @@
 /* 회원가입 */
 /* const csrfToken = 'D0DDkkL0Wmf4RBNIaa5l3HwSqwIwWF30D6uE3beEJWxFS7qrOXGnoifCbgPVJXd-DYNR6EUrhjtUamTZPpyx74PlQVp9ft-f'; */
 export async function signupUser(name, nickname, tag, email, password, csrfToken) {
-  const url = 'http://localhost:8080/api/v1/signup';
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/signup`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken,
@@ -37,9 +37,8 @@ export async function signupUser(name, nickname, tag, email, password, csrfToken
 }
 
 /* 유저 정보 조회 */
-/* const csrfToken = 'sPhSoSNTYpKWqg3PABylmjXAQPw2dyYJDMnJ9Y6_784tP66VhsE2lhFnAaq7nD3-ODGR_w34bZ5TT0ckb_38wL6G3fkcXJzx'; */
 export async function getUserInfo(userId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/user/${userId}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/user/${userId}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken
@@ -72,7 +71,7 @@ export async function getUserInfo(userId, csrfToken) {
 /* 유저 태그 중복 검사 */
 /* const csrfToken = 'mdel4zZBIqXXhoG69Kn_p5x7QFqOPOQuF5jbGoFzoCw78WXp-uGR2gYnFpb657DYw4TLlPhNbTvqDdIDIPnvL7JHlhgPwVCN'; */
 export async function checkTagDuplication(tag, csrfToken) {
-  const url = `http://localhost:8080/api/v1/user/${tag}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/user/${tag}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken,

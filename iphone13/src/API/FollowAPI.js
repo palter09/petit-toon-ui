@@ -1,7 +1,7 @@
 /* 팔로우 등록 */
 /* const csrfToken = 'z9Gm1qTCobyykm3Zxmv50wcAmu4Cj9xxeLM_tafNvFYochoF-7PFspb6kd6fo1Xp8kbN62E3t49gvOxcHtVejZf43TAaRn81'; */
 export async function followUser(followerId, followeeId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/follow/${followerId}/${followeeId}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/follow/${followerId}/${followeeId}`;
   
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken,
@@ -33,7 +33,7 @@ export async function getFollowers(userId, page, size, csrfToken) {
     size: size
   });
 
-  const url = `http://localhost:8080/api/v1/follow/${userId}?${queryParams.toString()}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/follow/${userId}?${queryParams.toString()}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken
@@ -71,7 +71,7 @@ export async function getFollowers(userId, page, size, csrfToken) {
 /* 팔로우 삭제 */
 /* const csrfToken = 'Ye7gHlhznH0S0z8ta1P4YjGpwuvcFmUUrkY9oGp-O003tsScUYyEKzsVq0g_sFoeWH7MVQOR74rvJ105nCAFkVtKXX4HjvP6'; */
 export async function deleteFollower(followId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/follow/${followId}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/follow/${followId}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken

@@ -1,27 +1,27 @@
 /* 검색 */
 /* const csrfToken = 'lZRIrNReva4P3d7K2WmdzvFQ8NSP7Xe1XaNFA2bcnW6Qh0Yvp_F7lLE8iMwiu-uruESp-pAy3bW5iEGYOMYjM1Dur1zytCcW'; */
-export async function search(keyword, page, size, csrfToken) {
+export async function search(keyword, page, size, accessToken, callback) {
   const queryParams = new URLSearchParams({
     keyword: keyword,
     page: page,
     size: size
   });
 
-  const url = `http://localhost:8080/api/v1/search?${queryParams.toString()}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/search?${queryParams.toString()}`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken
+     Authorization: `Bearer ${accessToken}`
   });
 
   const options = {
     method: 'GET',
-    headers: headers
+    headers: headers,
   };
 
   try {
     const response = await fetch(url, options);
     if (response.ok) {
-      const responseData = await response.json();
+      const responseData = await response.json(); 
 
       console.log('Users:');
       responseData.users.forEach(user => {
@@ -45,10 +45,12 @@ export async function search(keyword, page, size, csrfToken) {
         console.log(`  Like Count: ${toon.likeCount}`);
         console.log(`  Like Status: ${toon.likeStatus}`);
       });
+
+      callback(responseData);
     } else {
       console.error(`Failed to search: ${response.statusText}`);
     }
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error(error);
   }
 }
