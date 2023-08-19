@@ -3,11 +3,9 @@ import Header from "./Header/Header.js"
 import Profile from './UserinfoPage/Profile.js'
 import Works from './UserinfoPage/Works.js'
 
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const UserinfoPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const params = useParams();
 
   const userinfo = {nickname: "nickname_test", tag: "tag_test", works: [], following: []};

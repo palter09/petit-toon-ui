@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage/LoginPage.css';
+import {loginUser, reissueToken} from '../API/AuthentificationAPI.js';
+import { useNavigate } from 'react-router-dom';
 
 import { BiHide, BiShow } from "react-icons/bi";
 
@@ -8,7 +10,14 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
+    loginUser(username, password, (json) => {
+        document.cookie = `accessToken=${json.accessToken};`;
+        navigate('/search');
+    })
+
     // 로그인 처리 로직을 추가해야 합니다.
     // 예를 들어, 서버와 통신하여 로그인을 시도하고 성공 여부에 따라 다른 동작을 수행합니다.
   };

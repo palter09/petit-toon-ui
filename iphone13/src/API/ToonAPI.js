@@ -1,7 +1,7 @@
 /* 웹툰 등록 */
 /* const csrfToken = 'wMp5DKxlo82ylLlSxmd_kcBfn5IEtEOyY4PluMxvYMgWhKkY9KtJOZpVl_ufoYhjo0pLoqFusqpngSafB7Pc3PQOUfgv4s96'; */
 export async function registerWebtoon(csrfToken, imageFiles) {
-  const url = 'http://localhost:8080/api/v1/toon';
+  const url = `${process.env.REACT_APP_URL}/api/v1/toon`;
 
   const formData = new FormData();
   formData.append('toonImages', imageFiles[0], 'sample1.png');
@@ -32,7 +32,7 @@ export async function registerWebtoon(csrfToken, imageFiles) {
 /* 웹툰 삭제 */
 /* const csrfToken = 'qhLYmf_Qp769e3J2lecJ_EbG4IOweYpldVPCfIxDBrPd3uVeknG6-J3pxN-QSBdE98o9mn_-zbqIS-5IFGD0T7ggYIO569Vt'; */
 export async function deleteWebtoon(toonId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/toon/${toonId}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken
@@ -58,7 +58,7 @@ export async function deleteWebtoon(toonId, csrfToken) {
 /* 웹툰 정보 조회 */
 /* const csrfToken = 'UQuY2Zt7NIyhNqqyPyusogvrS6giEUe55rndz_5KBGu56PuzMzv7vfoaA7WMAs7UDAaYlTuNZpFDI3CU14jrqsh_PFqN0Z-B'; */
 export async function getWebtoonInfo(toonId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/toon/${toonId}`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken
@@ -99,7 +99,7 @@ export async function getWebtoonInfo(toonId, csrfToken) {
 /* 웹툰 조회수 상승 */
 /* const csrfToken = 'tp5-21ulOHZlty8FoYHAZD4kL4V3hW47caEeLVctLMeWC6jNgPtKvzjHXRJI00wzw6z0AFxGAuRD41YWE5R9GmFIT6X3bs6r'; */
 export async function increaseViewCount(toonId, csrfToken) {
-  const url = `http://localhost:8080/api/v1/toon/${toonId}/view`;
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}/view`;
 
   const headers = new Headers({
     'X-CSRF-TOKEN': csrfToken,
