@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles/InfoTitle.module.css';
 
-const InfoTitle = ({ title, onChange }) => {
+const InfoTitle = ({ title, handleTitle}) => {
+  const [inputCounter, setInputCounter] = useState(0);
+  
+  const onInputCounter = (e) => {
+    const inputValue = e.target.value;
+    setInputCounter(inputValue.length);
+    handleTitle(inputValue);
+  };
   return (
     <div className={styles.info_title}>
-      <label htmlFor="title">작품명</label>
+      <label htmlFor="title">제목</label>
       <input
         type="text"
         id="title"
         value={title}
         maxLength={15}
-        placeholder="최대 15글자"
-        onChange={onChange}
+        onChange={onInputCounter}
         required
       />
+      <p>
+        <span>{inputCounter}/15</span>
+      </p>
     </div>
   );
 };

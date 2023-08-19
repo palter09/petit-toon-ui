@@ -29,7 +29,7 @@ const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName }) => {
   };
   
   return (
-    <div className={styles.thumbnail_file_wrapper}>
+    <div className={styles.ImagesUpload_file_wrapper}>
       {previewVisible ? (
         <img
           src={imgFile}
