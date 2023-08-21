@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styles from './styles/ImgUpload.module.css';
 
-const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName }) => {
+const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName, isDisabled }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const imgRef = useRef();//input file에서 img 참조
   
@@ -50,6 +50,7 @@ const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName }) => {
         accept="image/*"
         onChange={handleImageUpload}
         ref={imgRef}
+        disabled={isDisabled}
       />
     </div>
   );

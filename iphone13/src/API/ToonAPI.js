@@ -1,52 +1,76 @@
-/* 웹툰 등록 */
-/* const csrfToken = 'wMp5DKxlo82ylLlSxmd_kcBfn5IEtEOyY4PluMxvYMgWhKkY9KtJOZpVl_ufoYhjo0pLoqFusqpngSafB7Pc3PQOUfgv4s96'; */
-export async function registerWebtoon(csrfToken, imageFiles) {
-  const url = `${process.env.REACT_APP_URL}/api/v1/toon`;
-
+/*ToonAPI*/
+/*
+register Webtoon
+*/
+export async function registerWebtoon(userId, toonTitle, description, imageFiles, accessToken, callback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon`;
   const formData = new FormData();
-  formData.append('toonImages', imageFiles[0], 'sample1.png');
-  formData.append('toonImages', imageFiles[1], 'sample2.png');
+
+  formData.append('userId', userId);
+  formData.append('title', toonTitle);
+  formData.append('description', description);
+  for (let i = 0; i < imageFiles.length; i++) {
+    if(imageFiles[i] === '') break;
+    // 이미지 URL을 Blob 객체로 변환
+    const response = await fetch(imageFiles[i]);
+    const blob = await response.blob();
+    
+    // Blob 객체를 FormData에 추가
+    formData.append('toonImages', blob, `sample${i + 1}.png`);
+  }
+
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken
+    Authorization: `Bearer ${accessToken}`,
   });
 
   const options = {
     method: 'POST',
     headers: headers,
-    body: formData
+    body: formData,
   };
 
   try {
     const response = await fetch(url, options);
+
+    // ... formData.append("키이름", "값"); 생략
+    
+    for (let value of formData.values()) {
+          console.log(value);
+    }
     if (response.ok) {
-      console.log('Webtoons registered successfully.');
+      const responseData = await response.json();
+      console.log(`Webtoon ${responseData.toonId} registered successfully.`);
+      callback(responseData.toonId);
     } else {
-      console.error(`Failed to register webtoons: ${response.statusText}`);
+      console.error(`Failed to register webtoon: ${response.statusText}`);
     }
   } catch (error) {
     console.error('An error occurred:', error);
   }
 }
 
-/* 웹툰 삭제 */
-/* const csrfToken = 'qhLYmf_Qp769e3J2lecJ_EbG4IOweYpldVPCfIxDBrPd3uVeknG6-J3pxN-QSBdE98o9mn_-zbqIS-5IFGD0T7ggYIO569Vt'; */
-export async function deleteWebtoon(toonId, csrfToken) {
+
+/*
+delete Webtoon
+*/
+export async function deleteWebtoon(toonId, accessToken, callback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken
+    Authorization: `Bearer ${accessToken}`
   });
 
   const options = {
     method: 'DELETE',
-    headers: headers
+    headers: headers,
   };
 
   try {
     const response = await fetch(url, options);
     if (response.ok) {
       console.log(`Webtoon with ID ${toonId} has been deleted.`);
+      callback(true);
     } else {
       console.error(`Failed to delete webtoon: ${response.statusText}`);
     }
@@ -55,39 +79,42 @@ export async function deleteWebtoon(toonId, csrfToken) {
   }
 }
 
-/* 웹툰 정보 조회 */
-/* const csrfToken = 'UQuY2Zt7NIyhNqqyPyusogvrS6giEUe55rndz_5KBGu56PuzMzv7vfoaA7WMAs7UDAaYlTuNZpFDI3CU14jrqsh_PFqN0Z-B'; */
-export async function getWebtoonInfo(toonId, csrfToken) {
+/*
+get Webtoon information
+*/
+export async function getWebtoonInfo(toonId, accessToken, callback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken
+    Authorization: `Bearer ${accessToken}`
   });
+
 
   const options = {
     method: 'GET',
-    headers: headers
+    headers: headers,
   };
 
   try {
     const response = await fetch(url, options);
     if (response.ok) {
-      const webtoonInfo = await response.json();
+      const responseData = await response.json();
 
-      console.log('Webtoon Information:');
-      console.log(`- Toon ID: ${webtoonInfo.id}`);
-      console.log(`- Title: ${webtoonInfo.title}`);
-      console.log(`- Description: ${webtoonInfo.description}`);
-      console.log(`- Author: ${webtoonInfo.author}`);
-      console.log(`- Profile Image URL: ${webtoonInfo.profileImageUrl}`);
-      console.log(`- Thumbnail URL: ${webtoonInfo.thumbnailUrl}`);
-      console.log('- Image Paths:');
-      webtoonInfo.imagePaths.forEach((imagePath, index) => {
-        console.log(`  ${index + 1}: ${imagePath}`);
+      console.log('Toons:');
+      responseData.toons.forEach(toon => {
+        console.log(`- Toon ID: ${toon.id}`);
+        console.log(`  Title: ${toon.title}`);
+        console.log(`  Description: ${toon.description}`);
+        console.log(`  Author: ${toon.author}`);
+        console.log(`  Profile Image URL: ${toon.profileImageUrl}`);
+        console.log(`  Thumbnail URL: ${toon.thumbnailUrl}`);
+        console.log(`  Image Paths: ${toon.imagePaths.join(', ')}`);
+        console.log(`  View Count: ${toon.viewCount}`);
+        console.log(`  Like Count: ${toon.likeCount}`);
+        console.log(`  Like Status: ${toon.likeStatus}`);
       });
-      console.log(`- View Count: ${webtoonInfo.viewCount}`);
-      console.log(`- Like Count: ${webtoonInfo.likeCount}`);
-      console.log(`- Like Status: ${webtoonInfo.likeStatus}`);
+
+      callback(responseData);
     } else {
       console.error(`Failed to fetch webtoon information: ${response.statusText}`);
     }
@@ -96,25 +123,26 @@ export async function getWebtoonInfo(toonId, csrfToken) {
   }
 }
 
-/* 웹툰 조회수 상승 */
-/* const csrfToken = 'tp5-21ulOHZlty8FoYHAZD4kL4V3hW47caEeLVctLMeWC6jNgPtKvzjHXRJI00wzw6z0AFxGAuRD41YWE5R9GmFIT6X3bs6r'; */
-export async function increaseViewCount(toonId, csrfToken) {
+/*
+increase ViewCount
+*/
+export async function increaseViewCount(toonId, accessToken, callback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}/view`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken,
-    'Content-Type': 'application/x-www-form-urlencoded'
+    Authorization: `Bearer ${accessToken}`
   });
 
   const options = {
     method: 'POST',
-    headers: headers
+    headers: headers,
   };
 
   try {
     const response = await fetch(url, options);
     if (response.ok) {
       console.log(`View count for webtoon with ID ${toonId} has been increased.`);
+      callback(true);
     } else {
       console.error(`Failed to increase view count: ${response.statusText}`);
     }

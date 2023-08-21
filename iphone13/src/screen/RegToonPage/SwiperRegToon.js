@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './styles/SwiperRegToon.css';
 import 'swiper/css/navigation';
@@ -7,9 +7,6 @@ import ImgUpload from './ImgUpload';
 import { Pagination, Navigation } from 'swiper/modules';
 
 const SwiperRegToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) => {
-  useEffect(() => {
-  }, [])
-
   return (
       <Swiper
         slidesPerView={1}
@@ -33,6 +30,7 @@ const SwiperRegToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) =
                 imgSize={imgSize}
                 inputId={`${inputId}-${index}`}
                 inputName={`${inputName}-${index}`}
+                isDisabled={index > 0 && !imgFiles[index - 1]}
               />
           </SwiperSlide>
         ))}

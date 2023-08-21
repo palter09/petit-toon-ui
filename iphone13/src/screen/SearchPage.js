@@ -17,16 +17,14 @@ const SearchPage = () => {
     return value? value[2] : null;
   }
 
-  const fetchSearchResults = (query) =>{
-    search(query, 0, 5, get_cookie('accessToken'), setSearchResults);
-  };
-
-  //렌더링 될때마다 + searchQuery변경시마다
-  useEffect(()=>{
-    if(searchQuery){
-      fetchSearchResults(searchQuery);
+  // 검색어가 변경될 때마다 API 호출
+  useEffect(() => {
+    if (searchQuery) {
+      console.log(get_cookie('accessToken'));
+      search(searchQuery, 0, 5, get_cookie('accessToken'), setSearchResults);
     }
-  },[searchQuery]);
+  }, [searchQuery]);
+
 
   return (
     <div className="container">
@@ -35,14 +33,14 @@ const SearchPage = () => {
       </div>
       <div className="item">
         <div className='searchLineUp'/>
-        <SearchEngine urlQuery={searchQuery} fetchSearchResults={fetchSearchResults} />
+        <SearchEngine />
         <div className='searchLineDown'/>
       </div>
       <div className="item">
-          <Profiles users={searchResults.users} /> 
+        <Profiles users={searchResults.users} /> 
       </div>
       <div className="item">
-          <Thumbnails toons={searchResults.toons} />
+        <Thumbnails toons={searchResults.toons} />
       </div>
     </div>
   );

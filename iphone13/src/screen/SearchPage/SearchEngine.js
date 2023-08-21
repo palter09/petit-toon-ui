@@ -1,49 +1,40 @@
-import React, { useState, useCallback} from 'react';
-import './SearchPage.css';
-import './SearchEngine.css';
-import useIconClick from './useIconClick';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useCallback } from "react";
+import "./SearchPage.css";
+import "./SearchEngine.css";
+import useIconClick from "./useIconClick";
+import { useNavigate } from "react-router-dom";
 
-
-const SearchEngine = ({urlQuery, fetchSearchResults }) => {
-  const [searchQuery, setSearchQuery] = useState(urlQuery||'');//url로 입력시 input창에도 검색어 뜨게
+const SearchEngine = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   /*
   검색
   */
-
   //검색창 input에서 onChange할때마다 searchQuery update
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  //검색창에 입력시 url 변경 + fetch search result호출
+  //버튼 클릭->handleSearchButtonIconClick->handleSearch->navigate
   const handleSearch = useCallback(() => {
     if (!searchQuery.trim()) return;
-
     navigate(`/search/${searchQuery}`, { replace: true });
+  }, [navigate, searchQuery]);
 
-    fetchSearchResults(searchQuery);
-  }, [fetchSearchResults, navigate, searchQuery]);
-  
   /*
-  버튼 아이콘
+  버튼 아이콘 클릭시 아이콘 변경 + handleSearch 호출
   */
- 
   const handleSearchButtonIconClick = () => {
     handleIconClick(1);
     handleSearch();
   };
   //icon 클릭시 변경
-  const {
-    searchButtonIconClicked,
-    handleIconClick,
-  } = useIconClick();
- 
+  const { searchButtonIconClicked, handleIconClick } = useIconClick();
+
   //KeyDown에서 Enter시에도 검색가능하도록
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSearchButtonIconClick();
     }
   };
@@ -65,11 +56,11 @@ const SearchEngine = ({urlQuery, fetchSearchResults }) => {
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
           />
-          <button className="searchButtonStyle" onClick={handleSearchButtonIconClick}>
-            <img
-              src={searchButtonImageSrc}
-              alt="search_engine_button"
-            />
+          <button
+            className="searchButtonStyle"
+            onClick={handleSearchButtonIconClick}
+          >
+            <img src={searchButtonImageSrc} alt="search_engine_button" />
           </button>
         </div>
       </div>
