@@ -20,9 +20,13 @@ export async function search(keyword, page, size, accessToken, callback) {
 
   try {
     const response = await fetch(url, options);
+    console.log(url);
+    console.log(options);
+    console.log(response.ok);
     if (response.ok) {
+      console.log("DDd");
       const responseData = await response.json(); 
-
+      console.log(responseData);
       console.log('Users:');
       responseData.users.forEach(user => {
         console.log(`- User ID: ${user.id}`);

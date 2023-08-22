@@ -18,6 +18,7 @@ const App = () => {
         <Route path="/" element={<LoginPage />} />
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/toon" element={<ToonPage />} />
+        <Route path="/toon/:id" element={<ToonPage />} />
         <Route path="/userinfo/:id" element={<UserinfoPage />} />
         <Route path="/search/" element={<SearchPage />}/>
         <Route path="/search/:searchQuery" element={<SearchPage />}/>
