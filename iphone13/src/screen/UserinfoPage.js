@@ -1,14 +1,21 @@
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 import Header from "./Header/Header.js"
 import Profile from './UserinfoPage/Profile.js'
 import Works from './UserinfoPage/Works.js'
 
+import { getUserInfo } from '../API/UserAPI.js';
+
 import { useParams } from 'react-router-dom';
 
 const UserinfoPage = () => {
-  const params = useParams();
+  const [userinfo, setUserinfo] = useState({});
+  const userid = useParams().id;
 
-  const userinfo = {nickname: "nickname_test", tag: "tag_test", works: [], following: []};
+  useEffect(() => {
+    if (userid) {
+      getUserInfo(userid, setUserinfo);
+    }
+  }, [userid]);
 
   return (
     <div className="container">

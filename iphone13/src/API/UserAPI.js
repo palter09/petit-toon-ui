@@ -1,10 +1,11 @@
+import { getCookie, setCookie } from "./handleTokens.js";
+import { reissueToken } from "./AuthentificationAPI.js";
+
 /* 회원가입 */
-/* const csrfToken = 'D0DDkkL0Wmf4RBNIaa5l3HwSqwIwWF30D6uE3beEJWxFS7qrOXGnoifCbgPVJXd-DYNR6EUrhjtUamTZPpyx74PlQVp9ft-f'; */
-export async function signupUser(name, nickname, tag, email, password, csrfToken) {
+export async function signupUser(name, nickname, tag, email, password) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/signup`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken,
     'Content-Type': 'application/json;charset=UTF-8'
   });
 
@@ -37,11 +38,11 @@ export async function signupUser(name, nickname, tag, email, password, csrfToken
 }
 
 /* 유저 정보 조회 */
-export async function getUserInfo(userId, csrfToken) {
+export async function getUserInfo(userId, callback, fallback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/user/${userId}`;
 
   const headers = new Headers({
-    'X-CSRF-TOKEN': csrfToken
+    Authorization: `Bearer ${getCookie("accessToken")}`
   });
 
   const options = {
@@ -50,18 +51,25 @@ export async function getUserInfo(userId, csrfToken) {
   };
 
   try {
-    const response = await fetch(url, options);
+    let response = await fetch(url, options);
+
+    if (response.status == 401){
+      let reissueStatus = 0;
+      await reissueToken(
+        (token) => {setCookie("accessToken", token.accessToken, 30*60)},
+        (_response) => {reissueStatus = _response.status}
+      );
+      if(reissueStatus) 
+        throw Error(`reissueToken failed: ${reissueStatus}`);
+      else
+        response = await fetch(url, options);
+    }
+
     if (response.ok) {
       const responseData = await response.json();
-
-      console.log('User Information:');
-      console.log(`- User ID: ${responseData.id}`);
-      console.log(`- Nickname: ${responseData.nickname}`);
-      console.log(`- Tag: ${responseData.tag}`);
-      console.log(`- Profile Image Path: ${responseData.profileImagePath}`);
-      console.log(`- Status Message: ${responseData.statusMessage}`);
+      callback && callback(responseData);
     } else {
-      console.error(`Failed to get user information: ${response.statusText}`);
+      fallback && fallback(response);
     }
   } catch (error) {
     console.error('An error occurred:', error);
@@ -69,7 +77,6 @@ export async function getUserInfo(userId, csrfToken) {
 }
 
 /* 유저 태그 중복 검사 */
-/* const csrfToken = 'mdel4zZBIqXXhoG69Kn_p5x7QFqOPOQuF5jbGoFzoCw78WXp-uGR2gYnFpb657DYw4TLlPhNbTvqDdIDIPnvL7JHlhgPwVCN'; */
 export async function checkTagDuplication(tag, csrfToken) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/user/${tag}`;
 

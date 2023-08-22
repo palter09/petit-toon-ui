@@ -12,16 +12,10 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState({ users: [], toons: [] });
   const { searchQuery } = useParams();
 
-  const get_cookie = (name) => {
-    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-    return value? value[2] : null;
-  }
-
   // 검색어가 변경될 때마다 API 호출
   useEffect(() => {
     if (searchQuery) {
-      console.log(get_cookie('accessToken'));
-      search(searchQuery, 0, 5, get_cookie('accessToken'), setSearchResults);
+      search(searchQuery, 0, 5, setSearchResults);
     }
   }, [searchQuery]);
 

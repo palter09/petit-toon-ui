@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './LoginPage/LoginPage.css';
-import {loginUser, reissueToken} from '../API/AuthentificationAPI.js';
+import {loginUser} from '../API/AuthentificationAPI.js';
+import { setCookie } from '../API/handleTokens.js';
+
 import { useNavigate } from 'react-router-dom';
 
 import { BiHide, BiShow } from "react-icons/bi";
@@ -14,12 +16,10 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     loginUser(username, password, (json) => {
-        document.cookie = `accessToken=${json.accessToken};`;
+        setCookie('accessToken', json.accessToken, 30*60);
+        setCookie('refreshToken', json.refreshToken, 7*24*60*60);
         navigate('/search');
     })
-
-    // 로그인 처리 로직을 추가해야 합니다.
-    // 예를 들어, 서버와 통신하여 로그인을 시도하고 성공 여부에 따라 다른 동작을 수행합니다.
   };
 
   return (
