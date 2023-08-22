@@ -1,3 +1,4 @@
+import { getCookie } from "./handleTokens.js";
 /*ToonAPI*/
 /*
 register Webtoon
@@ -7,7 +8,6 @@ export async function registerWebtoon(
   toonTitle,
   description,
   imageFiles,
-  accessToken,
   callback
 ) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon`;
@@ -27,7 +27,7 @@ export async function registerWebtoon(
   }
 
   const headers = new Headers({
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${getCookie("accessToken")}`,
   });
 
   const options = {
@@ -59,11 +59,11 @@ export async function registerWebtoon(
 /*
 delete Webtoon
 */
-export async function deleteWebtoon(toonId, accessToken, callback) {
+export async function deleteWebtoon(toonId, callback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${getCookie("accessToken")}`,
   });
 
   const options = {
@@ -87,11 +87,11 @@ export async function deleteWebtoon(toonId, accessToken, callback) {
 /*
 get Webtoon information
 */
-export async function getWebtoonInfo(toonId, accessToken, callback) {
+export async function getWebtoonInfo(toonId, callback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${getCookie("accessToken")}`,
   });
 
   const options = {
@@ -130,11 +130,11 @@ export async function getWebtoonInfo(toonId, accessToken, callback) {
 /*
 increase ViewCount
 */
-export async function increaseViewCount(toonId, accessToken) {
+export async function increaseViewCount(toonId) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}/view`;
 
   const headers = new Headers({
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${getCookie("accessToken")}`,
   });
 
   const options = {

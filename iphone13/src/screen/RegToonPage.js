@@ -29,11 +29,6 @@ const RegToonPage = () => {
     setAgreementChecked(!agreementChecked);
   };
 
-  // get user access token from cookie
-  const get_cookie = (name) => {
-    var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-    return value ? value[2] : null;
-  };
   // handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,7 +39,6 @@ const RegToonPage = () => {
       title,
       description,
       imgFiles,
-      get_cookie('accessToken'),
       setToonId
     );
   };

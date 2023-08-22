@@ -5,14 +5,9 @@ import "./Swiper.css";
 import { increaseViewCount } from "../../API/ToonAPI";
 
 export default function SwiperLR({ toon }) {
-  // get user access token from cookie
-  const get_cookie = (name) => {
-    var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-    return value ? value[2] : null;
-  };
   // 처음 렌더링 되거나 isView 변할때 api 호출
   useEffect(() => {
-    increaseViewCount(toon.id, get_cookie("accessToken"));
+    increaseViewCount(toon.id);
   }, [toon]);
   return (
     <>

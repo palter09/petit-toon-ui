@@ -18,7 +18,7 @@ const textStyle = {
   width: "159px",
 }
 
-const Works = ({userinfo}) => {
+const Works = ({ userinfo }) => {
   return (
     <div style={worksStyle}>
       <TabWrapper>
