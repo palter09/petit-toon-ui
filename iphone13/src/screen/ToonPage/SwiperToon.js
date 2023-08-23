@@ -4,6 +4,7 @@ import "swiper/css";
 import "./Swiper.css";
 import SwiperLR from "./SwiperLR.js";
 import { getWebtoonInfo } from "../../API/ToonAPI";
+import Loading from './Loading';
 
 export default function SwiperToon({toonId}) {
   const tid = toonId.id;//toonId = { id: num }
@@ -13,7 +14,7 @@ export default function SwiperToon({toonId}) {
     position: "absolute",
     width: "390px",
     height: "636px",
-    left: "-12px",
+    left: "0px",
     top: "113px",
     overflow: "hidden",
     textAlign: "center",
@@ -28,13 +29,13 @@ export default function SwiperToon({toonId}) {
 
 
   if (isLoading) {
-    return <div style ={toonStyle}>Loading...</div>;
+    return <div style ={toonStyle}><Loading/></div>;
   } 
 
 
   return (
     <>
-      <Swiper spaceBetween={30} direction={"vertical"} style={toonStyle}>
+      <Swiper spaceBetween={100} direction={"vertical"} style={toonStyle}>
         <SwiperSlide>
           <SwiperLR toon={toon} />
         </SwiperSlide>

@@ -25,7 +25,7 @@ const SwiperProfilesLR = ({ users, style }) => {
         {users.map((user) => (
           <SwiperSlide key={user.id}>
             <img
-              src={user.profileImagePath}
+              src={`${process.env.REACT_APP_SERVER_IP}/resources/${user.profileImagePath}`}
               alt={user.nickname}
               onClick={() => handleImageClick(user.id)}
             />
