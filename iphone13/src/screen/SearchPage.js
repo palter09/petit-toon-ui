@@ -13,7 +13,13 @@ const SearchPage = () => {
   const { searchQuery } = useParams();
   const navigate = useNavigate();
 
-  search(searchQuery, 0, 5, setSearchResults, (_) => { navigate('/') });
+  // 검색어가 변경될 때마다 API 호출
+  useEffect(() => {
+    if (searchQuery) {
+      search(searchQuery, 0, 5, setSearchResults, (_) => { navigate('/') });
+    }
+  }, [searchQuery]);
+
 
   return (
     <div className="container">
