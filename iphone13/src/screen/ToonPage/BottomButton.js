@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import chatDetectClose from "./chatDetectClose";
-import useIconClick from '../Header/useIconClick';
+import useDetectClose from "../../hooks/useDetectClose";
+import useIconClick from '../../hooks/useIconClick';
 import "./ChatStyles.css";
 import { useNavigate } from 'react-router-dom';
 
@@ -69,7 +69,7 @@ const DisLike = () => {
 };
 
 const Comment = () => {
-  const [myPageIsOpen, myPageToggleHandler] = chatDetectClose(false);
+  const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
 
@@ -93,7 +93,7 @@ const Comment = () => {
   } = useIconClick();
 
   return (
-    <div className='comment-wrapper'>
+    <div className='comment-wrapper' ref={myRef}>
       <div className="comment-container">
         {/* 채팅 아이콘 */}
         <div className='comment-button'
