@@ -16,7 +16,7 @@ const SwiperThumbnails = ({ toons, style }) => {
           {toons.map((toon) => (
             <div className='thumbnails_box' key={toon.id}>
               <img
-                src={toon.thumbnailUrl}
+                src={ `${process.env.REACT_APP_SERVER_IP}/resources/${toon.thumbnailUrl}`}
                 alt={toon.title}
                 onClick={() => handleImageClick(toon.id, toon.thumbnailUrl)}
               />

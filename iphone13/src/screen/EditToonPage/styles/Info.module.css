@@ -1,0 +1,21 @@
+/*info*/
+
+.info_header{
+  display: flex;
+  flex-direction: row;
+  height: 0.5rem;
+  align-items: center;
+  margin: 0.2rem;
+
+}
+.info_header p{
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0.2rem;
+  
+}
+.info_content{
+  font-size: 12px;
+  margin: 0.2rem;
+}
+

@@ -72,12 +72,14 @@ export async function deleteWebtoon(toonId, callback) {
   };
 
   try {
+    console.log(toonId);
     const response = await fetch(url, options);
     if (response.ok) {
       console.log(`Webtoon with ID ${toonId} has been deleted.`);
       callback(true);
     } else {
       console.error(`Failed to delete webtoon: ${response.statusText}`);
+      callback(false);
     }
   } catch (error) {
     console.error("An error occurred:", error);
