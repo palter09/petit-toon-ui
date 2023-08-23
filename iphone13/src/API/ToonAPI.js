@@ -1,4 +1,5 @@
-import { getCookie } from "./handleTokens.js";
+import { getCookie } from "./HandleTokens.js";
+import { fetchAPIAndExecute } from "./APIFetcher.js";
 /*ToonAPI*/
 /*
 register Webtoon
@@ -8,7 +9,8 @@ export async function registerWebtoon(
   toonTitle,
   description,
   imageFiles,
-  callback
+  callback,
+  fallback
 ) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon`;
   const formData = new FormData();
@@ -36,30 +38,13 @@ export async function registerWebtoon(
     body: formData,
   };
 
-  try {
-    const response = await fetch(url, options);
-
-    // ... formData.append("키이름", "값"); 생략
-
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log(`Webtoon ${responseData.toonId} registered successfully.`);
-      callback(responseData.toonId);
-    } else {
-      console.error(`Failed to register webtoon: ${response.statusText}`);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fetchAPIAndExecute(url, options, callback, fallback);
 }
 
 /*
 delete Webtoon
 */
-export async function deleteWebtoon(toonId, callback) {
+export async function deleteWebtoon(toonId, callback, fallback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
@@ -71,25 +56,13 @@ export async function deleteWebtoon(toonId, callback) {
     headers: headers,
   };
 
-  try {
-    console.log(toonId);
-    const response = await fetch(url, options);
-    if (response.ok) {
-      console.log(`Webtoon with ID ${toonId} has been deleted.`);
-      callback(true);
-    } else {
-      console.error(`Failed to delete webtoon: ${response.statusText}`);
-      callback(false);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fetchAPIAndExecute(url, options, callback, fallback);
 }
 
 /*
 get Webtoon information
 */
-export async function getWebtoonInfo(toonId, callback) {
+export async function getWebtoonInfo(toonId, callback, fallback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}`;
 
   const headers = new Headers({
@@ -101,38 +74,13 @@ export async function getWebtoonInfo(toonId, callback) {
     headers: headers,
   };
 
-  try {
-    const response = await fetch(url, options);
-    if (response.ok) {
-      const responseData = await response.json();
-
-      console.log("Toons:");
-      console.log(`- Toon ID: ${responseData.id}`);
-      console.log(`  Title: ${responseData.title}`);
-      console.log(`  Description: ${responseData.description}`);
-      console.log(`  Author: ${responseData.author}`);
-      console.log(`  Profile Image URL: ${responseData.profileImageUrl}`);
-      console.log(`  Thumbnail URL: ${responseData.thumbnailUrl}`);
-      console.log(`  Image Paths: ${responseData.imagePaths.join(", ")}`);
-      console.log(`  View Count: ${responseData.viewCount}`);
-      console.log(`  Like Count: ${responseData.likeCount}`);
-      console.log(`  Like Status: ${responseData.likeStatus}`);
-
-      callback(responseData);
-    } else {
-      console.error(
-        `Failed to fetch webtoon information: ${response.statusText}`
-      );
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fetchAPIAndExecute(url, options, callback, fallback);
 }
 
 /*
 increase ViewCount
 */
-export async function increaseViewCount(toonId) {
+export async function increaseViewCount(toonId, callback, fallback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/${toonId}/view`;
 
   const headers = new Headers({
@@ -144,16 +92,5 @@ export async function increaseViewCount(toonId) {
     headers: headers,
   };
 
-  try {
-    const response = await fetch(url, options);
-    if (response.ok) {
-      console.log(
-        `View count for webtoon with ID ${toonId} has been increased.`
-      );
-    } else {
-      console.error(`Failed to increase view count: ${response.statusText}`);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  fetchAPIAndExecute(url, options, callback, fallback);
 }

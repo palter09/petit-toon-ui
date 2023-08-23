@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPage/LoginPage.css';
 import {loginUser} from '../API/AuthentificationAPI.js';
-import { setCookie } from '../API/handleTokens.js';
+import { setCookie } from '../API/HandleTokens.js';
 
 import { useNavigate } from 'react-router-dom';
 
