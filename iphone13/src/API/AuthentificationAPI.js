@@ -1,5 +1,4 @@
 import { getCookie } from "./HandleTokens.js";
-import { fetchAPIAndExecute } from "./APIFetcher.js";
 
 /* 로그인 */
 export async function loginUser(email, password, callback, fallback) {
@@ -20,7 +19,21 @@ export async function loginUser(email, password, callback, fallback) {
     body: JSON.stringify(requestBody)
   };
 
-  fetchAPIAndExecute(url, options, callback, fallback);
+  try {
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const responseData = await response.json();
+
+      console.log('Access Token:', responseData.accessToken);
+      console.log('Refresh Token:', responseData.refreshToken);
+
+      callback && callback(responseData);
+    } else {
+      fallback && fallback(response);
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
 }
 
 /* 토큰 재발행 */
@@ -41,5 +54,16 @@ export async function reissueToken(callback, fallback) {
     body: JSON.stringify(requestBody)
   };
 
-  fetchAPIAndExecute(url, options, callback, fallback);
+  try {
+    const response = await fetch(url, options);
+    if (response.ok) {
+      const responseData = await response.json();
+
+      callback && callback(responseData)
+    } else {
+      fallback && fallback(response);
+    }
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
 }

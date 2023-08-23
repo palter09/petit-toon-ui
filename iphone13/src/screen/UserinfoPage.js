@@ -11,11 +11,7 @@ const UserinfoPage = () => {
   const [userinfo, setUserinfo] = useState({});
   const userid = useParams().id;
 
-  useEffect(() => {
-    if (userid) {
-      getUserInfo(userid, setUserinfo);
-    }
-  }, [userid]);
+  getUserInfo(userid, setUserinfo);
 
   return (
     <div className="container">
