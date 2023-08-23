@@ -9,10 +9,10 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
       let reissueStatus = 0;
       await reissueToken(
         (token) => {setCookie("accessToken", token.accessToken, 30*60)},
-        (_response) => {reissueStatus = _response.status}
+        (_response) => { reissueStatus = _response.status}
       );
       if(reissueStatus) 
-        throw Error(`reissueToken failed: ${reissueStatus}`);
+        fallback && fallback(response);
       else
         response = await fetch(url, options);
     }
@@ -20,10 +20,8 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
     if (response.ok) {
       const responseData = await response.json();
       callback && callback(responseData);
-    } else {
-      fallback && fallback(response);
     }
-    } catch (error) {
+  } catch (error) {
     console.error('An error occurred:', error);
   }
 }
