@@ -12,16 +12,7 @@ export async function followUser(followerId, followeeId, callback, fallback) {
     headers: headers,
   };
 
-  try {
-    const response = await fetch(url, options);
-    if (response.ok) {
-      console.log(`User ${followeeId} is now being followed by user ${followerId}.`);
-    } else {
-      console.error(`Failed to follow user: ${response.statusText}`);
-    }
-  } catch (error) {
-    console.error('An error occurred:', error);
-  }
+  fetchAPIAndExecute(url, options, callback, fallback);
 }
 
 /* 팔로우 목록 조회 */
