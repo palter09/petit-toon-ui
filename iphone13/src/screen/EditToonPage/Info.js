@@ -11,7 +11,7 @@ import {IoWarningSharp} from "react-icons/io5";
   "viewCount" : 0,
   "likeCount" : 0,*/
 
-const Rule = ({ checked, onChange }) => {
+const Info = ({ checked, onChange }) => {
   return (
     <>
       <div className={styles.info_header}>
@@ -27,13 +27,13 @@ const Rule = ({ checked, onChange }) => {
       <IoMdInformationCircle color="	#c83cc8	" size = "20"/>
       <p>웹툰 정보</p>
       </div>
-      <p className={styles.info_content}>
+      <div className={styles.info_content}>
         <p>제목: </p>
         <p>조회수: </p>
         <p>좋아요: </p>
-      </p>
+      </div>
     </>
   );
 };
 
-export default Rule;
+export default Info;
