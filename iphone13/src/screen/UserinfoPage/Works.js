@@ -30,6 +30,7 @@ const Works = ({ userinfo }) => {
       getFollowers(
         userinfo.id, 0, 20,
         (data) => {
+          console.log(data.followUsers)
           setFollower(data.followUsers);//[{followId: , user: }{followId: , user: }...]
         },
         (_) => {navigate("/");}

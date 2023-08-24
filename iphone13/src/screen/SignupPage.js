@@ -136,6 +136,7 @@ const SignupPage = () => {
             />
             <span
                 className="password-toggle"
+                style={{right: "67px", top: "437px"}}
                 onClick={() => setShowPassword(!showPassword)}
             >
                 {showPassword ? <BiHide color="#999999"/> : <BiShow color="#999999"/>}
