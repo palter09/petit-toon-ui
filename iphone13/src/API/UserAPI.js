@@ -6,7 +6,7 @@ export async function signupUser(name, nickname, tag, email, password, callback,
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/signup`;
 
   const headers = new Headers({
-    Authorization: `Bearer ${getCookie("accessToken")}`
+    'Content-Type': 'application/json'
   });
 
   const requestBody = {
