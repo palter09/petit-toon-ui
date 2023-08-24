@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from '../../hooks/useIconClick';
+import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI'
+import { followUser, deleteFollower } from '../../API/FollowAPI'
 import "./ChatStyles.css";
 import { useNavigate } from 'react-router-dom';
 
@@ -13,58 +15,48 @@ const chatTmp = () => {
 };
 
 const Like = () => {
+  const userId = 'user123'; // Replace with actual user ID
+  const toonId = 'toon456'; // Replace with actual toon ID
+
   const [liked, setLiked] = useState(false);
 
-  const toggleLike = () => {
-    // Make API call to like or unlike based on the 'liked' state
-    const userId = 'user123'; // Replace with actual user ID
-    const toonId = 'toon456'; // Replace with actual toon ID
-
-    fetch(`/api/v1/like/${userId}/${toonId}`, {
-      method: liked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Handle response data if needed
-        setLiked(!liked); // Toggle the liked state
-      })
-      .catch(error => {
-        // Handle error if needed
-      });
+  const handleLikeClick = () => {
+    if (liked) {
+      /* 좋아요 해제 */
+    }
+    else {
+      likeWebtoon(userId, toonId);
+    }
+    setLiked(!liked);
   };
 
   return <img 
-    src={process.env.PUBLIC_URL + '/images/broken_heart_icon.png'} 
+    src={process.env.PUBLIC_URL + (liked ? '/images/love_icon.png' : '/images/love_icon_b&w.png')} 
     style={{position: "absolute", left: "109px", top: "778px"}} 
-    onClick={toggleLike}
+    onClick={handleLikeClick}
   />;
 };
 
 const DisLike = () => {
+  const userId = 'user123'; // Replace with actual user ID
+  const toonId = 'toon456'; // Replace with actual toon ID
+
   const [disLiked, setDisLiked] = useState(false);
 
-  const toggleDisLike = () => {
-    // Make API call to like or unlike based on the 'liked' state
-    const userId = 'user123'; // Replace with actual user ID
-    const toonId = 'toon456'; // Replace with actual toon ID
-
-    fetch(`/api/v1/dislike/${userId}/${toonId}`, {
-      method: disLiked ? 'DELETE' : 'POST', // If liked, perform unlike (DELETE), otherwise like (POST)
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Handle response data if needed
-        setDisLiked(!disLiked); // Toggle the liked state
-      })
-      .catch(error => {
-        // Handle error if needed
-      });
+  const handleDisLikeClick = () => {
+    if (disLiked) {
+      /* 싫어요 해제 */
+    }
+    else {
+      dislikeWebtoon(userId, toonId);
+    }
+    setDisLiked(!disLiked);
   };
 
   return <img 
-    src={process.env.PUBLIC_URL + '/images/love_icon.png'} 
+    src={process.env.PUBLIC_URL + (disLiked? '/images/broken_heart_icon.png' : '/images/broken_heart_icon_b&w.png')} 
     style={{position: "absolute", left: "45px", top: "778px"}} 
-    onClick={toggleDisLike}
+    onClick={handleDisLikeClick}
   />;
 };
 
@@ -161,10 +153,25 @@ const Comment = () => {
 };
 
 const Subscribe = () => {
+  const followerId = 'user123'; // Replace with actual user ID
+  const followeeId = 'user456'; // Replace with actual user ID
+
+  const [subscribe, setSubscribe] = useState(false);
+
+  const handleSubscribeClick = () => {
+    if (subscribe) {
+      deleteFollower(followerId, followeeId);
+    }
+    else {
+      followUser(followeeId);
+    }
+    setSubscribe(!subscribe);
+  };
+
   return <img 
-    src={process.env.PUBLIC_URL + '/images/star_icon.png'} 
+    src={process.env.PUBLIC_URL + (subscribe? '/images/star_icon.png' : '/images/star_icon_b&w.png')} 
     style={{position: "absolute", left: "237px", top: "778px"}} 
-    onClick={test}
+    onClick={handleSubscribeClick}
   />;
 };
 
@@ -176,7 +183,6 @@ const Setting = () => {
     style={{position: "absolute", left: "301px", top: "778px"}}
     onClick={() => { navigate('/setting'); }}/>;
 };
-
 
 
 
