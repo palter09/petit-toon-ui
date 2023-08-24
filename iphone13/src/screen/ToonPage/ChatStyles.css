@@ -28,8 +28,8 @@
 .comment-menu {
   background: white;
   position: absolute;
-  top: -483px;
-  left: 23px;
+  top: -485px;
+  left: -165px;
   width: 373px;
   height: 458px;
   text-align: center;
@@ -37,7 +37,7 @@
   outline: 2px solid #DA5E9D;
   opacity: 0;
   visibility: hidden;
-  transform: translate(-187px, -0px);
+  transform: translate(0px, 0px);
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 }
@@ -45,7 +45,6 @@
 .comment-menu.open {
   opacity: 1;
   visibility: visible;
-  left: 50%;
 }
 
 .comment-triangle-wrapper {
