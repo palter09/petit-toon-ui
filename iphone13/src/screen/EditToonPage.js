@@ -6,6 +6,8 @@ import SwiperRegToon from "./EditToonPage/SwiperRegToon";
 import FooterButton from "./EditToonPage/FooterButton";
 import { useParams } from "react-router";
 
+/*deleteWebtoon은 FooterButton에서 수행*/
+
 const EditToonPage = () => {
   const [imgFiles, setImgFiles] = useState(Array(10).fill(""));
   const [description, setDescription] = useState("");

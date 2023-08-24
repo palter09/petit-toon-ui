@@ -25,7 +25,7 @@ export async function registerWebtoon(
     const blob = await response.blob();
 
     // Blob 객체를 FormData에 추가
-    formData.append("toonImages", blob, `sample${i + 1}.png`);
+    formData.append("toonImages", blob, `${toonTitle}-${i + 1}.png`);
   }
 
   const headers = new Headers({
