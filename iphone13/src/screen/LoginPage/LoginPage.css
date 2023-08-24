@@ -57,6 +57,5 @@ input {
 
 .password-toggle {
 	position: absolute;
-	right: 10px;
 	cursor: pointer;
 }
