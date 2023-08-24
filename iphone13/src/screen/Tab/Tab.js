@@ -8,7 +8,6 @@ const Tab = ({ isActive, title, content, onClick }) => (
         onClick={onClick}
         style={{
             flex: 1,
-            backgroundColor: 'white',
             borderBottom: isActive ? 'none' : '2px solid #DA5E9D',
             padding: '8px 16px',
             cursor: 'pointer',
