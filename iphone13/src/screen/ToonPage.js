@@ -1,26 +1,18 @@
-/*
-  const toonStyle = {
-      position: 'absolute',
-      width: '390px',
-      height: '636px',
-      left: '-12px',
-      top: '113px',
-      overflow: 'hidden',
-  };
-*/
-
 import React from 'react';
 import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./Header/Header.js"
 import { DisLike, Like, Comment, Subscribe, Setting } from "./ToonPage/BottomButton.js"
+import { useParams } from 'react-router';
 
 const ToonPage = () => {
+  const toonId = useParams();
+
   return (
     <div className="container">
       <div className="item">
         <Header />
         <div className='divLineHeader' />
-        <SwiperToon />
+        <SwiperToon toonId = {toonId}/>
         <div className='divLineBottom' />
         <DisLike />
         <Like />

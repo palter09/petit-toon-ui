@@ -1,6 +1,6 @@
 import React from "react";
-import useDetectClose from "./useDetectClose";
-import useIconClick from "./useIconClick";
+import useDetectClose from "../../hooks/useDetectClose";
+import useIconClick from "../../hooks/useIconClick";
 import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
 
@@ -10,7 +10,7 @@ const menuTmp = () => {
 
 const DropdownMenu = () => {
   const navigate = useNavigate();
-  const [myPageIsOpen, myPageToggleHandler] = useDetectClose(false);
+  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const {
     menuIconClicked,
     storeIconClicked,
@@ -38,14 +38,14 @@ const DropdownMenu = () => {
   };
 
   return (
-    <div className="Wrapper">
+    <div className="Wrapper" ref={myPageRef}>
       <div className="dropdown-container">
         {/*header menu button 헤더상의 메뉴 버튼*/}
         {/*0. menu button*/}
         <div
           className="dropdown-button"
           onClick={() => {
-            myPageToggleHandler();
+            myPageHandler();
             handleIconClick(0);
           }}
         >

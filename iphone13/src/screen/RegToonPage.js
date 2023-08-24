@@ -2,54 +2,45 @@ import React, { useState } from "react";
 import styles from "./RegToonPage/styles/RegToonPage.module.css";
 import Rule from "./RegToonPage/Rule";
 import InfoTitle from "./RegToonPage/InfoTitle";
-import InfoGenre from "./RegToonPage/InfoGenre";
-import ImgUpload from "./RegToonPage/ImgUpload";
+import ToonDescription from "./RegToonPage/InfoDescription";
 import FooterButton from "./RegToonPage/FooterButton";
+import SwiperRegToon from "./RegToonPage/SwiperRegToon";
+import { registerWebtoon } from "../API/ToonAPI";
 
 const RegToonPage = () => {
   const [title, setTitle] = useState("");
-  const [imgFile, setImgFile] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState([]);
   const [agreementChecked, setAgreementChecked] = useState(false);
-  //genre들 객체 배열
-  const genres = [
-    { value: "g0", label: "로맨스" },
-    { value: "g1", label: "판타지" },
-    { value: "g2", label: "액션" },
-    { value: "g3", label: "일상" },
-    { value: "g4", label: "스릴러" },
-    { value: "g5", label: "개그" },
-    { value: "g6", label: "무협/사극" },
-    { value: "g7", label: "드라마" },
-    { value: "g8", label: "감성" },
-    { value: "g9", label: "스포츠" },
-  ];
-
-  //모든 항목이 체크 + 썸네일 등록 되어야 submit button 활성화
+  const [description, setDescription] = useState("");
+  const [imgFiles, setImgFiles] = useState(Array(10).fill(""));
+  const [toonId, setToonId] = useState();
+  
+  //인자로 보낼 setter
+  const handleDescription = (descriptionValue) => {setDescription(descriptionValue);}
+  const handleTitle = (titleValue) => {setTitle(titleValue)};
+  
+  //모든 항목이 체크 + 이미지 등록 되어야 submit button 활성화
   const isSubmitButtonEnabled =
     agreementChecked &&
-    selectedGenres.length > 0 &&
     title.trim() !== "" &&
-    imgFile !== "";
+    description  !== "" &&
+    imgFiles[0] !== "";
   //동의합니다 체크했는지 확인용
   const handleAgreementChange = () => {
     setAgreementChecked(!agreementChecked);
   };
-  //genre 선택했는지 체크용
-  const handleGenreChange = (event) => {
-    const genreValue = event.target.value;
-    if (selectedGenres.includes(genreValue)) {
-      setSelectedGenres(selectedGenres.filter((genre) => genre !== genreValue));
-    } else {
-      setSelectedGenres([...selectedGenres, genreValue]);
-    }
-  };
 
-
-  //handleSubmit
+  // handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
-    //나중에 서버 연동? 작업시 코드 추가
+    console.log(imgFiles);
+    // toon 등록 # 현재 userId는 임의로 넣은 상태
+    registerWebtoon(
+      1, // 변경 필요한 부분
+      title,
+      description,
+      imgFiles,
+      setToonId
+    );
   };
 
   return (
@@ -68,23 +59,20 @@ const RegToonPage = () => {
           <div className={styles.info_wrapper}>
             <InfoTitle
               title={title}
-              onChange={(e) => setTitle(e.target.value)}
+              handleTitle={handleTitle}
             />
-            <InfoGenre
-              genres={genres}
-              selectedGenres={selectedGenres}
-              onGenreChange={handleGenreChange}
+            <ToonDescription
+              handleDescription={handleDescription}
             />
           </div>
-          <div className={styles.thumbnail_wrapper}>
+          <div className={styles.ImagesUpload_wrapper}>
             <span>
-              대표이미지
-              <br />
-              (썸네일)
+              만화<br/>
+              이미지
             </span>
-            <ImgUpload
-              imgFile={imgFile}
-              setImgFile={setImgFile}
+            <SwiperRegToon
+              imgFiles={imgFiles}
+              setImgFiles={setImgFiles}
               imgSize={"555 X 777"}
               inputId={"regToon-thumbnail"}
               inputName={"regToon-thumbnail-img"}

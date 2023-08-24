@@ -14,21 +14,21 @@ const textStyle = {
 }
 
 
-const Profile = (userinfo) => {
-	console.log(userinfo);
+const Profile = ({ userinfo }) => {
+	console.log(userinfo)
 	return (
 	<table style={profileStyle}>
 			<tbody><tr>
 				<td align= "center" style= {{ width: "128px", height: "128px"}}>
 					<img
-						src={userinfo.img || process.env.PUBLIC_URL + '/images/mypage.png'}
+						src={`${process.env.REACT_APP_SERVER_IP}/resources/${userinfo.profileImagePath}` && process.env.PUBLIC_URL + '/images/mypage.png'}
 						alt="profile_image"
 					/>
 				</td>
 				<td align= "left" valign="top" style={textStyle}>
 					<div>
 						<p style={{marginBottom:10}}><b>{userinfo.nickname || "Unknown"}의 정보</b></p>
-						<p style={{margin:5}}><b>@{userinfo.tag || "unknown_tag"}</b></p>
+						<p style={{margin:5}}><b>{userinfo.tag || "unknown_tag"}</b></p>
 						<p style={{margin:5}}><b>작품 수 :&nbsp;</b>{userinfo.works || 0}</p>
 						<p style={{margin:5}}><b>팔로잉  :&nbsp;</b>{userinfo.following || 0}</p>
 					</div>

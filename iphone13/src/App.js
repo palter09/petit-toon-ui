@@ -8,6 +8,7 @@ import SearchPage from './screen/SearchPage';
 import StorePage from './screen/StorePage';
 import LoginPage from './screen/LoginPage';
 import RegToonPage from './screen/RegToonPage';
+import EditToonPage from './screen/EditToonPage';
 
 import './App.css';
 
@@ -18,11 +19,13 @@ const App = () => {
         <Route path="/" element={<LoginPage />} />
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/toon" element={<ToonPage />} />
+        <Route path="/toon/:id" element={<ToonPage />} />
         <Route path="/userinfo/:id" element={<UserinfoPage />} />
         <Route path="/search/" element={<SearchPage />}/>
         <Route path="/search/:searchQuery" element={<SearchPage />}/>
         <Route path="/store/" element={<StorePage />}/>
         <Route path="/regToon" element={<RegToonPage />}/>
+        <Route path="/editToon/:toonId" element={<EditToonPage/>}/>
 
         {/* 다른 라우트들을 여기에 추가할 수 있습니다. */}
       </Routes>
