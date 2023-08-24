@@ -9,6 +9,7 @@ import StorePage from './screen/StorePage';
 import LoginPage from './screen/LoginPage';
 import RegToonPage from './screen/RegToonPage';
 import EditToonPage from './screen/EditToonPage';
+import SignupPage from './screen/SignupPage';
 
 import './App.css';
 
@@ -17,6 +18,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/toon" element={<ToonPage />} />
         <Route path="/toon/:id" element={<ToonPage />} />
