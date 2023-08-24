@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RegToonPage/styles/RegToonPage.module.css";
 import Rule from "./RegToonPage/Rule";
 import InfoTitle from "./RegToonPage/InfoTitle";
@@ -6,6 +6,7 @@ import ToonDescription from "./RegToonPage/InfoDescription";
 import FooterButton from "./RegToonPage/FooterButton";
 import SwiperRegToon from "./RegToonPage/SwiperRegToon";
 import { registerWebtoon } from "../API/ToonAPI";
+import { useNavigate } from 'react-router';
 
 const RegToonPage = () => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,8 @@ const RegToonPage = () => {
   const [description, setDescription] = useState("");
   const [imgFiles, setImgFiles] = useState(Array(10).fill(""));
   const [toonId, setToonId] = useState();
+  const [isRegistered, setIsRegistered] = useState(false); //등록되었는가
+  const navigate = useNavigate();
   
   //인자로 보낼 setter
   const handleDescription = (descriptionValue) => {setDescription(descriptionValue);}
@@ -28,7 +31,7 @@ const RegToonPage = () => {
   const handleAgreementChange = () => {
     setAgreementChecked(!agreementChecked);
   };
-
+  
   // handleSubmit
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -39,10 +42,24 @@ const RegToonPage = () => {
       title,
       description,
       imgFiles,
-      setToonId
+      (responseData) => {
+        // 등록 성공 시 toonId를 설정하고 등록 메시지 표시
+        setToonId(responseData.toonId);
+        setIsRegistered(true);
+      },
+      (_) => { navigate('/') }
     );
   };
 
+    // isSubmitButtonEnabled가 변경되면 toonId와 isRegistered 초기화
+    useEffect(() => {
+      if (!isSubmitButtonEnabled) {
+        setToonId(null);
+        setIsRegistered(false);
+      }
+    }, [isSubmitButtonEnabled]);
+
+    
   return (
     <div className="container">
       <div className={styles.content_wrapper}>
@@ -79,7 +96,7 @@ const RegToonPage = () => {
             />
           </div>
           <div className={styles.footer_wrapper}>
-            <FooterButton isEnabled={isSubmitButtonEnabled} />
+            <FooterButton isEnabled={isSubmitButtonEnabled} isRegistered={isRegistered} toonId={toonId}/>
           </div>
         </form>
       </div>

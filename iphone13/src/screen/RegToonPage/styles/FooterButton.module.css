@@ -24,3 +24,13 @@
   background-color: #FF9BE6	;
   border-radius: .2rem;
 }
+.footer_button_info{
+  width: 60%;
+  display: flex;
+}
+.footer_button_info p{
+  font-weight: bold;
+  margin: 0.65rem;
+  color: red;
+  
+}

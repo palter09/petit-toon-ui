@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styles from "./styles/FooterButton.module.css";
 import { deleteWebtoon } from "../../API/ToonAPI";
+import { useNavigate } from 'react-router';
 
 const FooterButton = ({ id, isEnabled }) => {
   const [isChecked, setIsChecked] = useState([false, false, false]);
   const [isDeleted, setIsDeleted] = useState(false);
-
+  const navigate = useNavigate();
+  
   const handleIsDeleted = (isDeletedVal) => {
     setIsDeleted(isDeletedVal);
   };
@@ -44,7 +46,7 @@ const FooterButton = ({ id, isEnabled }) => {
                     type="button"
                     disabled={!isAllChecked}
                     onClick={() => {
-                      deleteWebtoon(id, handleIsDeleted);
+                      deleteWebtoon(id, handleIsDeleted, (_) => { navigate('/') });
                     }}
                   >
                     삭제

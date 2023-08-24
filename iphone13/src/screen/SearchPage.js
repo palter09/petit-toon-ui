@@ -18,7 +18,7 @@ const SearchPage = () => {
     if (searchQuery) {
       search(searchQuery, 0, 5, setSearchResults, (_) => { navigate('/') });
     }
-  }, [searchQuery]);
+  }, [navigate, searchQuery]);
 
 
   return (

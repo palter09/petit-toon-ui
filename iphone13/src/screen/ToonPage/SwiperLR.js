@@ -37,10 +37,12 @@ export default function SwiperLR({ toon }) {
         ))}
       </Swiper>
       {showInfo && (
-        <div onClick={handleInfoClick}>
+        <div className="swiperLR_toonInfo" onClick={handleInfoClick}>
           <div>
             <h2>{toon.title}</h2>
-            <p>{toon.description}</p>
+            <h3>{toon.description}</h3>
+            <p>조회수:{toon.viewCount}</p>
+            <p>좋아요:{toon.likeCount}</p>
             <p>작가:{toon.author}</p>
           </div>
         </div>
