@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './LoginPage/LoginPage.css';
-import {loginUser} from '../API/AuthentificationAPI.js';
+import { loginUser } from '../API/AuthentificationAPI.js';
 import { setCookie } from '../API/HandleTokens.js';
 
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +56,7 @@ const LoginPage = () => {
             <div className="links">
                 <a>아이디/비밀번호 찾기</a>
                 <span> | </span>
-                <a>회원가입</a>
+                <a onClick={(e) => {navigate('/signup')}}>회원가입</a>
             </div>
         </div>
     </div>
