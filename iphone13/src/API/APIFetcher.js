@@ -1,4 +1,4 @@
-import { setCookie } from "./HandleTokens.js";
+import { setCookie, getCookie } from "./HandleTokens.js";
 import { reissueToken } from "./AuthentificationAPI.js";
 
 export async function fetchAPIAndExecute (url, options, callback, fallback) {
@@ -13,8 +13,16 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
       );
       if(reissueStatus) 
         fallback && fallback(response);
-      else
+      else{
+        options = {
+          ...options,
+          headers: {
+            ...options.headers,
+            Authorization: `Bearer ${getCookie("accessToken")}`
+          }
+        };
         response = await fetch(url, options);
+      }
     }
 
     if (response.ok) {

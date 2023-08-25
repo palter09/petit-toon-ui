@@ -1,19 +1,8 @@
-// StoreItemsList.js
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './StoreItemsList.css';
 
 const StoreItemsList = () => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {//처음 렌더링될때 api호출
-    fetch('http://34.105.97.215/api/v1/search?keyword=%EA%B9%80%EC%98%81%ED%98%84&page=0&size=5')//임시
-      .then((response) => response.json())
-      .then((data) => setImages(data.toons))//임시
-      .catch((error) => console.error('Error fetching images:', error));
-  }, []);
-
-
-
+  //const [images, setImages] = useState([]);
   return (
     <div className='store_scrollbar'> {/*스크롤 바 + 안에 컨텐츠 */}
       <div className='store_row'>
