@@ -14,8 +14,8 @@ const ToonPage = () => {
         <div className='divLineHeader' />
         <SwiperToon toonId = {toonId}/>
         <div className='divLineBottom' />
-        <DisLike />
         <Like />
+        <DisLike />
         <Comment />
         <Subscribe />
         <Setting />

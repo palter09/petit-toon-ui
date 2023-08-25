@@ -1,7 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./styles/FooterButton.module.css";
+import { useNavigate } from "react-router";
 
 const FooterButton = ({ isEnabled, isRegistered, toonId }) => {
+  const navigate = useNavigate(); 
+  useEffect(() => {
+    if (isRegistered && isEnabled) {
+      navigate(`/toon/${toonId}`);
+    }
+  }, [isRegistered, isEnabled, navigate, toonId]);
   return (
     <>
       <div className={styles.footer_button_info}>

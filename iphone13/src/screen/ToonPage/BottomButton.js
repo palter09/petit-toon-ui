@@ -26,7 +26,7 @@ const Like = () => {
 
   return <img 
     src={process.env.PUBLIC_URL + (liked ? '/images/love_icon.png' : '/images/love_icon_b&w.png')} 
-    style={{position: "absolute", left: "109px", top: "778px"}} 
+    style={{position: "absolute", left: "45px", top: "778px"}} 
     alt='like'
     onClick={handleLikeClick}
   />;
@@ -50,8 +50,8 @@ const DisLike = () => {
 
   return <img 
     src={process.env.PUBLIC_URL + (disLiked? '/images/broken_heart_icon.png' : '/images/broken_heart_icon_b&w.png')} 
-    style={{position: "absolute", left: "45px", top: "778px"}} 
     alt='hate'
+    style={{position: "absolute", left: "109px", top: "778px"}} 
     onClick={handleDisLikeClick}
   />;
 };
