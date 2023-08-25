@@ -5,14 +5,8 @@ import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI'
 import { followUser, deleteFollower } from '../../API/FollowAPI'
 import "./ChatStyles.css";
 import { useNavigate } from 'react-router-dom';
-
-const test = () => {
-  console.log("!")
-};
-
-const chatTmp = () => {
-  // ...
-};
+import { GoPaperAirplane } from "react-icons/go";
+import { RiCoinsFill } from "react-icons/ri";
 
 const Like = () => {
   const userId = 'user123'; // Replace with actual user ID
@@ -33,6 +27,7 @@ const Like = () => {
   return <img 
     src={process.env.PUBLIC_URL + (liked ? '/images/love_icon.png' : '/images/love_icon_b&w.png')} 
     style={{position: "absolute", left: "109px", top: "778px"}} 
+    alt='like'
     onClick={handleLikeClick}
   />;
 };
@@ -56,6 +51,7 @@ const DisLike = () => {
   return <img 
     src={process.env.PUBLIC_URL + (disLiked? '/images/broken_heart_icon.png' : '/images/broken_heart_icon_b&w.png')} 
     style={{position: "absolute", left: "45px", top: "778px"}} 
+    alt='hate'
     onClick={handleDisLikeClick}
   />;
 };
@@ -70,6 +66,7 @@ const Comment = () => {
       setComments([...comments, commentText]);
       setCommentText("");
     }
+    handleIconClick(8);
   }
 
   const handleKeyPress = (e) => {
@@ -81,7 +78,7 @@ const Comment = () => {
 
   const {
     chatIconClicked,
-    supportIconClicked,
+    commentClicked,
     handleIconClick,
   } = useIconClick();
 
@@ -98,7 +95,7 @@ const Comment = () => {
             <img
               src={
                 process.env.PUBLIC_URL +
-                (myPageIsOpen ? '/images/bubble_chat_icon.png' : '/images/bubble_chat_icon_b&w.png')
+                (chatIconClicked ? '/images/bubble_chat_icon_b&w.png' : '/images/bubble_chat_icon.png')
               }
               alt="채팅 아이콘"
             />
@@ -106,40 +103,28 @@ const Comment = () => {
           <div className={`comment-menu ${myPageIsOpen ? 'open' : ''}`}>
             <div className='comment-menu-title'>댓글 및 후원</div>
             <div className='comment-menu-container'>
-              {/* 댓글 입력 폼 */}
-              <input
-                type="text"
-                placeholder="댓글을 입력하세요."
-                value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-                onKeyDown={handleKeyPress}
-                style={{position: "absolute", top: "350px"}}
-              />
-              <button 
-                onClick={handleCommentSubmit}
-                style={{position: "absolute", left: "200px", top: "355px"}}
-                >댓글달기</button>
               {/* 댓글 표시 */}
               <div className='comment-section-container'>
                 {comments.slice().reverse().map((comment, index) => (
                   <div key={index}>{comment}</div>
                 ))}
               </div>
-              {/* 후원 아이콘 */}
-              <div className='support-button'
-                onClick={() => {
-                  chatTmp();
-                  handleIconClick(8);
-                }}
-              >
-                <img
-                  src={
-                    process.env.PUBLIC_URL +
-                    (supportIconClicked ? '/images/support.png' : '/images/support.png')
-                  }
-                  alt="support icon"
-                  style={{position: "absolute", left: "280px", top: "350px"}} 
+              <div className='comment-menu-bottom-wrapper'>
+                {/* 댓글 입력 폼 */}
+                <input
+                  type="text"
+                  placeholder="댓글을 입력하세요."
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  onKeyDown={handleKeyPress}
                 />
+                <GoPaperAirplane
+                  color={commentClicked ? '#800000' : '#FF3CBB'}
+                  size="30"
+                  onClick={handleCommentSubmit}
+                />
+                {/* 후원 아이콘 */}
+                <RiCoinsFill color= '#FF8200' size = '40'/>
               </div>
             </div>
           </div>
@@ -172,6 +157,7 @@ const Subscribe = () => {
   return <img 
     src={process.env.PUBLIC_URL + (subscribe? '/images/star_icon.png' : '/images/star_icon_b&w.png')} 
     style={{position: "absolute", left: "237px", top: "778px"}} 
+    alt='follow'
     onClick={handleSubscribeClick}
   />;
 };
@@ -182,6 +168,7 @@ const Setting = () => {
   return <img 
     src={process.env.PUBLIC_URL + '/images/setting_icon.png'} 
     style={{position: "absolute", left: "301px", top: "778px"}}
+    alt='setting'
     onClick={() => { navigate('/setting'); }}/>;
 };
 
