@@ -78,6 +78,7 @@ const Comment = () => {
     }
   };
 
+
   const {
     chatIconClicked,
     supportIconClicked,
@@ -97,7 +98,7 @@ const Comment = () => {
             <img
               src={
                 process.env.PUBLIC_URL +
-                (chatIconClicked ? '/images/bubble_chat_icon.png' : '/images/bubble_chat_icon.png')
+                (myPageIsOpen ? '/images/bubble_chat_icon.png' : '/images/bubble_chat_icon_b&w.png')
               }
               alt="채팅 아이콘"
             />
