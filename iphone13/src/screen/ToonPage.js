@@ -7,6 +7,7 @@ import {
   Comment,
   Subscribe,
   Setting,
+  Collection,
 } from "./ToonPage/BottomButton.js";
 import { useParams } from "react-router";
 
@@ -28,7 +29,7 @@ const ToonPage = () => {
         <Like toonId={toonId} isError={isError} />
         <DisLike toonId={toonId} isError={isError} />
         <Comment toonId={toonId} isError={isError} />
-        <Subscribe toonId={toonId} isError={isError} />
+        <Collection toonId={toonId} isError={isError} />
         <Setting toonId />
       </div>
     </div>

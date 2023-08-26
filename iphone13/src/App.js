@@ -7,8 +7,8 @@ import UserinfoPage from './screen/UserinfoPage';
 import SearchPage from './screen/SearchPage';
 import StorePage from './screen/StorePage';
 import LoginPage from './screen/LoginPage';
-import RegtoonPage from './screen/RegToonPage';
-import EdittoonPage from './screen/EditToonPage';
+import RegtoonPage from './screen/RegtoonPage';
+import EdittoonPage from './screen/EdittoonPage';
 import SignupPage from './screen/SignupPage';
 
 import './App.css';

@@ -195,7 +195,7 @@ const Collection = () => {
             <div className='collection-menu-container'>
             </div>
           </div>
-          <div className='comment-triangle-wrapper'>
+          <div className='collection-triangle-wrapper'>
             {myPageIsOpen && <div className={`comment-triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
             {myPageIsOpen && <div className={`comment-triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
           </div>
