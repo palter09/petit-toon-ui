@@ -4,6 +4,7 @@ import useIconClick from '../../hooks/useIconClick';
 import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI'
 import { followUser, deleteFollower } from '../../API/FollowAPI'
 import "./ChatStyles.css";
+import "./CollectionStyles.css";
 import { useNavigate } from 'react-router-dom';
 import { GoPaperAirplane } from "react-icons/go";
 import { RiCoinsFill } from "react-icons/ri";
@@ -162,6 +163,47 @@ const Subscribe = () => {
   />;
 };
 
+const Collection = () => {
+  const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
+
+  const [bookmark, setBookmark] = useState(false);
+
+  const handleCollectionClick = () => {
+    setBookmark(!bookmark);
+  }
+
+  const {
+    handleIconClick,
+  } = useIconClick();
+  
+  return (
+    <div className='collection-wrapper' ref={myRef}>
+      <div className='collection-container'>
+        <div className='collection-button'
+          onClick={() => {
+            myPageToggleHandler();
+            handleCollectionClick();
+            handleIconClick(9);
+          }}>
+            <img
+              src={process.env.PUBLIC_URL + (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png')}
+              alt='colletion' 
+              />
+          </div>
+          <div className={`collection-menu ${myPageIsOpen ? 'open' : ''}`}>
+            <div className='collection-menu-title'>컬렉션 목록</div>
+            <div className='collection-menu-container'>
+            </div>
+          </div>
+          <div className='comment-triangle-wrapper'>
+            {myPageIsOpen && <div className={`comment-triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+            {myPageIsOpen && <div className={`comment-triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
+          </div>
+      </div>
+    </div>
+  )
+}
+
 const Setting = () => {
   const navigate = useNavigate();
 
@@ -174,4 +216,4 @@ const Setting = () => {
 
 
 
-export { DisLike, Like, Comment, Subscribe, Setting };
+export { DisLike, Like, Comment, Collection, Setting };
