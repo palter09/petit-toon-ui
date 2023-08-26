@@ -10,6 +10,7 @@ const useIconClick = () => {
   const [mypageIconClicked, setMypageIconClicked] = useState(false);
   const [chatIconClicked, setChatIconClicked] = useState(false);
   const [commentClicked, setCommentClicked] = useState(false);
+  const [collectionIconClicked, setCollectionIconClicked] = useState(false);
 
   const handleIconClick = (icon) => {
     switch (icon) {
@@ -67,6 +68,12 @@ const useIconClick = () => {
           setCommentClicked(false);
         }, 100); 
         break;
+      case 9:
+        setCollectionIconClicked(true);
+        setTimeout(() => {
+          setMypageIconClicked(false);
+        }, 100);
+        break;
       default:
         break;
     }
@@ -83,6 +90,7 @@ const useIconClick = () => {
     chatIconClicked,
     handleIconClick,
     commentClicked,
+    collectionIconClicked,
   };
 };
 

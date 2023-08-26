@@ -1,0 +1,52 @@
+import { getCookie } from "./HandleTokens.js";
+import { fetchAPIAndExecute } from "./APIFetcher.js";
+
+/* 컬렉션 생성 */
+export async function createCollection(callback, fallback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/create`;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${getCookie("accessToken")}`
+  });
+
+  const options = {
+    method: 'POST',
+    headers: headers
+  };
+
+  fetchAPIAndExecute(url, options, callback, fallback);
+}
+
+
+/* 컬렉션 삭제 */
+export async function deleteCollection(collectionId, callback, fallback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/${collectionId}`;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${getCookie("accessToken")}`
+  });
+
+  const options = {
+    method: 'DELETE',
+    headers: headers
+  };
+
+  fetchAPIAndExecute(url, options, callback, fallback);
+}
+
+
+/* 컬렉션 리스트 조회 */
+export async function getBookMarks(userId, callback, fallback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/author/${userId}?page=0&size=30`;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${getCookie("accessToken")}`
+  });
+
+  const options = {
+    method: 'GET',
+    headers: headers
+  };
+
+  fetchAPIAndExecute(url, options, callback, fallback);
+}
