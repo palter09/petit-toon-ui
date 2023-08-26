@@ -9,20 +9,18 @@ import { useNavigate } from 'react-router-dom';
 import { GoPaperAirplane } from "react-icons/go";
 import { RiCoinsFill } from "react-icons/ri";
 
-const Like = () => {
+const Like = ({toonId, isError}) => {
   const userId = 'user123'; // Replace with actual user ID
-  const toonId = 'toon456'; // Replace with actual toon ID
-
   const [liked, setLiked] = useState(false);
 
   const handleLikeClick = () => {
+    if(isError) return;
     if (liked) {
-      /* 좋아요 해제 */
+      setLiked(!liked);
     }
     else {
       likeWebtoon(userId, toonId);
     }
-    setLiked(!liked);
   };
 
   return <img 
@@ -33,20 +31,19 @@ const Like = () => {
   />;
 };
 
-const DisLike = () => {
+const DisLike = ({toonId, isError}) => {
   const userId = 'user123'; // Replace with actual user ID
-  const toonId = 'toon456'; // Replace with actual toon ID
 
   const [disLiked, setDisLiked] = useState(false);
 
   const handleDisLikeClick = () => {
+    if(isError) return;
     if (disLiked) {
-      /* 싫어요 해제 */
+      setDisLiked(!disLiked);
     }
     else {
       dislikeWebtoon(userId, toonId);
     }
-    setDisLiked(!disLiked);
   };
 
   return <img 
@@ -57,7 +54,7 @@ const DisLike = () => {
   />;
 };
 
-const Comment = () => {
+const Comment = ({toonId, isError}) => {
   const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
@@ -76,7 +73,6 @@ const Comment = () => {
     }
   };
 
-
   const {
     chatIconClicked,
     commentClicked,
@@ -89,14 +85,18 @@ const Comment = () => {
         {/* 채팅 아이콘 */}
         <div className='comment-button'
           onClick={() => {
-            myPageToggleHandler();
-            handleIconClick(7);
+            if(!isError){
+              myPageToggleHandler();
+              handleIconClick(7);
+            }
           }}
           >
             <img
               src={
                 process.env.PUBLIC_URL +
-                (chatIconClicked ? '/images/bubble_chat_icon_b&w.png' : '/images/bubble_chat_icon.png')
+                (!isError ?
+                (chatIconClicked ? '/images/bubble_chat_icon_b&w.png' : '/images/bubble_chat_icon.png') :
+                '/images/bubble_chat_icon_b&w.png')
               }
               alt="채팅 아이콘"
             />
@@ -139,13 +139,13 @@ const Comment = () => {
   )
 };
 
-const Subscribe = () => {
+const Subscribe = ({toonId, isError}) => {
   const followerId = 'user123'; // Replace with actual user ID
   const followeeId = 'user456'; // Replace with actual user ID
-
   const [subscribe, setSubscribe] = useState(false);
 
   const handleSubscribeClick = () => {
+    if(isError) return;
     if (subscribe) {
       deleteFollower(followerId, followeeId);
     }

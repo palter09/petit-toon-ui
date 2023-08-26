@@ -32,13 +32,3 @@
   border: 1px solid #F2F2F2;
   width: 20%;
 }
-.header_bottom_follow_button:hover{
-  background: pink;
-  color:black;
-  cursor:pointer;
-}
-.header_bottom_cancel_button:hover{
-  background: pink;
-  color:black;
-  cursor:pointer;
-}
