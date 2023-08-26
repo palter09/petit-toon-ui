@@ -4,22 +4,22 @@ import SearchEngine from './SearchPage/SearchEngine';
 import Profiles from './SwiperScroll/SwiperProfilesLR'; 
 import Thumbnails from './SwiperScroll/SwiperThumbnails'; 
 import "./SearchPage/SearchPage.css"
-import { useParams, useNavigate } from 'react-router';
+import { useParams } from 'react-router';
 
 import { search } from '../API/SearchAPI.js';
 
 const SearchPage = () => {
   const [searchResults, setSearchResults] = useState({ users: [], toons: [] });
   const { searchQuery } = useParams();
-  const navigate = useNavigate();
 
   // 검색어가 변경될 때마다 API 호출
   useEffect(() => {
     if (searchQuery) {
-      search(searchQuery, 0, 5, setSearchResults, (_) => { navigate('/') });
+      search(searchQuery, 0, 5, setSearchResults, 
+        (_) => { setSearchResults({users:[], toons:[]})});//검색결과 없을시 검색결과 reset
       console.log("search호출");
     }
-  }, [navigate, searchQuery]);
+  }, [searchQuery]);
 
 
   return (

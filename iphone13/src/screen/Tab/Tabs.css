@@ -11,6 +11,3 @@
 .tab-container{
     display: flex;
 }
-.tab-button:hover{
-    background:pink;
-}
