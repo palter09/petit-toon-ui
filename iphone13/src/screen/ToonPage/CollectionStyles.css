@@ -1,0 +1,124 @@
+.collection-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+  font-size: 19px;
+  background: white;
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  left: 237px;
+  top: 780px;
+  font-weight: bold;
+}
+
+.collection-container {
+  position: absolute;
+  text-align: center;
+  z-index: 9;
+}
+
+.collection-button {
+  cursor: pointer;
+  z-index:9;
+}
+
+.collection-menu {
+  background: white;
+  position: absolute;
+  top: -485px;
+  left: -228px;
+  width: 373px;
+  height: 458px;
+  text-align: center;
+  border-radius: 32px;
+  outline: 2px solid #DA5E9D;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(0px, 0px);
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 9;
+}
+
+.collection-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.collection-triangle-wrapper {
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.collection-triangle-outer {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #DA5E9D;
+  position: absolute;
+  top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 8;
+  transform: scaleY(-1);
+}
+
+.collection-triangle-outer.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.collection-triangle-inner {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 35px solid white;
+  position: absolute;
+  top: -80px; /* 위쪽으로 이동하여 겹치도록 설정 */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9;
+  transform: scaleY(-1);
+}
+
+.collection-triangle-inner.fade-in {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+}
+
+.collection-menu-title {
+  position : relative;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 22px;
+  letter-spacing: -0.40799999237060547px;
+  text-align: left;
+  width: 120px;
+  height: 22px;
+  top: 5px;
+  left: 22px;
+  background: transparent;
+  color: #DA5E9D;
+}
+
+.collection-menu-container {
+  height: 94%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
