@@ -17,6 +17,7 @@ const SearchPage = () => {
   useEffect(() => {
     if (searchQuery) {
       search(searchQuery, 0, 5, setSearchResults, (_) => { navigate('/') });
+      console.log("search호출");
     }
   }, [navigate, searchQuery]);
 

@@ -23,7 +23,7 @@ export async function loginUser(email, password, callback, fallback) {
     const response = await fetch(url, options);
     if (response.ok) {
       const responseData = await response.json();
-
+      console.log(responseData);
       console.log('Access Token:', responseData.accessToken);
       console.log('Refresh Token:', responseData.refreshToken);
 
@@ -58,7 +58,6 @@ export async function reissueToken(callback, fallback) {
     const response = await fetch(url, options);
     if (response.ok) {
       const responseData = await response.json();
-
       callback && callback(responseData)
     } else {
       fallback && fallback(response);
