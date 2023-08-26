@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./RegtoonPage/styles/RegtoonPage.module.css";
-import Rule from "./RegtoonPage/Rule";
-import InfoTitle from "./RegtoonPage/InfoTitle";
-import ToonDescription from "./RegtoonPage/InfoDescription";
-import FooterButton from "./RegtoonPage/FooterButton";
-import SwiperRegToon from "./RegtoonPage/SwiperRegToon";
+import styles from "./RegToonPage/styles/RegToonPage.module.css";
+import Rule from "./RegToonPage/Rule";
+import InfoTitle from "./RegToonPage/InfoTitle";
+import ToonDescription from "./RegToonPage/InfoDescription";
+import FooterButton from "./RegToonPage/FooterButton";
+import SwiperRegToon from "./RegToonPage/SwiperRegToon";
 import { registerWebtoon } from "../API/ToonAPI";
 import { useNavigate } from 'react-router';
 
