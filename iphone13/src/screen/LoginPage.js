@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './LoginPage/LoginPage.css';
 import { loginUser } from '../API/AuthentificationAPI.js';
 import { setCookie } from '../API/HandleTokens.js';
+import Modal from './Modal/Modal.js';
+import ModalPortal from './Modal/Portal.js';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -11,19 +13,30 @@ const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    loginUser(username, password, (json) => {
+    loginUser(username, password, (json) => {   // 로그인 성공
         setCookie('accessToken', json.accessToken, 30*60);
         setCookie('refreshToken', json.refreshToken, 7*24*60*60);
         navigate('/search');
-    })
+    },
+    (response) => {
+        setIsModalOpen(true);
+    }
+    )
   };
 
   return (
     <div className="container">
+        <ModalPortal>
+            <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false); console.log("!");}}>
+                <p>아이디와 비밀번호가 일치하지 않습니다.</p>
+            </Modal>
+        </ModalPortal>
+        
         <div className="login-container">
             <div className="logo">
                 <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
