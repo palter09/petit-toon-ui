@@ -17,7 +17,6 @@ const SearchPage = () => {
     if (searchQuery) {
       search(searchQuery, 0, 5, setSearchResults, 
         (_) => { setSearchResults({users:[], toons:[]})});//검색결과 없을시 검색결과 reset
-      console.log("search호출");
     }
   }, [searchQuery]);
 
