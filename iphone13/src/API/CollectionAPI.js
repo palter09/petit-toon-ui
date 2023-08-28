@@ -2,16 +2,23 @@ import { getCookie } from "./HandleTokens.js";
 import { fetchAPIAndExecute } from "./APIFetcher.js";
 
 /* 컬렉션 생성 */
-export async function createCollection(callback, fallback) {
+export async function createCollection(title, closed, callback, fallback) {
   const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/create`;
 
   const headers = new Headers({
+    'Content-Type': 'application/json',
     Authorization: `Bearer ${getCookie("accessToken")}`
   });
 
+  const requestBody = {
+    title: title,
+    closed: closed
+  };
+
   const options = {
     method: 'POST',
-    headers: headers
+    headers: headers,
+    body: JSON.stringify(requestBody)
   };
 
   fetchAPIAndExecute(url, options, callback, fallback);

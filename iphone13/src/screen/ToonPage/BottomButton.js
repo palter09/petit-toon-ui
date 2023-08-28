@@ -168,7 +168,7 @@ const Subscribe = ({toonId, isError}) => {
   />;
 };
 
-const Collection = () => {
+const Collection = ({toonId, isError}) => {
   const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
   const [bookmark, setBookmark] = useState(false);
   const [collections, setCollections] = useState([]);
@@ -199,11 +199,17 @@ const Collection = () => {
       <div className='collection-container'>
         <div className='collection-button'
           onClick={() => {
-            myPageToggleHandler();
-            handleCollectionClick();
+            if(!isError){
+              myPageToggleHandler();
+              handleCollectionClick();
+            }
           }}>
             <img
-              src={process.env.PUBLIC_URL + (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png')}
+              src={process.env.PUBLIC_URL + 
+                (!isError? 
+                  (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png') :
+                            '/images/star_icon_b&w.png')
+              }
               alt='colletion' 
               />
           </div>
