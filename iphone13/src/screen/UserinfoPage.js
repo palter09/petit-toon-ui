@@ -32,7 +32,7 @@ const UserinfoPage = () => {
         <Header />
         <div className="divLineHeader" />
         {is404 ? (
-          <Error404 what = {'유저'} />
+          <Error404 what = {'유저를'} />
         ) : (
           <>
             <Profile userinfo={userinfo} />

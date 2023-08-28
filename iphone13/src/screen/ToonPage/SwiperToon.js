@@ -49,7 +49,7 @@ export default function SwiperToon({ toonId, onIsError }) {
   if (is404) {
     return (
       <div style={toonStyle}>
-        <Error404 what = {'웹툰'} />
+        <Error404 what = {'웹툰을'} />
       </div>
     );
   }

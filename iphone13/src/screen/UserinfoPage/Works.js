@@ -82,6 +82,7 @@ const Works = ({ userinfo }) => {
           title={<div style={textStyle}><b>내 컬렉션</b></div>}
           content={
             <Collections
+              userId = {userinfo.id}
               collections={
                 collectionInfo  
                 /* 테스트용
