@@ -32,11 +32,11 @@ const LoginPage = () => {
   return (
     <div className="container">
         <ModalPortal>
-            <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false); console.log("!");}}>
+            <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false);}}>
                 <p>아이디와 비밀번호가 일치하지 않습니다.</p>
             </Modal>
         </ModalPortal>
-        
+
         <div className="login-container">
             <div className="logo">
                 <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
