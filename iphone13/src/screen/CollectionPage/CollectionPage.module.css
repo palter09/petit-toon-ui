@@ -1,0 +1,141 @@
+.content_wrapper {
+  width:100%;
+  height:100%;
+  position:relative;
+  top: 3%;
+  background-color: #FBEFFB;
+}
+.scrollbar{
+  overflow-y: scroll;
+  /*스크롤 기능은 썸네일 컨테이너 전체 영역*/
+  height: 92%;
+  width: 100%;
+}
+::-webkit-scrollbar { 
+  display: none;
+}
+.header_wrapper{
+  height: 25%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 5px solid #DA5E9D;
+  border-bottom: 3px solid #DA5E9D;
+}
+.header_preview{
+  background: whitesmoke;
+  outline: 1px solid pink;
+  width: 35%;
+  height: 80%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+}
+.empty_header{
+  position: relative;
+  width: 100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header_info_wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height:80%;
+  justify-content: center;
+  font-weight: bold;
+  margin: 1rem;
+}
+.header_info_wrapper p{
+  margin: 0;
+}
+.header_info_wrapper h3{
+  font-size: 2rem;
+  margin:0;
+}
+.header_info_closedName{
+  width: 100%;
+  display: flex;
+}
+.header_info_closedName p{
+  margin: 0;
+}
+.header_info_wrapper button{
+  margin-top:1.5rem;
+  color: #DA5E9D;
+  background-color: white;
+  border: 1px solid #DA5E9D;
+  border-radius: 1.5rem;
+}
+.header_info_wrapper button:hover{
+  margin-top: 1.5rem;
+  color: white;
+  background-color: #DA5E9D;
+  border: 1px solid #DA5E9D;
+  border-radius: 1.5rem;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.1rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /*썸네일 1 row 상의 영역 height*/
+  height: 30%;
+  transition: margin-top 0.3s;
+}
+
+.previewInfo_wrapper{
+  text-align: center;
+  font-size: 18px;
+
+  width:33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+}
+.preview {
+  background: whitesmoke;
+  outline: 1px solid pink;
+  /*썸네일 하나하나의 크기 지정*/
+  width: 100%;
+  height: 70%;
+  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
+  margin: 4px; /* 추가: 각 박스 사이의 간격을 조절 */
+}
+.preview img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info{
+}
+
+.empty_collection{
+  position: absolute;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  color:#DA5E9D;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.footer_wrapper{
+  height: 10%;
+  background-color: white;
+  border-top: 5px solid #DA5E9D;
+}

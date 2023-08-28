@@ -6,7 +6,7 @@ import Profiles from "../SwiperScroll/SwiperProfiles.js";
 import Collections from "../SwiperScroll/SwiperCollections.js";
 import { getFollowers } from "../../API/FollowAPI.js";
 import { useNavigate } from "react-router";
-import { getBookmarks } from "../../API/CollectionAPI.js";
+import { getCollections } from "../../API/CollectionAPI.js";
 
 const worksStyle = {
   position: "absolute",
@@ -39,7 +39,7 @@ const Works = ({ userinfo }) => {
         (_) => {navigate("/");}
       );
       console.log(userinfo.id+"의 컬렉션 목록");
-      getBookmarks(
+      getCollections(
         userinfo.id,
         (data) =>{
           console.log("컬렉션목록",data);
