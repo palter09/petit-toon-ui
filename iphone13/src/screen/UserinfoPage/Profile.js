@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { deleteFollower, followUser } from '../../API/FollowAPI';
-import { useNavigate } from 'react-router';
 import styles from './Profile.module.css'; 
 
 const Profile = ({ userinfo }) => {
-	const navigate = useNavigate();
+	const [clickFollow, setClickFollow] = useState(false);
 
-	const handleDeleteFollower = () =>{//delete하는 주체가 명확히 없음
+	const handleFollower = () =>{//로그인한 user가 팔로우 , 취소 해야되는데 그거 수정되면 다시 수정해야함
 		console.log(userinfo.id);
-		deleteFollower(userinfo.id, ()=>{}, ()=>{navigate('/')});
-	};
-
-	const handleFollower = () =>{//로그인한 user의 id로 follow해야하는데 그 유저의 id를 모름
-		console.log(userinfo.id);
-		followUser(3, userinfo.id, ()=>{}, ()=>{navigate('/')});
+		if(!clickFollow){
+			followUser(3, userinfo.id, ()=>{setClickFollow(true)}, ()=>{});
+		}else{
+			deleteFollower(userinfo.id, ()=>{setClickFollow(false)}, ()=>{});
+		}
 	}
 
 	return (
@@ -45,8 +43,12 @@ const Profile = ({ userinfo }) => {
           <div style={{width:'100%', height:'48%',display:'flex', flexDirection:'column', justifyContent:'center'}}>
             <p style={{margin:0, height: '50%', textAlign:'center'}}>{userinfo.statusMessage || '상태메시지가 등록되지 않았습니다'}</p>
 						<div className={styles.header_bottom_wrapper}>
-							<button className={styles.header_bottom_follow_button} onClick={handleFollower}>팔로우</button>
-							<button className={styles.header_bottom_cancel_button} onClick={handleDeleteFollower}>취소</button>
+							<button 
+								className={`${clickFollow ? styles.header_bottom_follow_button_cancel : styles.header_bottom_follow_button}`} 
+								onClick={handleFollower}
+								>
+  							{clickFollow ? '팔로우 취소' : '팔로우'}
+							</button>
 						</div>
           </div>
 				</td>

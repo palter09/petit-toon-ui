@@ -6,19 +6,14 @@ import { increaseViewCount } from "../../API/ToonAPI";
 
 export default function SwiperLR({ toon }) {
   const [showInfo, setShowInfo] = useState(false); // 정보 화면 표시 상태
-
   // 이미지 클릭 시 정보 화면 표시
   const handleImageClick = (index) => {
-    if(index===0){
-    setShowInfo(true);
-    }
+    if(index === 0) setShowInfo((prevShowInfo) => !prevShowInfo); 
   };
-
-  // 정보 화면 클릭 시 정보 화면 닫기
-  const handleInfoClick = () => {
+  //slide변경시 showinfo창 reset
+  const handleSlideChange = () =>{
     setShowInfo(false);
-  };
-
+  }
   // 처음 렌더링 되거나 isView 변할때 api 호출
   useEffect(() => {
     increaseViewCount(toon.id);
@@ -26,27 +21,41 @@ export default function SwiperLR({ toon }) {
 
   return (
     <>
-      <Swiper direction={"horizontal"}>
+      <Swiper spaceBetween={'10rem'} direction={"horizontal"} onSlideChange={handleSlideChange}>
         {toon.imagePaths.map((imagePath, index) => (
           <SwiperSlide key={index} onClick={() => handleImageClick(index)}>
-            <img
-              src={`${process.env.REACT_APP_SERVER_IP}/resources/${imagePath}`}
-              alt={`${toon.title}-${index}`}
-            />
+            {showInfo && index === 0 ? (
+              <div className='swiperLR_toonInfo_wrapper'>
+                <div className='swiperLR_toonInfo'>
+                  <div className="swiperLR_toonInfo_contents">
+                    <h2>{toon.title}</h2>
+                    <div className="swiperLR_toonInfo_author_wrapper">
+                      <div className="swiperLR_toonInfo_author_profile">
+                        <img
+                        src= {`${process.env.PUBLIC_URL}/resources/${toon.profileImageUrl}` && process.env.PUBLIC_URL + '/images/mypage.png'} 
+                        alt= '작가'
+                        />
+                      </div>
+                      <p>{toon.author}</p>
+                    </div>
+                    <div className='swiperLR_toonInfo_likeAndView_wrapper'>
+                      <>
+                        <p>조회수: <b>{toon.viewCount}</b></p>
+                        <p>좋아요: <b>{toon.likeCount}</b></p>
+                      </>
+                    </div>
+                    <h3>{toon.description}</h3>
+                  </div>
+                </div>
+              </div>
+            ) : (null)}
+              <img
+                src={`${process.env.REACT_APP_SERVER_IP}/resources/${imagePath}`}
+                alt={`${toon.title}-${index}`}
+              />
           </SwiperSlide>
         ))}
       </Swiper>
-      {showInfo && (
-        <div className="swiperLR_toonInfo" onClick={handleInfoClick}>
-          <div>
-            <h2>{toon.title}</h2>
-            <h3>{toon.description}</h3>
-            <p>조회수:{toon.viewCount}</p>
-            <p>좋아요:{toon.likeCount}</p>
-            <p>작가:{toon.author}</p>
-          </div>
-        </div>
-      )}
     </>
   );
 }

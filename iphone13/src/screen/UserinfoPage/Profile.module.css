@@ -17,18 +17,18 @@
   justify-content:center;
 }
 .header_bottom_follow_button{
-  border-radius: 0.2rem;
-  background: #F5A9F2;
-  color: #190707;
+  border-radius: 0.3rem;
+  background: white;
+  color: #DA5E9D;
   font-weight: bold;
-  border: 1px solid #F2F2F2;
-  width: 80%;
+  border: 1px solid #DA5E9D;
+  width: 100%;
 }
-.header_bottom_cancel_button{
-  border-radius: 0.2rem;
-  background: #F5A9F2;
-  color: #190707;
+.header_bottom_follow_button_cancel{
+  border-radius: 0.3rem;
+  background: #c4548cca;
+  color: #FBEFFB;
   font-weight: bold;
   border: 1px solid #F2F2F2;
-  width: 20%;
+  width: 100%;
 }
