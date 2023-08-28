@@ -3,8 +3,10 @@ import TabWrapper from "../Tab/TabWrapper.js";
 import Tab from "../Tab/Tab.js";
 import Thumbnails from "../SwiperScroll/SwiperThumbnails.js";
 import Profiles from "../SwiperScroll/SwiperProfiles.js";
+import Collections from "../SwiperScroll/SwiperCollections.js";
 import { getFollowers } from "../../API/FollowAPI.js";
 import { useNavigate } from "react-router";
+import { getBookMarks } from "../../API/CollectionAPI.js";
 
 const worksStyle = {
   position: "absolute",
@@ -22,6 +24,7 @@ const textStyle = {
 
 const Works = ({ userinfo }) => {
   const [follower, setFollower] = useState([]);
+  const [collectionInfo, setCollectionInfo] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,10 +33,19 @@ const Works = ({ userinfo }) => {
       getFollowers(
         userinfo.id, 0, 20,
         (data) => {
-          console.log(data.followUsers)
+          console.log("팔로우목록",data)
           setFollower(data.followUsers);//[{followId: , user: }{followId: , user: }...]
         },
         (_) => {navigate("/");}
+      );
+      console.log(userinfo.id+"의 컬렉션 목록");
+      getBookMarks(
+        userinfo.id,
+        (data) =>{
+          console.log("컬렉션목록",data);
+          setCollectionInfo(data.collectionInfos);
+        },
+        () =>{}
       );
     }
   }, [navigate, userinfo.id]);
@@ -46,7 +58,7 @@ const Works = ({ userinfo }) => {
           content={
             <Thumbnails
               //toons={[userinfo.works]}
-              toons={[]}
+              toons={['f','f','f','f','f','f',]}
               style={{
                 top: "40px",
                 height: "445px",
@@ -59,6 +71,51 @@ const Works = ({ userinfo }) => {
           content={
             <Profiles
               users={follower}
+              style={{
+                top: "40px",
+                height: "445px",
+              }}
+            />
+          }
+        />
+        <Tab
+          title={<div style={textStyle}><b>내 컬렉션</b></div>}
+          content={
+            <Collections
+              collections={
+                collectionInfo  
+                /* 테스트용
+                  [ {
+                    "id" : 1,
+                    "title" : "모음집",
+                    "closed" : false
+                  }, {
+                    "id" : 2,
+                    "title" : "모음집2",
+                    "closed" : false
+                  }, {
+                    "id" : 3,
+                    "title" : "title3",
+                    "closed" : true
+                  }, {
+                    "id" : 4,
+                    "title" : "title3",
+                    "closed" : false
+                  } , {
+                    "id" : 5,
+                    "title" : "title3",
+                    "closed" : false
+                  } , {
+                    "id" : 6,
+                    "title" : "title3",
+                    "closed" : true
+                  } , {
+                    "id" : 7,
+                    "title" : "title3",
+                    "closed" : false
+                  } ]
+                  */
+              }
               style={{
                 top: "40px",
                 height: "445px",

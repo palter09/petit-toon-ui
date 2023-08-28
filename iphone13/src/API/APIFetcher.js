@@ -11,6 +11,7 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
         (token) => {setCookie("accessToken", token.accessToken, 30*60)},
         (_response) => { reissueStatus = _response.status}
       );
+      
       if(reissueStatus) 
         fallback && fallback(response);
       else{
