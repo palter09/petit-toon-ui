@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from '../../hooks/useIconClick';
-import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI'
-import { followUser, deleteFollower } from '../../API/FollowAPI'
+import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI';
+import { followUser, deleteFollower } from '../../API/FollowAPI';
+import { getBookmarks } from '../../API/BookmarkAPI';
 import "./ChatStyles.css";
 import "./CollectionStyles.css";
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +15,7 @@ const Like = ({toonId, isError}) => {
   const [liked, setLiked] = useState(false);
 
   const handleLikeClick = () => {
-    if(isError) return;
+    // if(isError) return;
     if (liked) {
       setLiked(!liked);
     }
@@ -37,7 +38,7 @@ const DisLike = ({toonId, isError}) => {
   const [disLiked, setDisLiked] = useState(false);
 
   const handleDisLikeClick = () => {
-    if(isError) return;
+    // if(isError) return;
     if (disLiked) {
       setDisLiked(!disLiked);
     }
@@ -85,10 +86,14 @@ const Comment = ({toonId, isError}) => {
         {/* 채팅 아이콘 */}
         <div className='comment-button'
           onClick={() => {
+            /*
             if(!isError){
               myPageToggleHandler();
               handleIconClick(7);
             }
+            */
+           myPageToggleHandler();
+           handleIconClick(7);
           }}
           >
             <img
@@ -165,14 +170,27 @@ const Subscribe = ({toonId, isError}) => {
 
 const Collection = () => {
   const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
-
   const [bookmark, setBookmark] = useState(false);
+  const [collections, setCollections] = useState([]);
+  const [isCreatingCollection, setIsCreatingCollection] = useState(false);
+
+  const fetchCollections = async (userId) => {
+    try {
+      const response = await getBookmarks(userId);
+      const data = await response.json();
+      setCollections(data.collections);
+    } catch (error) {
+      console.error('Error fetching collection list:', error);
+    }
+  };
 
   const handleCollectionClick = () => {
     setBookmark(!bookmark);
+    fetchCollections(123);
   }
 
   const {
+    collectionCreateClicked,
     handleIconClick,
   } = useIconClick();
   
@@ -183,7 +201,6 @@ const Collection = () => {
           onClick={() => {
             myPageToggleHandler();
             handleCollectionClick();
-            handleIconClick(9);
           }}>
             <img
               src={process.env.PUBLIC_URL + (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png')}
@@ -193,6 +210,33 @@ const Collection = () => {
           <div className={`collection-menu ${myPageIsOpen ? 'open' : ''}`}>
             <div className='collection-menu-title'>컬렉션 목록</div>
             <div className='collection-menu-container'>
+              {collections.map((collection, index) => (
+              <div key={index} className='collection-menu-item'>
+                {/* Display collection name or other information */}
+                {collection.name}
+              </div>
+              ))}
+              {!isCreatingCollection ? (
+                <button
+                  className='collection-menu-button'
+                  onClick={() => setIsCreatingCollection(true)}>
+                  새 컬렉션 생성
+                </button>
+              ) : (
+                // Input field and "Create" button for new collection
+                <div className='collection-create-container'>
+                  <input
+                    type='text'
+                    placeholder='Enter collection name'
+                    className='collection-name-input'
+                  />
+                  <button 
+                    className='collection-create-button'
+                    onClick={() => setIsCreatingCollection(false)}>
+                    Create
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className='collection-triangle-wrapper'>
