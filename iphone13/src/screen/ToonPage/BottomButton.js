@@ -174,19 +174,9 @@ const Collection = ({toonId, isError}) => {
   const [collections, setCollections] = useState([]);
   const [isCreatingCollection, setIsCreatingCollection] = useState(false);
 
-  const fetchCollections = async (userId) => {
-    try {
-      const response = await getBookmarks(userId);
-      const data = await response.json();
-      setCollections(data.collections);
-    } catch (error) {
-      console.error('Error fetching collection list:', error);
-    }
-  };
-
   const handleCollectionClick = () => {
     setBookmark(!bookmark);
-    fetchCollections(123);
+    getBookmarks(123);
   }
 
   const {
@@ -199,16 +189,23 @@ const Collection = ({toonId, isError}) => {
       <div className='collection-container'>
         <div className='collection-button'
           onClick={() => {
+            /*
             if(!isError){
               myPageToggleHandler();
               handleCollectionClick();
             }
+            */
+            myPageToggleHandler();
+            handleCollectionClick();
           }}>
             <img
-              src={process.env.PUBLIC_URL + 
+              src={process.env.PUBLIC_URL +
+                /* 
                 (!isError? 
                   (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png') :
                             '/images/star_icon_b&w.png')
+                */
+                (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png')
               }
               alt='colletion' 
               />

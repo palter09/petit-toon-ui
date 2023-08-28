@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SwiperCollections.module.css";
-import { createCollection, getBookMarks } from "../../API/CollectionAPI";
+import { createCollection, getBookmarks } from "../../API/CollectionAPI";
 
 const SwiperCollections = ({ collections, style }) => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const SwiperCollections = ({ collections, style }) => {
     const updatedList = [];
     if(Array.isArray(collections)){
       for (const collection of collections) {
-          getBookMarks(
+          getBookmarks(
             collection.id,
             (resultData) =>{
               updatedList.push({collectionId: collection.id, toons: resultData.bookmarkInfos});
