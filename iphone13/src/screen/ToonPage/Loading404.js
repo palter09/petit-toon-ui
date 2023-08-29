@@ -19,7 +19,7 @@ export const Error404 = ({what}) =>{
         <div style = {{textAlign : 'center'}}>
           <TbError404 size="100" color="#DA5E9D" />
         </div>
-        <p style ={{margin: '0.5rem', color: '#DA5E9D', fontWeight:'bold', fontSize:'30px', textAlign:'center'}}>원하시는 {what}을/를 <br/>찾을 수 없습니다</p>
+        <p style ={{margin: '0.5rem', color: '#DA5E9D', fontWeight:'bold', fontSize:'30px', textAlign:'center'}}>원하시는 {what}<br/>찾을 수 없습니다</p>
       </div>
     </div>
   )
