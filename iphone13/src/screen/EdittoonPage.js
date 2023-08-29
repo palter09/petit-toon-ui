@@ -24,7 +24,7 @@ const EditToonPage = () => {
           <p>웹툰 수정/삭제 페이지</p>
         </div>
         <div className={styles.info_wrapper}>
-          <Info />
+          <Info toonId={toonId}/>
         </div>
         <div className={styles.description_wrapper}>
           <Description handleDescription={handleDescription} />

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './styles/Info.module.css';
 import {IoMdInformationCircle} from "react-icons/io";
 import {IoWarningSharp} from "react-icons/io5";
-  /*  "title" : "sample-title",
-  "description" : "sample-description",
-  "author" : "sample-author",
-  "profileImageUrl" : "profileImages/1.png",
-  "thumbnailUrl" : "toons/1/1-thumb.png",
-  "imagePaths" : [ "toons/1/1-0.png", "toons/1/1-1.png" ],
-  "viewCount" : 0,
-  "likeCount" : 0,*/
+import { getWebtoonInfo } from '../../API/ToonAPI';
 
-const Info = ({ checked, onChange }) => {
+const Info = ({toonId}) => {
+  const [title, setTitle] = useState("");
+  const [viewCount, setViewCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(0);
+  useEffect(()=>{
+    getWebtoonInfo(
+      toonId,
+      (data) => {
+        setTitle(data.title);
+        setViewCount(data.viewCount);
+        setLikeCount(data.likeCount);
+      }
+    )
+  });
   return (
     <>
       <div className={styles.info_header}>
@@ -28,9 +34,9 @@ const Info = ({ checked, onChange }) => {
       <p>웹툰 정보</p>
       </div>
       <div className={styles.info_content}>
-        <p>제목: </p>
-        <p>조회수: </p>
-        <p>좋아요: </p>
+        <p>제목: <b>{title}</b></p>
+        <p>조회수: <b>{viewCount}</b></p>
+        <p>좋아요: <b>{likeCount}</b></p>
       </div>
     </>
   );

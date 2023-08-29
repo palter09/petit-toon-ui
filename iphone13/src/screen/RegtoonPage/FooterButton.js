@@ -15,7 +15,7 @@ const FooterButton = ({ isEnabled, isRegistered, toonId }) => {
         {isRegistered && isEnabled && <p>등록되었습니다. Toon ID: {toonId}</p>}
       </div>
       <div className={styles.footer_button_grey}>
-        <button type="button">취소</button>
+        <button type="button" onClick={()=>{navigate(-1);}}>취소</button>
       </div>
       <div className={styles.footer_button_pink}>
         <button type="submit" id="toon_submit" disabled={!isEnabled}>

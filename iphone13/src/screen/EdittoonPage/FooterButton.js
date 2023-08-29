@@ -10,6 +10,9 @@ const FooterButton = ({ id, isEnabled }) => {
   
   const handleIsDeleted = (isDeletedVal) => {
     setIsDeleted(isDeletedVal);
+    if (isDeletedVal) {
+      navigate(-1); // 뒤로 가기
+    }
   };
 
   const handleCheckboxChange = (index) => {
@@ -55,6 +58,9 @@ const FooterButton = ({ id, isEnabled }) => {
               </div>
           </div>
           <div className={styles.footer_button_grey}>
+            <button type="button" id="cancel" onClick={() => navigate(-1)}>
+              취소
+            </button>
             <button type="submit" id="toon_edit" disabled={!isEnabled}>
               수정
             </button>

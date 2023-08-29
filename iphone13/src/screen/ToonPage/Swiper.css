@@ -68,11 +68,22 @@
   justify-content: center;
   align-items: center;
 }
+.swiperLR_toonInfo_author_wrapper:active{
+  width:100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: transparent;
+  border-bottom: 1px solid #DA5E9D;
+  border-top: 1px solid #DA5E9D;
+  border-radius: 0.5rem;
+}
 .swiperLR_toonInfo_author_profile{
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 1rem;
-  border: 1px solid white;
+  border-radius: 0.5rem;
+  border-bottom: 1px solid white;
 }
 .swiperLR_toonInfo_likeAndView_wrapper{
   height: 8%;
