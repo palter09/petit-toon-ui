@@ -65,7 +65,7 @@ const Comment = ({toonId, isError}) => {
       setComments([...comments, commentText]);
       setCommentText("");
     }
-    handleIconClick(8);
+    handleCommentIconClick();
   }
 
   const handleKeyPress = (e) => {
@@ -74,11 +74,8 @@ const Comment = ({toonId, isError}) => {
     }
   };
 
-  const {
-    chatIconClicked,
-    commentClicked,
-    handleIconClick,
-  } = useIconClick();
+  const [chatIconClicked, handleChatIconClick] = useIconClick();
+  const [commentClicked, handleCommentIconClick] = useIconClick();
 
   return (
     <div className='comment-wrapper' ref={myRef}>
@@ -93,7 +90,7 @@ const Comment = ({toonId, isError}) => {
             }
             */
            myPageToggleHandler();
-           handleIconClick(7);
+           handleCommentIconClick();
           }}
           >
             <img
@@ -179,10 +176,7 @@ const Collection = ({toonId, isError}) => {
     getBookmarks(123);
   }
 
-  const {
-    collectionCreateClicked,
-    handleIconClick,
-  } = useIconClick();
+  const [collectionCreateClicked, handleCollectionCreateIconClick] = useIconClick();
   
   return (
     <div className='collection-wrapper' ref={myRef}>

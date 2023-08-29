@@ -4,34 +4,28 @@ import useIconClick from "../../hooks/useIconClick";
 import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
 
-const menuTmp = () => {
-  // ...이건 그냥 예시
-};
 
 const DropdownMenu = () => {
   const navigate = useNavigate();
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
-  const {
-    menuIconClicked,
-    storeIconClicked,
-    searchIconClicked,
-    mapIconClicked,
-    petitIconClicked,
-    eventIconClicked,
-    mypageIconClicked,
-    handleIconClick,
-  } = useIconClick();
+  const [menuIconClicked, handleMenuIconClicked] = useIconClick();
+  const [storeIconClicked, handleStoreIconClicked] = useIconClick();
+  const [searchIconClicked, handleSearchIconClicked] = useIconClick();
+  const [mapIconClicked, handleMapIconClicked] = useIconClick();
+  const [petitIconClicked, handlePetitIconClicked] = useIconClick();
+  const [eventIconClicked, handleEventIconClicked] = useIconClick();
+  const [mypageIconClicked, handleMyPageIconClicked] = useIconClick();
+  
 
-  //iconclick효과가 페이지 이동보다 먼저 일어나게
   const handleSearchIconClick = () => {
-    handleIconClick(2);
+    handleSearchIconClicked();
     setTimeout(() => {
       navigate('/search');
     }, 150);
   };
-  //iconclick효과가 페이지 이동보다 먼저 일어나게
+
   const handleStoreIconClick = () => {
-    handleIconClick(1);
+    handleStoreIconClicked();
     setTimeout(() => {
       navigate('/store');
     }, 150);
@@ -46,7 +40,7 @@ const DropdownMenu = () => {
           className="dropdown-button"
           onClick={() => {
             myPageHandler();
-            handleIconClick(0);
+            handleMenuIconClicked();
           }}
         >
           <img
@@ -98,8 +92,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(3);
+                handleMapIconClicked();
               }}
             >
               <img
@@ -115,8 +108,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(4);
+                handlePetitIconClicked();
               }}
             >
               <img
@@ -132,8 +124,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(5);
+                handleEventIconClicked();
               }}
             >
               <img
@@ -149,8 +140,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(6);
+                handleMyPageIconClicked(6);
               }}
             >
               <img
