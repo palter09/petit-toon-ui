@@ -9,7 +9,7 @@
   height: 70%;
   margin: 1rem;
 
-  background-color: 	#FFE6EB;
+  background-color: 	white;
   outline: 1px solid #FFD2D7;
 }
 .ImagesUpload_file_wrapper:hover{
@@ -18,7 +18,7 @@
 }
 .ImagesUpload_file_wrapper label{
   outline: 1px solid #FFD2D7;
-  background-color: #FFBBC6;
+  background-color: #fbe4e8;
   border-radius: .2rem;
   font-size: 16px;
   font-weight: 500;

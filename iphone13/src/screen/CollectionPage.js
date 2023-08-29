@@ -76,6 +76,7 @@ const CollectionPage = () => {
       }
     );
   };
+  
   return (
     <div className="container">
       <div className={styles.content_wrapper}>

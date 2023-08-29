@@ -3,9 +3,11 @@ import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from "../../hooks/useIconClick";
 import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
+import { getCookie } from "../../API/HandleTokens";
 
 
 const DropdownMenu = () => {
+  const userId = parseInt(getCookie("loginUserId"));
   const navigate = useNavigate();
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [menuIconClicked, handleMenuIconClicked] = useIconClick();
@@ -31,6 +33,12 @@ const DropdownMenu = () => {
     }, 150);
   };
 
+  const handleMyPageClick= ()=>{
+    handleMyPageIconClicked();
+    setTimeout(() => {
+      navigate(`/userinfo/${userId}`);
+    }, 150);
+  };
   return (
     <div className="Wrapper" ref={myPageRef}>
       <div className="dropdown-container">
@@ -140,7 +148,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                handleMyPageIconClicked(6);
+                handleMyPageClick();
               }}
             >
               <img

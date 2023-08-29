@@ -5,11 +5,16 @@ import Works from "./UserinfoPage/Works.js";
 import { getUserInfo } from "../API/UserAPI.js";
 import { useParams } from "react-router-dom";
 import { Error404 } from "./ToonPage/Loading404";
+import { getCookie } from "../API/HandleTokens.js";
 
 const UserinfoPage = () => {
   const [userinfo, setUserinfo] = useState({});
   const [is404, setIs404] = useState(false);
+  const [numCartoons, setNumCartoons] = useState(0);
+  const [numFollowers, setNumFollowers] = useState(0);
+  const [numFollowings, setNumFollowings] = useState(0);
   const userid = useParams().id;
+  const accessUserId = parseInt(getCookie("loginUserId"));
 
   //404에러 핸들러
   const handleUndefinedUser = (errorResponseData) => {
@@ -24,7 +29,7 @@ const UserinfoPage = () => {
     if (userid) {
       getUserInfo(userid, setUserinfo, handleUndefinedUser);
     }
-  }, [userid]);
+  }, [userid, userinfo]);
 
   return (
     <div className="container">
@@ -35,9 +40,22 @@ const UserinfoPage = () => {
           <Error404 what = {'유저를'} />
         ) : (
           <>
-            <Profile userinfo={userinfo} />
+            <Profile 
+              accessUserId={accessUserId}
+              userinfo={userinfo} 
+              onUserInfo={(data)=>setUserinfo(data)}
+              numCartoons={numCartoons} 
+              numFollowers={numFollowers}
+              numFollowings={numFollowings}
+            />
             <div className="divLineMid" />
-            <Works userinfo={userinfo} />
+            <Works 
+              accessUserId={accessUserId}
+              userinfo={userinfo} 
+              onNumCartoons={(num)=>setNumCartoons(num)} 
+              onNumFollowers={(num)=>setNumFollowers(num)}
+              onNumFollowings={(num)=>setNumFollowings(num)}
+            />
             <div className="divLineBottom" />
           </>
         )}
