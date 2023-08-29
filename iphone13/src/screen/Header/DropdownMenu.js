@@ -41,25 +41,16 @@ const DropdownMenu = () => {
   };
   return (
     <div className="Wrapper" ref={myPageRef}>
+      <img 
+        className="dropdown-button"
+        src={process.env.PUBLIC_URL + (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")} 
+        alt="메뉴 아이콘" 
+        onClick={() => {
+          myPageHandler();
+          handleMenuIconClicked();
+        }}
+      />
       <div className="dropdown-container">
-        {/*header menu button 헤더상의 메뉴 버튼*/}
-        {/*0. menu button*/}
-        <div
-          className="dropdown-button"
-          onClick={() => {
-            myPageHandler();
-            handleMenuIconClicked();
-          }}
-        >
-          <img
-            src={
-              process.env.PUBLIC_URL +
-              (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")
-            }
-            alt="메뉴 아이콘"
-          />
-        </div>
-        {/*header menu open 오픈된 메뉴*/}
         <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
           <div className="menu-title">메뉴|Menu</div>
           <div className="menu-container">
@@ -162,11 +153,8 @@ const DropdownMenu = () => {
             </div>
           </div>
         </div>
-        {/* 삼각형 요소 */}
-        <div className="triangle-wrapper">
-          {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
-          {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
-        </div>
+        {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+        {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
       </div>
     </div>
   );
