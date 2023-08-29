@@ -23,7 +23,7 @@ const textStyle = {
   width: "159px",
 };
 
-const Works = ({ userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => {
+const Works = ({ accessUserId, userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => {
   const [cartoons, setCartoons] = useState([]);
   const [collectionInfo, setCollectionInfo] = useState([]);
   const [followings, setFollowings] = useState([]);
@@ -68,12 +68,12 @@ const Works = ({ userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => 
       getFollowings(
         userinfo.id, 0, 20,
         (data) => {
-          console.log("팔로윙목록",data)
+          console.log("팔로잉목록",data)
           setFollowings(data.users);
           onNumFollowings(data.users.length);
         },
         (_) => {
-          console.log("팔로윙 목록 불러오기 실패");
+          console.log("팔로잉 목록 불러오기 실패");
         }
       );
     }
@@ -98,6 +98,7 @@ const Works = ({ userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => 
           title={<div style={textStyle}><b>컬렉션</b></div>}
           content={
             <Collections
+              accessUserId={accessUserId}
               userId = {userinfo.id}
               collections={
                 collectionInfo  
@@ -122,7 +123,7 @@ const Works = ({ userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => 
           }
         />
         <Tab
-          title={<div style={textStyle}><b>팔로윙</b></div>}
+          title={<div style={textStyle}><b>팔로잉</b></div>}
           content={
             <Profiles
               users={followings}

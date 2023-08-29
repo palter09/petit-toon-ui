@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./SwiperCollections.module.css";
 import { createCollection, getCollections } from "../../API/CollectionAPI";
 
-const SwiperCollections = ({ userId,  collections, style }) => {
+const SwiperCollections = ({ accessUserId, userId,  collections, style }) => {
   const navigate = useNavigate();
   const [collectionsLocal, setCollectionsLocal] = useState(collections);//인자로 받는 collections 업데이트 해서 재렌더링 용도
   const [newCollectionOn, setNewCollectionOn] = useState(false);
@@ -117,9 +117,13 @@ const SwiperCollections = ({ userId,  collections, style }) => {
         ) : (null)}
       {/*본문 */}
       <div className={styles.newCollection}>
-        <button onClick={handleNewCollectionOn}>
-          + 새 컬렉션
-        </button>
+        {
+          accessUserId===userId &&(
+          <button onClick={handleNewCollectionOn}>
+            + 새 컬렉션
+          </button>
+        )
+        }
       </div>
           <div className={styles.scrollbar}>
           <div className={styles.collections_row}>
