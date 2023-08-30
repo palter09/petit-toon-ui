@@ -28,22 +28,28 @@
     justify-content: flex-start;
     align-items: flex-start;
     /*썸네일 1 row 상의 영역 height*/
-    height: 175px;
+    height: 150px;
     transition: margin-top 0.3s;
   }
   
+  .profiles_wrapper{
+    width:33%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .profiles_box {
     text-align: center;
-    font-size: 18px;
     background: whitesmoke;
     outline: 1px solid pink;
     width: 120px;
     height: 120px;
+    border-radius: 50%;
     box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
     margin: 4px;
     display: block;
-    justify-content: center;
-    align-items: center;
   }
   
   
@@ -52,4 +58,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  .profiles_wrapper p{
+    margin:0rem;
+    height:12%;
+    width:95%;
+    font-size: 13px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
