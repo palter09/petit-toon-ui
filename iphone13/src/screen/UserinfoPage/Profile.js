@@ -4,7 +4,7 @@ import { defaultProfileImage, uploadProfileImage } from "../../API/ProfileAPI";
 import styles from './Profile.module.css'; 
 import Modal from '../Modal/Modal.js';
 import ModalPortal from '../Modal/Portal.js';
-import ImgUpload from '../RegToonPage/ImgUpload';
+import ImgUpload from '../RegtoonPage/ImgUpload';
 
 const Profile = ({ accessUserId, userinfo, onUserInfo, numCartoons, numFollowings, numFollowers}) => {
 	const [isFollow, setIsFollow] = useState(false);

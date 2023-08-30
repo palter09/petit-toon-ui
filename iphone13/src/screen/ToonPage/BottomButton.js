@@ -65,7 +65,7 @@ const Comment = ({toonId, isError}) => {
       setComments([...comments, commentText]);
       setCommentText("");
     }
-    handleCommentIconClick();
+    // handleIconClick(8);
   }
 
   const handleKeyPress = (e) => {
@@ -74,8 +74,11 @@ const Comment = ({toonId, isError}) => {
     }
   };
 
-  const [chatIconClicked, handleChatIconClick] = useIconClick();
-  const [commentClicked, handleCommentIconClick] = useIconClick();
+  const {
+    chatIconClicked,
+    commentClicked,
+    handleIconClick,
+  } = useIconClick();
 
   return (
     <div className='comment-wrapper' ref={myRef}>
@@ -90,7 +93,7 @@ const Comment = ({toonId, isError}) => {
             }
             */
            myPageToggleHandler();
-           handleCommentIconClick();
+           // handleIconClick(7);
           }}
           >
             <img
@@ -176,7 +179,13 @@ const Collection = ({toonId, isError}) => {
     getBookmarks(123);
   }
 
-  const [collectionCreateClicked, handleCollectionCreateIconClick] = useIconClick();
+  const handleCollectionCreateClick = () => {
+  }
+
+  const {
+    collectionCreateClicked,
+    handleIconClick,
+  } = useIconClick();
   
   return (
     <div className='collection-wrapper' ref={myRef}>
@@ -213,27 +222,18 @@ const Collection = ({toonId, isError}) => {
                 {collection.name}
               </div>
               ))}
-              {!isCreatingCollection ? (
+              <div className='collection-create-container'>
+                <input
+                  type='text'
+                  placeholder='Enter collection name'
+                  className='collection-name-input'
+                />
                 <button
-                  className='collection-menu-button'
-                  onClick={() => setIsCreatingCollection(true)}>
-                  새 컬렉션 생성
+                  className='collection-create-button'
+                  onClick={handleCollectionCreateClick}>
+                  create
                 </button>
-              ) : (
-                // Input field and "Create" button for new collection
-                <div className='collection-create-container'>
-                  <input
-                    type='text'
-                    placeholder='Enter collection name'
-                    className='collection-name-input'
-                  />
-                  <button 
-                    className='collection-create-button'
-                    onClick={() => setIsCreatingCollection(false)}>
-                    Create
-                  </button>
-                </div>
-              )}
+              </div>
             </div>
           </div>
           <div className='collection-triangle-wrapper'>
@@ -243,7 +243,7 @@ const Collection = ({toonId, isError}) => {
       </div>
     </div>
   )
-}
+};
 
 const Setting = () => {
   const navigate = useNavigate();
