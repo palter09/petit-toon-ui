@@ -146,6 +146,7 @@ const DropdownMenu = () => {
               className="menu-button"
               onClick={() => {
                 handleMyPageClick();
+                myPageHandler();
               }}
             >
               <img
