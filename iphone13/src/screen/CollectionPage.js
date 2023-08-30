@@ -124,7 +124,10 @@ const CollectionPage = () => {
                         alt={toon.title}
                       />
                     </div>
-                    <div className={styles.info}></div>
+                    <div className={styles.info}>
+                      <p>{toon.title}</p>
+                      <p>{toon.authorNickname}</p>
+                    </div>
                   </>
                 ))}
               </div>

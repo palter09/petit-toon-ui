@@ -1,0 +1,22 @@
+.content_wrapper {
+  width:100%;
+  height:100%;
+  position:relative;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  background-color: #FBEFFB;
+}
+.header_wrapper{
+  height: 18%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+}
+.header_wrapper h1{
+  margin: 0.3rem;
+  color: #DA5E9D;
+}

@@ -39,6 +39,12 @@ const DropdownMenu = () => {
       navigate(`/userinfo/${userId}`);
     }, 150);
   };
+  const handlePetitClick= ()=>{
+    handlePetitIconClicked();
+    setTimeout(() => {
+      navigate(`/ranking`);
+    }, 150);
+  };
   return (
     <div className="Wrapper" ref={myPageRef}>
       <img 
@@ -107,7 +113,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                handlePetitIconClicked();
+                handlePetitClick();
               }}
             >
               <img
