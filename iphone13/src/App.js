@@ -11,6 +11,7 @@ import RegToonPage from './screen/RegToonPage';
 import EditToonPage from './screen/EditToonPage';
 import SignupPage from './screen/SignupPage';
 import CollectionPage from './screen/CollectionPage';
+import RankingPage from './screen/RankingPage';
 
 import './App.css';
 
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/regtoon" element={<RegToonPage />}/>
         <Route path="/edittoon/:toonId" element={<EditToonPage/>}/>
         <Route path="/collection/:userId/:collectionId" element={<CollectionPage/>}/>
+        <Route path="/ranking" element={<RankingPage/>}/>
 
         {/* 다른 라우트들을 여기에 추가할 수 있습니다. */}
       </Routes>

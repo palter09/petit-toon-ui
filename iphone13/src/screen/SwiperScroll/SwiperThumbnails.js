@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './SwiperThumbnails.css';
 import { getCookie } from '../../API/HandleTokens';
 
-const SwiperThumbnails = ({  toons, style }) => {
+const SwiperThumbnails = ({  toons, style, boxStyle }) => {
   const [path, setPath] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,7 +16,6 @@ const SwiperThumbnails = ({  toons, style }) => {
   useEffect(() => {
     console.log("swipertoon위치:",location.pathname);
     setPath(location.pathname);
-    console.log("마이페이지:",isSameUser);
   }, [ location ]);
 
   const handleImageClick = (toonId) => {
@@ -42,7 +41,7 @@ const SwiperThumbnails = ({  toons, style }) => {
       <div className='thumbnails_scrollbar'>
         <div className='thumbnails_row'>
           {toons.map((toon) => (
-            <div className='thumbnails_box' key={toon.id}>
+            <div className='thumbnails_box' key={toon.id} style={boxStyle}>
               <img
                 src={ `${process.env.REACT_APP_SERVER_IP}/resources/${toon.thumbnailUrl}`}
                 alt={toon.title}
