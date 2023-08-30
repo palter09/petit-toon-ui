@@ -1,0 +1,27 @@
+/*info*/
+.info_title{
+  width:100%;
+  top: .3rem;
+  margin: .2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: relative;
+}
+.info_title label{
+  margin: .5rem;
+  font-size: 15px;
+  font-weight: bold;
+}
+.info_title input{
+  width: 75%;
+  border: transparent;
+}
+.info_title p{
+  position: absolute;
+  top: 5%;
+  right: 10%;
+
+  color: #dcdcdc;
+}

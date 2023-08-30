@@ -3,9 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./Swiper.css";
 import { increaseViewCount } from "../../API/ToonAPI";
+import { useNavigate } from "react-router";
 
 export default function SwiperLR({ toon }) {
   const [showInfo, setShowInfo] = useState(false); // 정보 화면 표시 상태
+  const navigate = useNavigate();
   // 이미지 클릭 시 정보 화면 표시
   const handleImageClick = (index) => {
     if(index === 0) setShowInfo((prevShowInfo) => !prevShowInfo); 
@@ -29,14 +31,14 @@ export default function SwiperLR({ toon }) {
                 <div className='swiperLR_toonInfo'>
                   <div className="swiperLR_toonInfo_contents">
                     <h2>{toon.title}</h2>
-                    <div className="swiperLR_toonInfo_author_wrapper">
+                    <div className="swiperLR_toonInfo_author_wrapper" onClick={()=>navigate(`/userinfo/${toon.authorId}`)}>
                       <div className="swiperLR_toonInfo_author_profile">
                         <img
                         src= {`${process.env.PUBLIC_URL}/resources/${toon.profileImageUrl}` && process.env.PUBLIC_URL + '/images/mypage.png'} 
                         alt= '작가'
                         />
                       </div>
-                      <p>{toon.author}</p>
+                      <p>{toon.authorNickname}</p>
                     </div>
                     <div className='swiperLR_toonInfo_likeAndView_wrapper'>
                       <>

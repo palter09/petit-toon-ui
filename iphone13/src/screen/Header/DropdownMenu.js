@@ -3,61 +3,54 @@ import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from "../../hooks/useIconClick";
 import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
+import { getCookie } from "../../API/HandleTokens";
 
-const menuTmp = () => {
-  // ...이건 그냥 예시
-};
 
 const DropdownMenu = () => {
+  const userId = parseInt(getCookie("loginUserId"));
   const navigate = useNavigate();
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
-  const {
-    menuIconClicked,
-    storeIconClicked,
-    searchIconClicked,
-    mapIconClicked,
-    petitIconClicked,
-    eventIconClicked,
-    mypageIconClicked,
-    handleIconClick,
-  } = useIconClick();
+  const [menuIconClicked, handleMenuIconClicked] = useIconClick();
+  const [storeIconClicked, handleStoreIconClicked] = useIconClick();
+  const [searchIconClicked, handleSearchIconClicked] = useIconClick();
+  const [mapIconClicked, handleMapIconClicked] = useIconClick();
+  const [petitIconClicked, handlePetitIconClicked] = useIconClick();
+  const [eventIconClicked, handleEventIconClicked] = useIconClick();
+  const [mypageIconClicked, handleMyPageIconClicked] = useIconClick();
+  
 
-  //iconclick효과가 페이지 이동보다 먼저 일어나게
   const handleSearchIconClick = () => {
-    handleIconClick(2);
+    handleSearchIconClicked();
     setTimeout(() => {
       navigate('/search');
     }, 150);
   };
-  //iconclick효과가 페이지 이동보다 먼저 일어나게
+
   const handleStoreIconClick = () => {
-    handleIconClick(1);
+    handleStoreIconClicked();
     setTimeout(() => {
       navigate('/store');
     }, 150);
   };
 
+  const handleMyPageClick= ()=>{
+    handleMyPageIconClicked();
+    setTimeout(() => {
+      navigate(`/userinfo/${userId}`);
+    }, 150);
+  };
   return (
     <div className="Wrapper" ref={myPageRef}>
+      <img 
+        className="dropdown-button"
+        src={process.env.PUBLIC_URL + (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")} 
+        alt="메뉴 아이콘" 
+        onClick={() => {
+          myPageHandler();
+          handleMenuIconClicked();
+        }}
+      />
       <div className="dropdown-container">
-        {/*header menu button 헤더상의 메뉴 버튼*/}
-        {/*0. menu button*/}
-        <div
-          className="dropdown-button"
-          onClick={() => {
-            myPageHandler();
-            handleIconClick(0);
-          }}
-        >
-          <img
-            src={
-              process.env.PUBLIC_URL +
-              (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")
-            }
-            alt="메뉴 아이콘"
-          />
-        </div>
-        {/*header menu open 오픈된 메뉴*/}
         <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
           <div className="menu-title">메뉴|Menu</div>
           <div className="menu-container">
@@ -98,8 +91,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(3);
+                handleMapIconClicked();
               }}
             >
               <img
@@ -115,8 +107,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(4);
+                handlePetitIconClicked();
               }}
             >
               <img
@@ -132,8 +123,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(5);
+                handleEventIconClicked();
               }}
             >
               <img
@@ -149,8 +139,7 @@ const DropdownMenu = () => {
             <div
               className="menu-button"
               onClick={() => {
-                menuTmp();
-                handleIconClick(6);
+                handleMyPageClick();
               }}
             >
               <img
@@ -164,11 +153,8 @@ const DropdownMenu = () => {
             </div>
           </div>
         </div>
-        {/* 삼각형 요소 */}
-        <div className="triangle-wrapper">
-          {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
-          {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
-        </div>
+        {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
+        {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
       </div>
     </div>
   );

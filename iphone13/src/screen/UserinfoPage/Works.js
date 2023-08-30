@@ -4,9 +4,10 @@ import Tab from "../Tab/Tab.js";
 import Thumbnails from "../SwiperScroll/SwiperThumbnails.js";
 import Profiles from "../SwiperScroll/SwiperProfiles.js";
 import Collections from "../SwiperScroll/SwiperCollections.js";
-import { getFollowers } from "../../API/FollowAPI.js";
+import { getFollowings, getFollowers } from "../../API/FollowAPI.js";
 import { useNavigate } from "react-router";
-import { getBookmarks } from "../../API/CollectionAPI.js";
+import { getCollections } from "../../API/CollectionAPI.js";
+import { getWebtoons } from "../../API/ToonAPI.js";
 
 const worksStyle = {
   position: "absolute",
@@ -22,30 +23,58 @@ const textStyle = {
   width: "159px",
 };
 
-const Works = ({ userinfo }) => {
-  const [follower, setFollower] = useState([]);
+const Works = ({ accessUserId, userinfo, onNumCartoons, onNumFollowers, onNumFollowings }) => {
+  const [cartoons, setCartoons] = useState([]);
   const [collectionInfo, setCollectionInfo] = useState([]);
+  const [followings, setFollowings] = useState([]);
+  const [followers, setFollowers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if(userinfo.id){
-      console.log(userinfo.id+"의 팔로우 목록");
-      getFollowers(
-        userinfo.id, 0, 20,
-        (data) => {
-          console.log("팔로우목록",data)
-          setFollower(data.followUsers);//[{followId: , user: }{followId: , user: }...]
+      console.log("유저페이지:",userinfo.id);
+      getWebtoons(
+        userinfo.id,
+        (data) =>{
+          console.log("웹툰 목록", data);
+          setCartoons(data.cartoons);
+          onNumCartoons(data.cartoons.length);
         },
-        (_) => {navigate("/");}
-      );
-      console.log(userinfo.id+"의 컬렉션 목록");
-      getBookmarks(
+        () =>{
+          console.log("웹툰 목록 불러오기 실패");
+        }
+      )
+      getCollections(
         userinfo.id,
         (data) =>{
           console.log("컬렉션목록",data);
           setCollectionInfo(data.collectionInfos);
         },
-        () =>{}
+        (_) => {
+          console.log("컬렉션 목록 불러오기 실패");
+        }
+      );
+      getFollowers(
+        userinfo.id, 0, 20,
+        (data) => {
+          console.log("팔로워목록",data)
+          setFollowers(data.users);
+          onNumFollowers(data.users.length);
+        },
+        (_) => {
+          console.log("팔로워 목록 불러오기 실패");
+        }
+      );
+      getFollowings(
+        userinfo.id, 0, 20,
+        (data) => {
+          console.log("팔로잉목록",data)
+          setFollowings(data.users);
+          onNumFollowings(data.users.length);
+        },
+        (_) => {
+          console.log("팔로잉 목록 불러오기 실패");
+        }
       );
     }
   }, [navigate, userinfo.id]);
@@ -54,11 +83,10 @@ const Works = ({ userinfo }) => {
     <div style={worksStyle}>
       <TabWrapper>
         <Tab
-          title={<div style={textStyle}><b>내 작품</b></div>}
+          title={<div style={textStyle}><b>작품</b></div>}
           content={
             <Thumbnails
-              //toons={[userinfo.works]}
-              toons={['f','f','f','f','f','f',]}
+              toons={cartoons}
               style={{
                 top: "40px",
                 height: "445px",
@@ -67,55 +95,38 @@ const Works = ({ userinfo }) => {
           }
         />
         <Tab
-          title={<div style={textStyle}><b>내 팔로우</b></div>}
-          content={
-            <Profiles
-              users={follower}
-              style={{
-                top: "40px",
-                height: "445px",
-              }}
-            />
-          }
-        />
-        <Tab
-          title={<div style={textStyle}><b>내 컬렉션</b></div>}
+          title={<div style={textStyle}><b>컬렉션</b></div>}
           content={
             <Collections
+              accessUserId={accessUserId}
+              userId = {userinfo.id}
               collections={
                 collectionInfo  
-                /* 테스트용
-                  [ {
-                    "id" : 1,
-                    "title" : "모음집",
-                    "closed" : false
-                  }, {
-                    "id" : 2,
-                    "title" : "모음집2",
-                    "closed" : false
-                  }, {
-                    "id" : 3,
-                    "title" : "title3",
-                    "closed" : true
-                  }, {
-                    "id" : 4,
-                    "title" : "title3",
-                    "closed" : false
-                  } , {
-                    "id" : 5,
-                    "title" : "title3",
-                    "closed" : false
-                  } , {
-                    "id" : 6,
-                    "title" : "title3",
-                    "closed" : true
-                  } , {
-                    "id" : 7,
-                    "title" : "title3",
-                    "closed" : false
-                  } ]
-                  */
               }
+              style={{
+                top: "40px",
+                height: "445px",
+              }}
+            />
+          }
+        />
+        <Tab
+          title={<div style={textStyle}><b>팔로워</b></div>}
+          content={
+            <Profiles
+              users={followers}
+              style={{
+                top: "40px",
+                height: "445px",
+              }}
+            />
+          }
+        />
+        <Tab
+          title={<div style={textStyle}><b>팔로잉</b></div>}
+          content={
+            <Profiles
+              users={followings}
               style={{
                 top: "40px",
                 height: "445px",

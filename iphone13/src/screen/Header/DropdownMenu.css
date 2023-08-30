@@ -6,33 +6,34 @@
   font-size: 19px;
   background: white;
   position: absolute;
-  width: 45px;
-  height: 45px;
-  left: 320px;
-  top: 47px;
   font-weight: bold;
+}
+
+.dropdown-button {
+  position: absolute;
+  cursor: pointer;
+  z-index: 9;
+  left: 125px;
+  top: 48px;
 }
 
 .dropdown-container {
   position: absolute;
   text-align: center;
   z-index: 9;
-}
-
-.dropdown-button {
-  cursor: pointer;
-  z-index: 9;
+  left: 250px;
+  top: 48px;
 }
 
 .menu {
   background: white;
   position: absolute;
   top: 68px;
-  left: 50%;
-  width: 373px;
-  height: 458px;
+  left: 80%;
+  width: 273px;
+  height: 630px;
   text-align: center;
-  border-radius: 32px;
+  border-radius: 10px;
   outline: 2px solid #DA5E9D;
   opacity: 0;
   visibility: hidden;
@@ -45,52 +46,6 @@
   opacity: 1;
   visibility: visible;
   left: 50%;
-}
-
-/* triangle animation */
-.triangle-wrapper {
-  position: relative;
-  width: 0;
-  height: 0;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-}
-
-.triangle-outer {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid #DA5E9D;
-  position: absolute;
-  top: -20px;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 8;
-}
-
-.triangle-outer.fade-in {
-  visibility: visible;
-  opacity: 1;
-}
-
-.triangle-inner {
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 35px solid white;
-  position: absolute;
-  top: -13px;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 9;
-}
-
-.triangle-inner.fade-in {
-  visibility: visible;
-  opacity: 1;
 }
 
 .menu-title {
@@ -144,4 +99,50 @@
   align-items: center;
   justify-content: center;
   vertical-align: text-bottom;
+}
+
+/* triangle animation */
+.triangle-wrapper {
+  position: relative;
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.triangle-outer {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #DA5E9D;
+  position: absolute;
+  top: -20px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 8;
+}
+
+.triangle-outer.fade-in {
+  visibility: visible;
+  opacity: 1;
+}
+
+.triangle-inner {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 35px solid white;
+  position: absolute;
+  top: -13px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9;
+}
+
+.triangle-inner.fade-in {
+  visibility: visible;
+  opacity: 1;
 }

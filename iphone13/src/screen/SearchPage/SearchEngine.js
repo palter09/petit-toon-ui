@@ -1,11 +1,13 @@
 import React, { useState, useCallback } from "react";
 import "./SearchPage.css";
 import "./SearchEngine.css";
-import useIconClick from "./useIconClick";
+import useIconClick from '../../hooks/useIconClick';
 import { useNavigate } from "react-router-dom";
 
 const SearchEngine = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [ searchButtonIconClicked, handleSearchIconClick ] = useIconClick();
+
   const navigate = useNavigate();
 
   /*
@@ -26,11 +28,9 @@ const SearchEngine = () => {
   버튼 아이콘 클릭시 아이콘 변경 + handleSearch 호출
   */
   const handleSearchButtonIconClick = () => {
-    handleIconClick(1);
+    handleSearchIconClick();
     handleSearch();
   };
-  //icon 클릭시 변경
-  const { searchButtonIconClicked, handleIconClick } = useIconClick();
 
   //KeyDown에서 Enter시에도 검색가능하도록
   const handleKeyDown = (event) => {

@@ -54,3 +54,12 @@
   height: 100%;
   object-fit: cover;
 }
+
+.swiperThumbnails_regNewButton{
+  background: white;
+  width: 390px;
+  border: 1px solid #DA5E9D;
+  border-radius: 0.3rem;
+  color: #DA5E9D;
+  font-weight: bold;
+}

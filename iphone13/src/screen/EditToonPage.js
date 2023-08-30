@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import styles from "./EdittoonPage/styles/EdittoonPage.module.css";
-import Info from "./EdittoonPage/Info";
-import Description from "./EdittoonPage/Description";
-import SwiperRegToon from "./EdittoonPage/SwiperRegToon";
-import FooterButton from "./EdittoonPage/FooterButton";
+import styles from "./EditToonPage/styles/EdittoonPage.module.css";
+import Info from "./EditToonPage/Info";
+import Description from "./EditToonPage/Description";
+import SwiperRegToon from "./EditToonPage/SwiperRegToon";
+import FooterButton from "./EditToonPage/FooterButton";
 import { useParams } from "react-router";
 
 /*deleteWebtoon은 FooterButton에서 수행*/
@@ -24,7 +24,7 @@ const EditToonPage = () => {
           <p>웹툰 수정/삭제 페이지</p>
         </div>
         <div className={styles.info_wrapper}>
-          <Info />
+          <Info toonId={toonId}/>
         </div>
         <div className={styles.description_wrapper}>
           <Description handleDescription={handleDescription} />

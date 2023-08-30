@@ -78,6 +78,25 @@ export async function getWebtoonInfo(toonId, callback, fallback) {
 }
 
 /*
+get User's Webtoon List
+*/
+export async function getWebtoons(userId, callback, fallback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/toon/user/${userId}`;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${getCookie("accessToken")}`,
+  });
+
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
+
+  fetchAPIAndExecute(url, options, callback, fallback);
+}
+
+
+/*
 increase ViewCount
 */
 export async function increaseViewCount(toonId, callback, fallback) {

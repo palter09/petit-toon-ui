@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
 import styles from './styles/ImgUpload.module.css';
 
-const ImgUpload= ({ style, imgFile, setImgFile, imgSize, inputId, inputName, isDisabled }) => {
+const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName, isDisabled }) => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const imgRef = useRef();//input file에서 img 참조
   
   //input File에서 imgRef받아서 url읽고 setImg + 미리보기 세팅
-  const handleImageUpload = (e) => {
+  const handleImageUpload = () => {
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -29,9 +29,9 @@ const ImgUpload= ({ style, imgFile, setImgFile, imgSize, inputId, inputName, isD
   };
   
   return (
-    <div className={styles.ImagesUpload_file_wrapper} style = {style}>
+    <div className={styles.ImagesUpload_file_wrapper}>
       {previewVisible ? (
-        <img style = {{border: 'transparent'}}
+        <img
           src={imgFile}
           alt="클릭후 파일 선택"
           onClick={handlePreviewClick}
