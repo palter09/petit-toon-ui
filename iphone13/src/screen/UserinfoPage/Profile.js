@@ -3,7 +3,7 @@ import { defaultProfileImage, uploadProfileImage } from "../../API/ProfileAPI";
 import styles from './Profile.module.css'; 
 import Modal from '../Modal/Modal.js';
 import ModalPortal from '../Modal/Portal.js';
-import ImgUpload from '../RegtoonPage/ImgUpload';
+import ImgUpload from '../RegToonPage/ImgUpload';
 
 const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, numFollowings, numFollowers, handleFollower, handleProfileImage, reload}) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
