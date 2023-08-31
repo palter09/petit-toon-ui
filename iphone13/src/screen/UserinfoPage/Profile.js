@@ -4,11 +4,13 @@ import styles from './Profile.module.css';
 import Modal from '../Modal/Modal.js';
 import ModalPortal from '../Modal/Portal.js';
 import ImgUpload from '../RegToonPage/ImgUpload';
+import { useNavigate } from 'react-router';
 
 const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, numFollowings, numFollowers, handleFollower, handleProfileImage, reload}) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalStatusMessage, setModalStatusMessage] = useState("");
 	const [inputCounter, setInputCounter] = useState(0);
+	const navigate = useNavigate();
 
 	const handleStatusMessage = (message) =>{setModalStatusMessage(message);}
 
@@ -84,11 +86,13 @@ const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, 
                 <p style={{margin:0}}>작품</p>
                 <p style={{margin:0}}><b>{numCartoons || 0}</b></p>
               </div>
-							<div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}>
-                <p style={{margin:0}}>팔로워</p>
+							<div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}
+										onClick={()=>{navigate(`/userinfo/follow/${userinfo.id}/0`)}}>
+										<p style={{margin:0}}>팔로워</p>
                 <p style={{margin:0}}><b>{numFollowers|| 0}</b></p>
               </div>
-              <div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}>
+              <div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}
+										onClick={()=>{navigate(`/userinfo/follow/${userinfo.id}/1`)}}>
                 <p style={{margin:0}}>팔로잉</p>
                 <p style={{margin:0}}><b>{numFollowings || 0}</b></p>
               </div>

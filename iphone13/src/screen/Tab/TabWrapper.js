@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Tabs.css'
 
-const TabWrapper = ({ children }) => {
-  const [activeTab, setActiveTab] = useState(0);
+const TabWrapper = ({ children, initialTab= 0}) => {
+  const [activeTab, setActiveTab] = useState(initialTab || 0);
+
+  useEffect(() => {
+    if (initialTab !== undefined) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
 
   const handleTabClick = (index) => {
     setActiveTab(index);
