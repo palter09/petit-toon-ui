@@ -19,9 +19,9 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     loginUser(username, password, (json) => {   // 로그인 성공
-        setCookie('loginUserId', json.userId, 30*60);
         setCookie('accessToken', json.accessToken, 30*60);
         setCookie('refreshToken', json.refreshToken, 7*24*60*60);
+        setCookie('loginUserId', json.userId, 7*24*60*60);
         navigate('/search');
     },
     (response) => {

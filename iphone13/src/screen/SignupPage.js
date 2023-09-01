@@ -10,6 +10,10 @@ import { signupUser } from '../API/UserAPI.js';
 import './SignupPage/SignupPage.css'
 import './SignupPage/Modeless.css'
 
+import Modal from './Modal/Modal.js';
+import ModalPortal from './Modal/Portal.js';
+
+
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -22,6 +26,8 @@ const SignupPage = () => {
   const [passwordModeless, passwordRef, togglePasswordModeless] = useDetectClose(false);
   const [tagModeless, tagRef, toggleTagModeless] = useDetectClose(false);
   const [nicknameModeless, nicknameRef, toggleNicknameModeless] = useDetectClose(false);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -89,12 +95,17 @@ const SignupPage = () => {
       return;
     }
 
-    signupUser("테스트", nickname, tag, email, password, ()=>{navigate('/')});
+    signupUser("테스트", nickname, tag, email, password, ()=>{navigate('/')}, );
   };
 
 
   return (
     <div className="container">
+      <ModalPortal>
+          <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false);}}>
+              <p>회원가입 중 오류가 발생했습니다.</p>
+          </Modal>
+      </ModalPortal>
       <div className="logo">
         <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
       </div>
