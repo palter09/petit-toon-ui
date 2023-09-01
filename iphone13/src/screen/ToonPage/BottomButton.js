@@ -4,6 +4,7 @@ import useIconClick from '../../hooks/useIconClick';
 import { likeWebtoon, dislikeWebtoon } from '../../API/LikeAPI';
 import { followUser, deleteFollower } from '../../API/FollowAPI';
 import { getBookmarks } from '../../API/BookmarkAPI';
+import { createCollection } from '../../API/CollectionAPI';
 import "./ChatStyles.css";
 import "./CollectionStyles.css";
 import { useNavigate } from 'react-router-dom';
@@ -118,6 +119,7 @@ const Comment = ({toonId, isError}) => {
               <div className='comment-menu-bottom-wrapper'>
                 {/* 댓글 입력 폼 */}
                 <input
+                  className='comment-menu-input-style'
                   type="text"
                   placeholder="댓글을 입력하세요."
                   value={commentText}
@@ -172,6 +174,10 @@ const Collection = ({toonId, isError}) => {
   const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
   const [bookmark, setBookmark] = useState(false);
   const [collections, setCollections] = useState([]);
+  const [collectionName, setCollectionName] = useState('');
+  const selectList = ["공개", "비공개"];
+  const [selected, setSelected] = useState(false)
+  const [selectPublic, setSelectPublic] = useState(null);
   const [isCreatingCollection, setIsCreatingCollection] = useState(false);
 
   const handleCollectionClick = () => {
@@ -179,7 +185,20 @@ const Collection = ({toonId, isError}) => {
     getBookmarks(123);
   }
 
-  const handleCollectionCreateClick = () => {
+  const handleSelect = (e) => {
+    setSelected(e.target.value);
+  };
+
+  const handleCollectionCreateClick = (collectionName, selected) => {
+    createCollection(collectionName, selected, 
+      (data) => {
+        console.log("컬렉션 생성", data);
+        setIsCreatingCollection(data.isCreatingCollection);
+      },
+        (_) => {
+          console.log("컬렉션 생성 실패");
+        }
+      )
   }
 
   const {
@@ -225,9 +244,21 @@ const Collection = ({toonId, isError}) => {
               <div className='collection-create-container'>
                 <input
                   type='text'
-                  placeholder='Enter collection name'
+                  placeholder='컬렉션 이름을 입력하세요'
                   className='collection-name-input'
+                  value={collectionName}
+                  onChange={(e) => setCollectionName(e.target.value)}
                 />
+                <select 
+                  className='collection-set-public'
+                  value = {selected}
+                  onChange={handleSelect}>
+                  {selectList.map((item) => (
+                    <option value={item} key={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
                 <button
                   className='collection-create-button'
                   onClick={handleCollectionCreateClick}>
