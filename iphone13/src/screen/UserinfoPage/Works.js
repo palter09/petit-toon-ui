@@ -51,30 +51,6 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, followings, foll
             />
           }
         />
-        <Tab
-          title={<div style={textStyle}><b>팔로워</b></div>}
-          content={
-            <Profiles
-              users={followers}
-              style={{
-                top: "40px",
-                height: "445px",
-              }}
-            />
-          }
-        />
-        <Tab
-          title={<div style={textStyle}><b>팔로잉</b></div>}
-          content={
-            <Profiles
-              users={followings}
-              style={{
-                top: "40px",
-                height: "445px",
-              }}
-            />
-          }
-        />
       </TabWrapper>
     </div>
   );

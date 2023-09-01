@@ -2,18 +2,6 @@ import React from "react";
 import "./SwiperProfiles.css";
 import { useNavigate } from "react-router";
 
-/* users =  [ {
-    "id" : 1,
-    "nickname" : "zl존",
-    "tag" : "@Hotoran",
-    "profileImagePath" : "sample-profile-image-url"
-  }, {
-    "id" : 2,
-    "nickname" : "DrangeWoo",
-    "tag" : "@timel2ss",
-    "profileImagePath" : "sample-profile-image-url"
-  } ]
-}]*/
 const SwiperProfiles = ({ users, style }) => {
   const navigate = useNavigate();
   const handleImageClick = (id) => {

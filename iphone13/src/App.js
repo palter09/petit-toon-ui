@@ -12,6 +12,7 @@ import EditToonPage from './screen/EditToonPage';
 import SignupPage from './screen/SignupPage';
 import CollectionPage from './screen/CollectionPage';
 import RankingPage from './screen/RankingPage';
+import FollowPage from './screen/FollowPage';
 
 import './App.css';
 
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/toon" element={<ToonPage />} />
         <Route path="/toon/:id" element={<ToonPage />} />
         <Route path="/userinfo/:id" element={<UserinfoPage />} />
+        <Route path="/userinfo/follow/:id/:er" element={<FollowPage />} />
         <Route path="/search/" element={<SearchPage />}/>
         <Route path="/search/:searchQuery" element={<SearchPage />}/>
         <Route path="/store/" element={<StorePage />}/>
