@@ -43,13 +43,14 @@ const LoginPage = () => {
                 <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
             </div>
             <div className="login-form">
-                <div className="input-container">
-                <input
-                    type="text"
-                    placeholder="아이디"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+                <div className="id-container">
+                    <input
+                        type="text"
+                        placeholder="아이디"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
                 <div className="password-container">
                     <input
                         type={showPassword ? 'text' : 'password'}
@@ -64,7 +65,6 @@ const LoginPage = () => {
                     >
                         {showPassword ? <BiHide color="#999999"/> : <BiShow color="#999999"/>}
                     </span>
-                </div>
                 </div>
                 <button className="login-button" onClick={handleLogin}>로그인</button>
             </div>

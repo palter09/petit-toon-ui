@@ -101,15 +101,15 @@ const SignupPage = () => {
 
   return (
     <div className="container">
-      <ModalPortal>
-          <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false);}}>
-              <p>회원가입 중 오류가 발생했습니다.</p>
-          </Modal>
-      </ModalPortal>
-      <div className="logo">
-        <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
-      </div>
-      <div className='signup-container'>
+      <div className="signup-container">
+        <ModalPortal>
+            <Modal isOpen={isModalOpen} onClose={() => {setIsModalOpen(false);}}>
+                <p>회원가입 중 오류가 발생했습니다.</p>
+            </Modal>
+        </ModalPortal>
+        <div className="logo">
+          <img src={process.env.PUBLIC_URL + '/images/logo.png'} alt="Logo" />
+        </div>
         <h2>회원가입</h2>
         <form onSubmit={handleSubmit} autoComplete="off">
           <div className="form-group">
@@ -131,27 +131,28 @@ const SignupPage = () => {
               </div> }
           </div>
 
-
           <div className="form-group">
             <label htmlFor="password">비밀번호</label>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              value={password}
-              ref={passwordRef}
+            <div className="password-container">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                value={password}
+                ref={passwordRef}
 
-              onChange={(e) => setPassword(e.target.value)}
-              onFocus={() => { isPasswordValid || togglePasswordModeless(); }}
-              onBlur={() => { passwordModeless && togglePasswordModeless(); }}
-              required
-            />
-            <span
-                className="password-toggle"
-                style={{right: "67px", top: "437px"}}
-                onClick={() => setShowPassword(!showPassword)}
-            >
-                {showPassword ? <BiHide color="#999999"/> : <BiShow color="#999999"/>}
-            </span>
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => { isPasswordValid || togglePasswordModeless(); }}
+                onBlur={() => { passwordModeless && togglePasswordModeless(); }}
+                required
+              />
+              <span
+                  className="password-toggle"
+                  style={{right: "10px"}}
+                  onClick={() => setShowPassword(!showPassword)}
+              >
+                  {showPassword ? <BiHide color="#999999"/> : <BiShow color="#999999"/>}
+              </span>
+            </div>
             { (passwordModeless && !isPasswordValid && password.length > 0) && 
               <div className='modeless'>
                 {passwordValidation[0] || <p style={{color: "red"}}><ImCross/>&nbsp;&nbsp;비밀번호는 8자 이상, 20자 이하여야 합니다.</p>}

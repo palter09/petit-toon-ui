@@ -59,7 +59,7 @@ const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, 
 	};
 		
 	return (
-	<table className={styles.profileContainer}>
+		<table className={styles.profileContainer}>
 			<tbody><tr>
 				{/*프로필 이미지*/}
 				<td align= "center">

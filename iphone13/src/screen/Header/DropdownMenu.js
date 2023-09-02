@@ -46,7 +46,7 @@ const DropdownMenu = () => {
     }, 150);
   };
   return (
-    <div className="Wrapper" ref={myPageRef}>
+    <div className="dropdown-wrapper" ref={myPageRef}>
       <img 
         className="dropdown-button"
         src={process.env.PUBLIC_URL + (menuIconClicked ? "/images/menu_icon_clicked.png" : "/images/menu_icon.png")} 
@@ -160,8 +160,6 @@ const DropdownMenu = () => {
             </div>
           </div>
         </div>
-        {myPageIsOpen && <div className={`triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
-        {myPageIsOpen && <div className={`triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
       </div>
     </div>
   );
