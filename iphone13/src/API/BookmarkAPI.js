@@ -36,8 +36,13 @@ export async function deleteBookmark(bookmarkId, callback, fallback) {
 
 
 /* 북마크 리스트 조회 */
-export async function getBookmarks(collectionId, callback, fallback) {
-  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/${collectionId}?page=0&size=5`;
+export async function getBookmarks(collectionId, page, size, callback, fallback) {
+  const queryParams = new URLSearchParams({
+    page: page,
+    size: size
+  });
+
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/${collectionId}?${queryParams}`;
 
   const headers = new Headers({
     Authorization: `Bearer ${getCookie("accessToken")}`

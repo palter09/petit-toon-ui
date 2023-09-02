@@ -14,6 +14,8 @@ const ToonPage = () => {
   const [followers, setFollowers] = useState([]);
   const [followings, setFollowings] = useState([]);
   const [userInfoName, setUserInfoName] = useState("");
+  const [pageFollowerAPI, setPageFollowerAPI] = useState(0);
+  const [pageFollowingAPI, setPageFollowingAPI] = useState(0);
   const navigate=useNavigate();
   
   const textStyle = {
@@ -23,9 +25,20 @@ const ToonPage = () => {
 
   useEffect(()=>{
       getUserInfo(userInfoId,(data)=>{setUserInfoName(data.nickname);},()=>{console.log("user닉네임 불러오기 실패");})
-      getFollowers(userInfoId,0,20,(data)=>{setFollowers(data.users);},()=>{console.log("followers불러오기 실패");})
-      getFollowings(userInfoId,0,20,(data)=>{setFollowings(data.users);},()=>{console.log("followings불러오기 실패");})
-  },[userInfoId])
+      getFollowers(userInfoId,pageFollowerAPI,20,(data)=>{setFollowers(data.users);},()=>{console.log("followers불러오기 실패");})
+      getFollowings(userInfoId,pageFollowingAPI,20,(data)=>{setFollowings(data.users);},()=>{console.log("followings불러오기 실패");})
+  },[pageFollowerAPI, pageFollowingAPI, userInfoId])
+
+  const handleFollowerIntersect = () => {
+    // 교차 감지 시 다음 페이지의 데이터를 가져옵니다.
+    setPageFollowerAPI(prevCurrentPage=>prevCurrentPage+1);
+    console.log("감지:get follower api 재호출");
+  };
+  const handleFollowingIntersect = () => {
+    // 교차 감지 시 다음 페이지의 데이터를 가져옵니다.
+    setPageFollowingAPI(prevCurrentPage=>prevCurrentPage+1);
+    console.log("감지:get following api 재호출");
+  };
 
   return (
     <div className="container">
@@ -45,6 +58,7 @@ const ToonPage = () => {
               content={
                 <Profiles
                   users={followers}
+                  handleFollowerIntersect={handleFollowerIntersect}
                   style={{
                     top: "80px",
                     height: "80%",
@@ -57,6 +71,7 @@ const ToonPage = () => {
               content={
                 <Profiles
                   users={followings}
+                  handleFollowingIntersect={handleFollowingIntersect}
                   style={{
                     top: "80px",
                     height: "80%",

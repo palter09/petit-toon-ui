@@ -43,8 +43,13 @@ export async function deleteCollection(collectionId, callback, fallback) {
 
 
 /* 컬렉션 리스트 조회 */
-export async function getCollections(userId, callback, fallback) {
-  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/author/${userId}?page=0&size=30`;
+export async function getCollections(userId, page, size, callback, fallback) {
+  const queryParams = new URLSearchParams({
+    page: page,
+    size: size
+  });
+
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/collection/author/${userId}?${queryParams}`;
 
   const headers = new Headers({
     Authorization: `Bearer ${getCookie("accessToken")}`

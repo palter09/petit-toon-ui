@@ -171,6 +171,7 @@
 }
 
 .collections_info{
+  height: 13%;
   font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
