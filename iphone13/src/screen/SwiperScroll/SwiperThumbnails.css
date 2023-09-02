@@ -16,6 +16,8 @@
   /*스크롤 기능은 썸네일 컨테이너 전체 영역*/
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 ::-webkit-scrollbar { 
   display: none;

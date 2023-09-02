@@ -18,6 +18,7 @@ const UserinfoPage = () => {
   const [numCartoons, setNumCartoons] = useState(0);
   const [numFollowers, setNumFollowers] = useState(0);
   const [numFollowings, setNumFollowings] = useState(0);
+  const [pageCollectionAPI, setPageCollectionAPI] = useState(0);
 
   const userid = useParams().id;
   const [accessUserId, setAccessUserId] = useState(parseInt(getCookie("loginUserId")));
@@ -43,7 +44,15 @@ const UserinfoPage = () => {
 
   const loadInfo = () => {getUserInfo(userid, setUserinfo, handleUndefinedUser);}
   const loadToons = () => {getWebtoons(userid, (data) =>{ setCartoons(data.cartoons); }, (_) =>{ console.error("웹툰 목록 불러오기 실패"); })}
-  const loadCollections = () => {getCollections(userid, (data) =>{ setCollectionInfo(data.collectionInfos); }, (_) => { console.error("컬렉션 목록 불러오기 실패"); });}
+  const loadCollections = () => {
+    getCollections(userid, pageCollectionAPI, 9,
+      (data) =>{
+        if(data.collectionInfos.length !== 0){//더이상 받아올 정보가 없으면 변화x
+        setCollectionInfo((prevData)=>prevData.concat(data.collectionInfos));
+      }}, //이전 컬렉션 정보 배열이랑 합침
+      (_) => { console.error("컬렉션 목록 불러오기 실패"); }
+    );
+  }
   const loadFollowings = () => {getFollowings(userid, 0, 20, (data) => { setFollowings(data.users);}, (_) => { console.error("팔로잉 목록 불러오기 실패"); });}
   const loadFollowers = () => {getFollowers(userid, 0, 20, 
     (data) => { setFollowers(data.users); }, 
@@ -58,13 +67,23 @@ const UserinfoPage = () => {
       loadFollowings();
       loadFollowers();
     }
-  }, [userid]);
+  }, [userid, pageCollectionAPI]);
 
 
   useEffect(()=> {
     setIsFollow(userinfo.follow);
   }, [userinfo]);
 
+  //컬렉션 재호출 감지용
+  const handleIntersect = () =>{setPageCollectionAPI(prevPage => prevPage + 1); console.log("감지:컬렉션api 재호출");}
+  // 컬렉션 추가 시 호출되는 함수
+  const updateCollections = (collectionId, title, closed) => {
+    const updatedCollections = [
+      ...collections,
+      { id: collectionId, title: title, closed: closed },
+    ];
+    setCollectionInfo(updatedCollections);
+  };
 
   //팔로우 버튼 누를시
 	const handleFollower = () =>{
@@ -123,6 +142,8 @@ const UserinfoPage = () => {
               userinfo={userinfo} 
               cartoons={cartoons}
               collections={collections}
+              handleIntersect={handleIntersect}
+              updateCollections={updateCollections}
               followings={followings}
               followers={followers}
             />

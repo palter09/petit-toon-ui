@@ -19,7 +19,7 @@ const textStyle = {
   width: "159px",
 };
 
-const Works = ({ accessUserId, userinfo, cartoons, collections, followings, followers }) => {
+const Works = ({ accessUserId, userinfo, cartoons, collections, handleIntersect, updateCollections }) => {
   return (
     <div style={worksStyle}>
       <TabWrapper>
@@ -44,6 +44,8 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, followings, foll
               collections={
                 collections
               }
+              handleIntersect={handleIntersect}
+              updateCollections={updateCollections}
               style={{
                 top: "40px",
                 height: "445px",
