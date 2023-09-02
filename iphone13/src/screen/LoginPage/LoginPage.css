@@ -1,9 +1,9 @@
 .login-container {
 	display: flex;
+	width: 100%;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
 }
 
 .logo {
@@ -14,6 +14,7 @@
 
 .login-form {
 	display: flex;
+	width: 50%;
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
@@ -21,6 +22,7 @@
 }
 
 input {
+	width: 100%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -28,6 +30,7 @@ input {
 
 .links {
 	font-size: 14px;
+	text-align: center;
 }
 
 .links a {
@@ -40,7 +43,7 @@ input {
 }
 
 .login-button {
-	width: 187px;
+	width: 100%;
 	padding: 8px 16px;
 	background-color: #DA5E9D;
 	color: white;
@@ -49,8 +52,16 @@ input {
 	cursor: pointer;
 }
 
+.id-container {
+	position: relative;
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
 .password-container {
 	position: relative;
+	width: 100%;
 	display: flex;
 	align-items: center;
 }

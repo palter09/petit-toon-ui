@@ -153,9 +153,11 @@ const SwiperCollections = ({ accessUserId, userId, collections, handleIntersect,
       ) : null}
       {/*본문 */}
       <div className={styles.newCollection}>
-        {isLookSelfPage && (
-          <button onClick={handleNewCollectionOn}>+ 새 컬렉션</button>
-        )}
+        {isLookSelfPage && 
+          <button onClick={handleNewCollectionOn}>
+            + 새 컬렉션
+          </button>
+        }
       </div>
       <div className={styles.scrollbar}>
         <div className={styles.collections_row}>

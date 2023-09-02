@@ -1,5 +1,5 @@
 .signup-container {
-  width: 270px;
+  width: 70%;
   display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -31,7 +31,7 @@
   border-color: #007bff;
   border-radius: 5px;
   cursor: pointer;
-  margin-right: 5px;
+  margin-right: 3%;
 }
 
 .cancel-button {
@@ -42,7 +42,7 @@
   border-color: gray;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 3%;
 }
 
 .button-container {

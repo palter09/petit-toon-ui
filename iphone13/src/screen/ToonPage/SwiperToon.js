@@ -12,7 +12,7 @@ export default function SwiperToon({ toonId, onIsError }) {
   const [is404, setIs404] = useState(false);
   const toonStyle = {
     position: "absolute",
-    width: "390px",
+    width: "100%",
     height: "636px",
     left: "0px",
     top: "113px",

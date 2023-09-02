@@ -1,10 +1,11 @@
 .ThumbnailsContainer{
   position: absolute;
+  justify-content: center;
   /*썸네일 들어갈 영역 크기 지정*/
   top: 285px;
   left: 0px;
-  width: 390px;
-  height: 570px;
+  width: 100%;
+  height: 100%;
   
   background:whitesmoke;
   outline: 2px solid transparent;
@@ -59,7 +60,10 @@
 
 .swiperThumbnails_regNewButton{
   background: white;
-  width: 390px;
+  width: 90%;
+  height:30px;
+  margin: 5px;
+  margin-left: 5%;
   border: 1px solid #DA5E9D;
   border-radius: 0.3rem;
   color: #DA5E9D;
