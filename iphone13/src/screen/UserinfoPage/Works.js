@@ -8,7 +8,7 @@ import Collections from "../SwiperScroll/SwiperCollections.js";
 const worksStyle = {
   position: "absolute",
   backgroundColor: "#FFEDFE",
-  width: "390px",
+  width: "100%",
   height: "578px",
   top: "266px",
   left: "0px",
@@ -16,10 +16,9 @@ const worksStyle = {
 
 const textStyle = {
   color: "#DA5E9D",
-  width: "159px",
 };
 
-const Works = ({ accessUserId, userinfo, cartoons, collections, followings, followers }) => {
+const Works = ({ accessUserId, userinfo, cartoons, collections, handleIntersect, updateCollections }) => {
   return (
     <div style={worksStyle}>
       <TabWrapper>
@@ -30,7 +29,7 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, followings, foll
               toons={cartoons}
               style={{
                 top: "40px",
-                height: "445px",
+                height: "100%",
               }}
             />
           }
@@ -44,9 +43,11 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, followings, foll
               collections={
                 collections
               }
+              handleIntersect={handleIntersect}
+              updateCollections={updateCollections}
               style={{
                 top: "40px",
-                height: "445px",
+                height: "100%",
               }}
             />
           }

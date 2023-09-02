@@ -1,10 +1,10 @@
-.Wrapper{
+.dropdown-wrapper{
+  right: 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 19px;
-  background: white;
   position: absolute;
   font-weight: bold;
 }
@@ -13,7 +13,7 @@
   position: absolute;
   cursor: pointer;
   z-index: 9;
-  left: 125px;
+  right: 15px;
   top: 48px;
 }
 
@@ -21,7 +21,7 @@
   position: absolute;
   text-align: center;
   z-index: 9;
-  left: 250px;
+  right: -55px;
   top: 48px;
 }
 
@@ -29,9 +29,7 @@
   background: white;
   position: absolute;
   top: 68px;
-  left: 80%;
   width: 273px;
-  height: 630px;
   text-align: center;
   border-radius: 10px;
   outline: 2px solid #DA5E9D;

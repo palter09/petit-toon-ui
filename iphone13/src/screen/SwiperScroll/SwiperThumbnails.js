@@ -2,21 +2,47 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom'; 
 import './SwiperThumbnails.css';
 import { getCookie } from '../../API/HandleTokens';
+import useIntersectionObserver from '../../hooks/useIntersectionOberserver';
 
-const SwiperThumbnails = ({  toons, style, boxStyle }) => {
+const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
   const [path, setPath] = useState('');
+  const [observeTarget, setObserveTarget] = useState(false); // observe 상태 설정
   const navigate = useNavigate();
   const location = useLocation();
   const accessUserId = getCookie("loginUserId");
+
+  const options = {
+    threshold : 0.3,//targetRef가 30% 차지하면
+    root: document.querySelector('.thumbnails_scrollbar')//viewport를 .thumbnails_scrollbar로 설정
+  }
+  const { targetRef, observerRef } = useIntersectionObserver(
+    options,
+    ()=>{
+      if(observeTarget){
+        handleIntersect();
+        observerRef.current.unobserve(targetRef.current);
+        setObserveTarget(false);
+      }
+    },
+  );
+
+
   // URL에서 /userinfo/ 다음에 나오는 숫자를 추출
-  const userIdFromUrl = location.pathname.match(/\/userinfo\/(\d+)/i);
+  const userIdFromUrl = path.match(/\/userinfo\/(\d+)/i);
   // userinfo 유저 정보가 로그인한 유저의 정보인가
   const isSameUser = userIdFromUrl && (parseInt(userIdFromUrl[1]) === parseInt(accessUserId));
+  //reloading이 필요없는 page
+  const needNotReloading = path.startsWith('/userinfo/') || path.match(/^\/userinfo\/\d+$/);
 
   useEffect(() => {
-    console.log("swipertoon위치:",location.pathname);
     setPath(location.pathname);
-  }, [ location ]);
+    console.log(toons);
+    // 데이터가 로딩되고 toons 배열의 길이가 9의 배수이면 observe
+    if (toons.length !== 0 && toons.length % 9 === 0) {
+      setObserveTarget(true);
+    }
+  }, [location, toons]);
+
 
   const handleImageClick = (toonId) => {
     if(isSameUser){
@@ -41,7 +67,7 @@ const SwiperThumbnails = ({  toons, style, boxStyle }) => {
       <div className='thumbnails_scrollbar'>
         <div className='thumbnails_row'>
           {toons.map((toon) => (
-            <div className='thumbnails_box' key={toon.id} style={boxStyle}>
+            <div className='thumbnails_box' key={toon.id} >
               <img
                 src={ `${process.env.REACT_APP_SERVER_IP}/resources/${toon.thumbnailUrl}`}
                 alt={toon.title}
@@ -49,6 +75,11 @@ const SwiperThumbnails = ({  toons, style, boxStyle }) => {
               />
             </div>
           ))}
+          {needNotReloading || !observeTarget  ? null : (
+            <div className='thumbnails_box' ref={targetRef}>
+              loading...
+            </div>
+          )}
         </div>
       </div>
     </div>

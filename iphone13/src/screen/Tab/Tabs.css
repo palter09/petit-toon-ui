@@ -9,7 +9,6 @@
     justify-content: center;
     cursor: pointer;
     border-radius: 4px 4px 0 0;
-    width:25%;
 }
 .tab-container{
     display: flex;

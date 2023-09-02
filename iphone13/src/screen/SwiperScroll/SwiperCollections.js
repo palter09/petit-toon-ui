@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SwiperCollections.module.css";
-import { createCollection, getCollections } from "../../API/CollectionAPI";
+import { createCollection } from "../../API/CollectionAPI";
+import { getBookmarks } from "../../API/BookmarkAPI";
+import useIntersectionObserver from '../../hooks/useIntersectionOberserver';
 
-const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
+const SwiperCollections = ({ accessUserId, userId, collections, handleIntersect, updateCollections, style }) => {
   const navigate = useNavigate();
-  const [collectionsLocal, setCollectionsLocal] = useState(collections); //인자로 받는 collections 업데이트 해서 재렌더링 용도
+  const [observeTarget, setObserveTarget] = useState(false); // observe 상태 설정
   const [newCollectionOn, setNewCollectionOn] = useState(false);
   const [title, setTitle] = useState("");
   const selectList = ["공개", "비공개"];
@@ -13,27 +15,61 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
   const [list, setList] = useState([]);
   const isLookSelfPage = accessUserId === userId;//본인이 자기 페이지 보는가
   
-  //처음 렌더링 시에 collections 배열에 있는 collection 마다의 bookmarks를 짝짓기해서 list에 저장
+  
+  //처음 렌더링 시에 collections 배열에 있는 collection 마다의 bookmarks를 collection번호에 맞게 짝짓기해서 list에 저장
   useEffect(() => {
-    console.log("swiperCollection:", collectionsLocal);
+    console.log("swiperCollection:", collections);
     const updatedList = [];
-    if (Array.isArray(collectionsLocal)) {
-      for (const collection of collectionsLocal) {
-        getCollections(
-          collection.id,
-          (resultData) => {
-            updatedList.push({
-              collectionId: collection.id,
-              toons: resultData.bookmarkInfos,
-            });
-          },
-          () => {}
-        );
-        setList(updatedList);
+    let count = 0;
+    if (Array.isArray(collections)) {
+      for (const collection of collections) {
+        if(!isLookSelfPage && collection.closed){
+          continue;
+        }else{
+          getBookmarks(
+            collection.id,
+            0,//어차피 미리보기용이라 0페이지만 받아도 됨
+            4,
+            (resultData) => {
+              updatedList.push({
+                collectionId: collection.id,
+                toons: resultData.bookmarkInfos,
+              });
+            },
+            () => {}
+          );
+          count = count + 1;
+        }
       }
+      setList(updatedList);
     }
-    console.log("swipercollection list: ", updatedList);
-  }, [collectionsLocal, collections]);
+    if(count !== 0 && count % 9 === 0){
+      setObserveTarget(true);
+    }
+  }, [collections, isLookSelfPage]);
+
+  //collection 클릭시 collectionPage로 이동
+  const handlePreviewClick = (collectionId) => {
+    navigate(`/collection/${userId}/${collectionId}`);
+    console.log(userId);
+    console.log(collectionId);
+  };
+
+  //스크롤시 api재호출 위한 observer 
+  const options = {
+    threshold : 0.3,//targetRef가 30% 차지하면
+    root: document.querySelector(`.${styles.scrollbar}`)//viewport를 scrollbar로 설정
+  }
+  const { targetRef, observerRef } = useIntersectionObserver(
+    options,
+    ()=>{
+      if(observeTarget){
+        handleIntersect();
+        observerRef.current.unobserve(targetRef.current);
+        setObserveTarget(false);
+      }
+    },
+  );
 
   // + 새 컬렉션 입력 창 on/off
   const handleNewCollectionOn = () => {
@@ -62,26 +98,13 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
       closed,
       (data) => {
         console.log(title, data.collectionId, "컬렉션 추가 완료");
-        console.log(list);
-        // 기존 collectionsLocal 배열에 새 컬렉션을 추가하여 업데이트
-        const updatedCollections = [
-          ...collectionsLocal,
-          { id: data.collectionId, title: title, closed: closed },
-        ];
-        setCollectionsLocal(updatedCollections);
+        updateCollections(data.collectionId, title, closed);
       },
       () => {
         console.log(title, "컬렉션 추가 실패");
       }
     );
     handleNewCollectionOn();
-  };
-
-  //collection 클릭시 collectionPage로 이동
-  const handlePreviewClick = (collectionId) => {
-    navigate(`/collection/${userId}/${collectionId}`);
-    console.log(userId);
-    console.log(collectionId);
   };
 
   return (
@@ -130,14 +153,16 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
       ) : null}
       {/*본문 */}
       <div className={styles.newCollection}>
-        {accessUserId === userId && (
-          <button onClick={handleNewCollectionOn}>+ 새 컬렉션</button>
-        )}
+        {isLookSelfPage && 
+          <button onClick={handleNewCollectionOn}>
+            + 새 컬렉션
+          </button>
+        }
       </div>
       <div className={styles.scrollbar}>
         <div className={styles.collections_row}>
-          {Array.isArray(collectionsLocal) &&
-            collectionsLocal.map(
+          {Array.isArray(collections) &&
+            collections.map(//컬렉션 mapping
               (collection) =>
                 (isLookSelfPage ||!collection.closed) && (
                   <div
@@ -146,7 +171,7 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
                     onClick={() => handlePreviewClick(collection.id)}
                   >
                     <div className={styles.collections_preview}>
-                      {list &&
+                      {list &&//컬렉션 안에 북마크 mapping (컬렉션 내에 미리보기 4분할)
                         list
                           .filter((item) => item.collectionId === collection.id)
                           .map(
@@ -164,7 +189,8 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
                                       />
                                     )
                                 )
-                          )}
+                          )
+                      }
                     </div>
                     <div
                       className={styles.collections_info}
@@ -174,7 +200,13 @@ const SwiperCollections = ({ accessUserId, userId, collections, style }) => {
                     </div>
                   </div>
                 )
-            )}
+            )
+          }
+          { !observeTarget? null : (
+            <div className={styles.collections_prevInfo_wrapper} ref={targetRef}>
+              loading...
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -31,6 +31,8 @@ const CollectionPage = () => {
     getCollections(
       //컬렉션 정보 불러오기
       userId,
+      0,
+      30,
       (data) => {
         const responseData = data.collectionInfos;
         for (const collection of responseData) {

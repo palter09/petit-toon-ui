@@ -1,14 +1,7 @@
 import React, { useState, useCallback } from "react";
 import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./Header/Header.js";
-import {
-  DisLike,
-  Like,
-  Comment,
-  Subscribe,
-  Setting,
-  Collection,
-} from "./ToonPage/BottomButton.js";
+import BottomButtons from "./ToonPage/BottomButtons.js";
 import { useParams } from "react-router";
 
 const ToonPage = () => {
@@ -26,11 +19,7 @@ const ToonPage = () => {
           onIsError={onIsError}
         />
         <div className="divLineBottom" />
-        <Like toonId={toonId} isError={isError} />
-        <DisLike toonId={toonId} isError={isError} />
-        <Comment toonId={toonId} isError={isError} />
-        <Collection toonId={toonId} isError={isError} />
-        <Setting toonId />
+        <BottomButtons toonId={toonId} isError={isError} />
       </div>
     </div>
   );
