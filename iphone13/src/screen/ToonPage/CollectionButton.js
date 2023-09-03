@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from '../../hooks/useIconClick';
 import { getBookmarks } from '../../API/BookmarkAPI';
-import { createCollection } from '../../API/CollectionAPI';
+import { createCollection, deleteCollection, getCollections } from '../../API/CollectionAPI';
 import "./ChatStyles.css";
 import "./CollectionStyles.css";
 
 
-const CollectionButton = ({toonId, isError}) => {
+const CollectionButton = ({toonId, userId, isError}) => {
   const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
   const [bookmark, setBookmark] = useState(false);
   const [collections, setCollections] = useState([]);
   const [collectionName, setCollectionName] = useState('');
-  const selectList = ["공개", "비공개"];
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState('공개')
   const [selectPublic, setSelectPublic] = useState(null);
   const [isCreatingCollection, setIsCreatingCollection] = useState(false);
 
@@ -22,21 +21,64 @@ const CollectionButton = ({toonId, isError}) => {
     getBookmarks(123);
   }
 
+  useEffect(() => {
+    // Fetch collections when the component mounts
+    // fetchCollections();
+  }, []);
+
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
 
-  const handleCollectionCreateClick = (collectionName, selected) => {
-    createCollection(collectionName, selected, 
+  /*
+  const fetchCollections = () => {
+    // Implement the logic to fetch collections here
+    // Use getCollections function and handle success and failure
+    getCollections(
+      1, // Replace with the actual user ID
+      0, // Page number
+      30, // Number of collections per page
       (data) => {
-        console.log("컬렉션 생성", data);
-        setIsCreatingCollection(data.isCreatingCollection);
+        console.log('컬렉션 조회', data);
+        setCollections(data.collections);
       },
-        (_) => {
-          console.log("컬렉션 생성 실패");
-        }
-      )
-  }
+      (error) => {
+        console.error('컬렉션 조회 실패', error);
+      }
+    );
+  };
+  */
+
+  const handleCollectionCreateClick = () => {
+    createCollection(
+      collectionName,
+      selected === '공개', // Convert '공개' to true, '비공개' to false
+      (data) => {
+        console.log('컬렉션 생성', data);
+        // Refresh the collections list after creating a new one
+        // fetchCollections();
+      },
+      (error) => {
+        console.error('컬렉션 생성 실패', error);
+      }
+    );
+  };
+
+  const handleCollectionDeleteClick = (collectionId) => {
+    // Implement the logic to delete a collection here
+    // Use deleteCollection function and handle success and failure
+    deleteCollection(
+      collectionId,
+      () => {
+        console.log('컬렉션 삭제 성공');
+        // Refresh the collections list after deleting
+        // fetchCollections();
+      },
+      (error) => {
+        console.error('컬렉션 삭제 실패', error);
+      }
+    );
+  };
 
   const {
     collectionCreateClicked,
@@ -90,7 +132,7 @@ const CollectionButton = ({toonId, isError}) => {
                   className='collection-set-public'
                   value = {selected}
                   onChange={handleSelect}>
-                  {selectList.map((item) => (
+                  {['공개', '비공개'].map((item) => (
                     <option value={item} key={item}>
                       {item}
                     </option>
