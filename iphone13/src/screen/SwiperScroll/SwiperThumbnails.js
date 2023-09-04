@@ -7,6 +7,8 @@ import useIntersectionObserver from '../../hooks/useIntersectionOberserver';
 const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
   const [path, setPath] = useState('');
   const [observeTarget, setObserveTarget] = useState(false); // observe 상태 설정
+  const [showChoose, setShowChoose] = useState(false); // thumbnail클릭시 다른걸로 변환
+  const [selectedToonId, setSelectedToonId] = useState(null); // 선택한 만화 아이디
   const navigate = useNavigate();
   const location = useLocation();
   const accessUserId = getCookie("loginUserId");
@@ -45,17 +47,23 @@ const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
 
 
   const handleImageClick = (toonId) => {
-    if(isSameUser){
-      navigate(`/edittoon/${toonId}`);
+    if(isSameUser && path.match(/^\/userinfo\/\d+$/)){//userinfo page에서 썸네일을 클릭하면
+      setShowChoose(true);
+      setSelectedToonId(toonId);
     }else{
       navigate(`/toon/${toonId}`);
     }
   };
-
+  const handleChooseClick = (action) => {
+    if (action === 'view') {
+      navigate(`/toon/${selectedToonId}`);
+    } else if (action === 'edit') {
+      navigate(`/edittoon/${selectedToonId}`)
+    }
+  };
   const handleRegNewButtonClick = () => {
     navigate('/regtoon');
   }
-
 
   return (
     <div className='ThumbnailsContainer' style={style}>
@@ -68,11 +76,19 @@ const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
         <div className='thumbnails_row'>
           {toons.map((toon) => (
             <div className='thumbnails_box' key={toon.id} >
-              <img
-                src={ `${process.env.REACT_APP_SERVER_IP}/resources/${toon.thumbnailUrl}`}
-                alt={toon.title}
-                onClick={() => handleImageClick(toon.id)}
-              />
+              {showChoose && selectedToonId === toon.id  ? (
+                <div className="thumbnails_choose_wrapper" onClick={()=>{setShowChoose(false)}}>
+                  <button onClick={() => handleChooseClick('view')}>만화보기</button>
+                  <button onClick={() => handleChooseClick('edit')}>만화수정</button>
+                </div>
+              ):(
+                <img
+                  src={ `${process.env.REACT_APP_SERVER_IP}/resources/${toon.thumbnailUrl}`}
+                  alt={toon.title}
+                  onClick={() => handleImageClick(toon.id)}
+                />
+                )
+              }
             </div>
           ))}
           {needNotReloading || !observeTarget  ? null : (
@@ -85,5 +101,6 @@ const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
     </div>
   );
 };
+
 
 export default SwiperThumbnails;
