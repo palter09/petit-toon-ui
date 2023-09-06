@@ -3,10 +3,12 @@ import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./Header/Header.js";
 import BottomButtons from "./ToonPage/BottomButtons.js";
 import { useParams } from "react-router";
+import { getCookie } from "../API/HandleTokens.js";
 
 const ToonPage = () => {
   const param = useParams();
   const toonId = param.id;
+  const loginUserId = parseInt(getCookie("loginUserId"));
   const [isError, setIsError] = useState(false);
   const onIsError = useCallback(() => setIsError(true), []);//useCallback: 처음 렌더링 될때 함수 만들고 이후 안만듦
   return (
@@ -19,7 +21,7 @@ const ToonPage = () => {
           onIsError={onIsError}
         />
         <div className="divLineBottom" />
-        <BottomButtons toonId={toonId} isError={isError} />
+        <BottomButtons userId={loginUserId} toonId={toonId} isError={isError} />
       </div>
     </div>
   );

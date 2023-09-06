@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './LoginPage/LoginPage.css';
 import { loginUser } from '../API/AuthentificationAPI.js';
-import { setCookie } from '../API/HandleTokens.js';
+import { getCookie, setCookie } from '../API/HandleTokens.js';
 import Modal from './Modal/Modal.js';
 import ModalPortal from './Modal/Portal.js';
 
@@ -16,6 +16,11 @@ const LoginPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    if(getCookie('loginUserId') !== null)
+        navigate('/search');
+  }, [])
 
   const handleLogin = () => {
     loginUser(username, password, (json) => {   // 로그인 성공
