@@ -8,7 +8,7 @@ export async function loginUser(email, password, callback, fallback) {
     'Content-Type': 'application/json;charset=UTF-8'
   });
 
-  const requestBody = {
+  const requestBody = { 
     email: email,
     password: password
   };
