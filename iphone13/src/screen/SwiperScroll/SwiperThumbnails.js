@@ -38,7 +38,6 @@ const SwiperThumbnails = ({  toons, style,  handleIntersect}) => {
 
   useEffect(() => {
     setPath(location.pathname);
-    console.log(toons);
     // 데이터가 로딩되고 toons 배열의 길이가 9의 배수이면 observe
     if (toons.length !== 0 && toons.length % 9 === 0) {
       setObserveTarget(true);

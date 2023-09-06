@@ -6,49 +6,58 @@ import Thumbnails from './SwiperScroll/SwiperThumbnails';
 import "./SearchPage/SearchPage.css"
 import { useParams } from 'react-router';
 
-import { search } from '../API/SearchAPI.js';
+import { searchToon, searchUser } from '../API/SearchAPI.js';
 
 const SearchPage = () => {
-  const [searchResults, setSearchResults] = useState({ users: [], toons: [], page: 0 });
-  const { searchQuery } = useParams();
-  const [currentPage, setCurrentPage] = useState(0);
+  const [userResult, setUserResult] = useState([]);
+  const [toonResult, setToonResult] = useState([]);
 
-  // 검색어가 변경될 때마다 API 호출
+  const { searchQuery } = useParams();
+  const [currentUserPage, setCurrentUserPage] = useState(0);
+  const [currentToonPage, setCurrentToonPage] = useState(0);
+
   useEffect(() => {
     if (searchQuery) {
-      console.log("api호출 page:",currentPage);
-      search(
-        searchQuery, 
-        currentPage,
-        9,       
-        (data) => {//더이상 받아올 정보가 없으면 받지 않게 설정 해야하는데 어차피 search 고칠 것 같아서 고려x
-          setSearchResults((prevResults) => {
-            if (currentPage === prevResults.page + 1) {
-              return {
-                users: [...prevResults.users, ...data.users],
-                toons: [...prevResults.toons, ...data.toons],
-                page: currentPage,
-              };
-            } else {
-              setCurrentPage(0);
-              return {
-                users: [...data.users],
-                toons: [...data.toons],
-                page: 0,
-              }
-            }
-          });
-        }, 
-        (_) => { 
-          setSearchResults({users:[], toons:[], page: 0});
-        });//검색결과 없을시 검색결과 reset
+      searchUser(searchQuery, currentUserPage, 9, (data) => {setUserResult(data.users);});
+      searchToon(searchQuery, currentToonPage, 9, (data) => {setToonResult(data.cartoons);});
     }
-  }, [currentPage, searchQuery]);
+  }, [searchQuery]);
 
-  const handleIntersect = () => {
-    // 교차 감지 시 다음 페이지의 데이터를 가져옵니다.
-    setCurrentPage(prevCurrentPage=>prevCurrentPage+1);
-    console.log("감지:api 재호출");
+  useEffect(() => {
+    if(userResult.length === 0)
+      setCurrentUserPage(0);
+  }, [userResult]);
+
+  useEffect(() => {
+    if(toonResult.length === 0)
+      setCurrentToonPage(0);
+  }, [toonResult]);
+
+
+  useEffect(() => {
+    if(searchQuery)
+      searchUser(searchQuery, currentUserPage, 9, (data) => {
+        setUserResult([...userResult, ...data.users]);
+      });
+  }, [currentUserPage]);
+
+  useEffect(() => {
+    if(searchQuery)
+      searchToon(searchQuery, currentToonPage, 9, (data) => {
+        setToonResult([...toonResult, ...data.cartoons]);
+      });
+  }, [currentToonPage]);
+
+
+
+  const handleUserIntersect = () => {
+    setCurrentUserPage(currentUserPage+1);
+    console.log("유저 재검색");
+  };
+
+  const handleToonIntersect = () => {
+    setCurrentToonPage(currentToonPage+1);
+    console.log("툰 재검색");
   };
 
   return (
@@ -63,14 +72,14 @@ const SearchPage = () => {
       </div>
       <div className="item">
         <Profiles 
-          users={searchResults.users}
-          handleIntersect={handleIntersect}
+          users={userResult}
+          handleIntersect={handleUserIntersect}
         /> 
       </div>
       <div className="item">
         <Thumbnails 
-          toons={searchResults.toons} 
-          handleIntersect={handleIntersect}
+          toons={toonResult} 
+          handleIntersect={handleToonIntersect}
         />
       </div>
     </div>
