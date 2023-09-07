@@ -17,9 +17,11 @@ const SearchPage = () => {
   const [currentToonPage, setCurrentToonPage] = useState(0);
 
   useEffect(() => {
+    setCurrentUserPage(0);
+    setCurrentToonPage(0);
     if (searchQuery) {
-      searchUser(searchQuery, currentUserPage, 4, (data) => {setUserResult(data.users)}, ()=>{setUserResult([])});
-      searchToon(searchQuery, currentToonPage, 9, (data) => {setToonResult(data.cartoons)}, ()=>{setToonResult([])});
+      searchUser(searchQuery, 0, 4, (data) => {setUserResult(data.users)}, ()=>{setUserResult([])});
+      searchToon(searchQuery, 0, 9, (data) => {setToonResult(data.cartoons)}, ()=>{setToonResult([])});
     }
   }, [searchQuery]);
 
