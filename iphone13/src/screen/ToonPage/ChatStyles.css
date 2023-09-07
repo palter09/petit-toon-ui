@@ -1,16 +1,9 @@
 .comment-wrapper {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  color: white;
-  font-size: 19px;
-  background: white;
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  left: 173px;
-  bottom: 23px;
-  font-weight: bold;
+  gap: 20px;
 }
 
 .comment-container {
