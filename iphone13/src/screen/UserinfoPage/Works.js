@@ -9,7 +9,7 @@ const worksStyle = {
   position: "absolute",
   backgroundColor: "#FFEDFE",
   width: "100%",
-  height: "578px",
+  height: "640px",
   top: "266px",
   left: "0px",
 };
@@ -27,9 +27,12 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, handleIntersect,
           content={
             <Thumbnails
               toons={cartoons}
-              style={{
-                top: "40px",
-                height: "100%",
+              containerStyle={{
+                top:'40px',
+                height: 'calc(100% - 40px)',
+              }}
+              scrollbarStyle={{
+                height: 'calc(100% - 40px)',
               }}
             />
           }

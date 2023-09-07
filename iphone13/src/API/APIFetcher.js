@@ -31,7 +31,6 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
     }
     if (response.ok) {
       // 응답이 OK이지만 JSON 데이터가 있는지 확인
-      console.log(url);
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const responseData = await response.json();
