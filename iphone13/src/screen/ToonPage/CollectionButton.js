@@ -1,158 +1,107 @@
 import React, { useEffect, useState } from 'react';
-import useDetectClose from "../../hooks/useDetectClose";
-import useIconClick from '../../hooks/useIconClick';
-import { getBookmarks } from '../../API/BookmarkAPI';
-import { createCollection, deleteCollection, getCollections } from '../../API/CollectionAPI';
-import "./ChatStyles.css";
+import { addBookmark } from '../../API/BookmarkAPI';
+import { createCollection, getCollections, deleteCollection } from '../../API/CollectionAPI';
+import Modal from '../Modal/Modal.js';
+import ModalPortal from '../Modal/Portal.js';
 import "./CollectionStyles.css";
 
 
 const CollectionButton = ({toonId, userId, isError}) => {
-  const [myPageIsOpen, myRef, myPageToggleHandler] = useDetectClose(false);
-  const [bookmark, setBookmark] = useState(false);
   const [collections, setCollections] = useState([]);
-  const [collectionName, setCollectionName] = useState('');
-  const [selected, setSelected] = useState('공개')
-  const [selectPublic, setSelectPublic] = useState(null);
-  const [isCreatingCollection, setIsCreatingCollection] = useState(false);
-
-  const handleCollectionClick = () => {
-    setBookmark(!bookmark);
-    getBookmarks(123);
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selected, setSelected] = useState('공개');
+  const [bookmark, setBookmark] = useState(false);
+  const [newCollection, setNewCollection] = useState({ title: '', closed: false });
 
   useEffect(() => {
-    // Fetch collections when the component mounts
-    // fetchCollections();
+    fetchCollections();
   }, []);
 
   const handleSelect = (e) => {
     setSelected(e.target.value);
   };
 
-  /*
-  const fetchCollections = () => {
-    // Implement the logic to fetch collections here
-    // Use getCollections function and handle success and failure
-    getCollections(
-      1, // Replace with the actual user ID
-      0, // Page number
-      30, // Number of collections per page
-      (data) => {
-        console.log('컬렉션 조회', data);
-        setCollections(data.collections);
-      },
-      (error) => {
-        console.error('컬렉션 조회 실패', error);
-      }
-    );
+  const openModal = () => {
+    setIsModalOpen(true);
   };
-  */
-
-  const handleCollectionCreateClick = () => {
-    createCollection(
-      collectionName,
-      selected === '공개', // Convert '공개' to true, '비공개' to false
-      (data) => {
-        console.log('컬렉션 생성', data);
-        // Refresh the collections list after creating a new one
-        // fetchCollections();
-      },
-      (error) => {
-        console.error('컬렉션 생성 실패', error);
-      }
-    );
-  };
-
-  const handleCollectionDeleteClick = (collectionId) => {
-    // Implement the logic to delete a collection here
-    // Use deleteCollection function and handle success and failure
-    deleteCollection(
-      collectionId,
-      () => {
-        console.log('컬렉션 삭제 성공');
-        // Refresh the collections list after deleting
-        // fetchCollections();
-      },
-      (error) => {
-        console.error('컬렉션 삭제 실패', error);
-      }
-    );
-  };
-
-  const {
-    collectionCreateClicked,
-    handleIconClick,
-  } = useIconClick();
   
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const fetchCollections = () => {
+    getCollections(userId, 1, 10, (data) => {
+      setCollections(data.collections);
+    });
+  };
+
+  const handleCreateCollection = () => {
+    createCollection(newCollection.title, newCollection.closed, () => {
+      fetchCollections(); // 컬렉션 리스트 새로고침
+      setNewCollection({ title: '', closed: false }); // 입력된 필드 지우기
+    });
+  };
+
+  const handleAddToCollection = (collectionId, toonId) => {
+    addBookmark(collectionId, toonId, () => {
+      // 북마크에 추가되면 색상 바뀌는 부분 추가해야됨
+    });
+  };
+
+  const handleDeleteCollection = (collectionId) => {
+    deleteCollection(collectionId, () => {
+      fetchCollections(); // 컬렉션 리스트 새로고침
+    });
+  };
+
   return (
-    <div className='collection-wrapper' ref={myRef}>
-      <div className='collection-container'>
-        <div className='collection-button'
-          onClick={() => {
-            /*
-            if(!isError){
-              myPageToggleHandler();
-              handleCollectionClick();
-            }
-            */
-            myPageToggleHandler();
-            handleCollectionClick();
-          }}>
-            <img
-              src={process.env.PUBLIC_URL +
-                /* 
-                (!isError? 
-                  (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png') :
-                            '/images/star_icon_b&w.png')
-                */
-                (bookmark? '/images/star_icon.png' : '/images/star_icon_b&w.png')
-              }
-              alt='colletion' 
-              />
-          </div>
-          <div className={`collection-menu ${myPageIsOpen ? 'open' : ''}`}>
-            <div className='collection-menu-title'>컬렉션 목록</div>
-            <div className='collection-menu-container'>
-              {collections.map((collection, index) => (
-              <div key={index} className='collection-menu-item'>
-                {/* Display collection name or other information */}
-                {collection.name}
-              </div>
-              ))}
-              <div className='collection-create-container'>
-                <input
-                  type='text'
-                  placeholder='컬렉션 이름을 입력하세요'
-                  className='collection-name-input'
-                  value={collectionName}
-                  onChange={(e) => setCollectionName(e.target.value)}
-                />
-                <select 
-                  className='collection-set-public'
-                  value = {selected}
-                  onChange={handleSelect}>
-                  {['공개', '비공개'].map((item) => (
-                    <option value={item} key={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-                <button
-                  className='collection-create-button'
-                  onClick={handleCollectionCreateClick}>
-                  create
+    <div>
+      <img
+        className='collection-button'
+        src={process.env.PUBLIC_URL + '/images/star_icon.png'}
+        onClick={openModal}
+        setBookmark={!bookmark}
+       />  
+
+      {/* 모달 */}
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {/* 컬렉션 목록 */}
+        <div>
+          <h2 className='collection-title'>컬렉션</h2>
+          <ul>
+            {collections.map((collection) => (
+              <li key={collection.id}>
+                {collection.title}{' '}
+                <button onClick={() => handleDeleteCollection(collection.id)}>삭제</button>
+                <button onClick={() => handleAddToCollection(collection.id, 'webtoonId')}>
+                  추가
                 </button>
-              </div>
-            </div>
-          </div>
-          <div className='collection-triangle-wrapper'>
-            {myPageIsOpen && <div className={`comment-triangle-outer ${myPageIsOpen ? 'fade-in' : ''}`} />}
-            {myPageIsOpen && <div className={`comment-triangle-inner ${myPageIsOpen ? 'fade-in' : ''}`} />}
-          </div>
-      </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <input
+            className='collection-title-input'
+            type="text"
+            placeholder="컬렉션 제목"
+            value={newCollection.title}
+            onChange={(e) => setNewCollection({ ...newCollection, title: e.target.value })}
+          />
+          <select
+            value = {selected}
+            onChange={handleSelect}>
+            {['공개', '비공개'].map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          <button onClick={handleCreateCollection}>컬렉션 생성</button>
+        </div>
+      </Modal>
     </div>
-  )
-};
+  );
+}
 
 export default CollectionButton;
