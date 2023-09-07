@@ -59,15 +59,9 @@ const DropdownMenu = () => {
       <div className="dropdown-container">
         <div className={`menu ${myPageIsOpen ? 'open' : ''}`}>
           <div className="menu-title">메뉴|Menu</div>
+          <hr className="dropdown-hr"></hr>
           <div className="menu-container">
-            {/*header menu안의 buttons*/}
-            {/*1. store icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handleStoreIconClick();
-              }}
-            >
+            <div className="menu-button" onClick={() => {handleStoreIconClick();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -75,15 +69,11 @@ const DropdownMenu = () => {
                 }
                 alt="store icon"
               />
+              &nbsp;&nbsp;
               <span>스토어</span>
             </div>
-            {/*2. search-engine icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handleSearchIconClick();
-              }}
-            >
+
+            <div className="menu-button" onClick={() => {handleSearchIconClick();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -91,15 +81,11 @@ const DropdownMenu = () => {
                 }
                 alt="search-engine icon"
               />
+              &nbsp;&nbsp;
               <span>검색</span>
             </div>
-            {/*3 map icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handleMapIconClicked();
-              }}
-            >
+
+            <div className="menu-button" onClick={() => {handleMapIconClicked();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -107,15 +93,11 @@ const DropdownMenu = () => {
                 }
                 alt="map icon"
               />
+              &nbsp;&nbsp;
               <span>탐색</span>
             </div>
-            {/*4. petit icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handlePetitClick();
-              }}
-            >
+           
+            <div className="menu-button" onClick={() => {handlePetitClick();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -123,15 +105,11 @@ const DropdownMenu = () => {
                 }
                 alt="petit icon"
               />
+              &nbsp;&nbsp;
               <span>이주의 쁘띠</span>
             </div>
-            {/*5. event icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handleEventIconClicked();
-              }}
-            >
+
+            <div className="menu-button" onClick={() => {handleEventIconClicked();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -139,16 +117,11 @@ const DropdownMenu = () => {
                 }
                 alt="event icon"
               />
+              &nbsp;&nbsp;
               <span>공지/이벤트</span>
             </div>
-            {/*6. mypage icon */}
-            <div
-              className="menu-button"
-              onClick={() => {
-                handleMyPageClick();
-                myPageHandler();
-              }}
-            >
+
+            <div className="menu-button" onClick={() => {handleMyPageClick(); myPageHandler();}}>
               <img
                 src={
                   process.env.PUBLIC_URL +
@@ -156,6 +129,7 @@ const DropdownMenu = () => {
                 }
                 alt="mypage icon"
               />
+              &nbsp;&nbsp;
               <span>마이페이지</span>
             </div>
           </div>

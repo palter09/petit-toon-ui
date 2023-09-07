@@ -27,37 +27,32 @@
 
 .menu {
   background: white;
-  position: absolute;
-  top: 68px;
+  position: fixed;
+  top: 110px;
+  right: -100%;
   width: 273px;
+  height: calc(100% - 220px);
   text-align: center;
   border-radius: 10px;
   outline: 2px solid #DA5E9D;
-  opacity: 0;
   visibility: hidden;
-  transform: translate(-334px, -0px);
-  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  transition: right 0.3s ease;
   z-index: 9;
 }
 
 .menu.open {
-  opacity: 1;
   visibility: visible;
-  left: 50%;
+  right: 3px;
 }
 
 .menu-title {
-  position: relative;
   font-family: Inter;
   font-size: 20px;
   font-weight: 700;
   line-height: 22px;
   letter-spacing: -0.40799999237060547px;
   text-align: left;
-  width: 106px;
-  height: 22px;
-  top: 5px;
-  left: 22px;
+  padding: 15px;
   background: transparent;
   color: #DA5E9D;
 }
@@ -72,7 +67,6 @@
   background: transparent;
   color: #DA5E9D;
   text-decoration: none;
-  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 0.5rem;
@@ -92,55 +86,15 @@
   color: #DA5E9D;
   text-decoration: none;
   display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  vertical-align: text-bottom;
+  padding-bottom: 16px;
 }
 
-/* triangle animation */
-.triangle-wrapper {
-  position: relative;
-  width: 0;
-  height: 0;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
+.menu-button img {
+  width: 24px;
+  height: 24px;
 }
 
-.triangle-outer {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid #DA5E9D;
-  position: absolute;
-  top: -20px;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 8;
-}
-
-.triangle-outer.fade-in {
-  visibility: visible;
-  opacity: 1;
-}
-
-.triangle-inner {
-  width: 0;
-  height: 0;
-  border-left: 16px solid transparent;
-  border-right: 16px solid transparent;
-  border-bottom: 35px solid white;
-  position: absolute;
-  top: -13px;
-  visibility: hidden;
-  opacity: 0;
-  z-index: 9;
-}
-
-.triangle-inner.fade-in {
-  visibility: visible;
-  opacity: 1;
+.dropdown-hr {
+  margin: 0px;
+  border-color: #ffd8ec;
 }
