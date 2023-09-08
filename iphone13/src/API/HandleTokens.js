@@ -9,4 +9,8 @@ const setCookie = (name, value, expires) => {
   document.cookie = `${name}=${value};expires=${date.toUTCString()}`;
 }
 
-export { getCookie, setCookie }
+const deleteCookie = (name) => {
+	document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+export { getCookie, setCookie, deleteCookie }
