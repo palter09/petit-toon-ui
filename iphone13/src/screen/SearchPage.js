@@ -17,9 +17,11 @@ const SearchPage = () => {
   const [currentToonPage, setCurrentToonPage] = useState(0);
 
   useEffect(() => {
+    setCurrentUserPage(0);
+    setCurrentToonPage(0);
     if (searchQuery) {
-      searchUser(searchQuery, currentUserPage, 9, (data) => {setUserResult(data.users);});
-      searchToon(searchQuery, currentToonPage, 9, (data) => {setToonResult(data.cartoons);});
+      searchUser(searchQuery, 0, 4, (data) => {setUserResult(data.users)}, ()=>{setUserResult([])});
+      searchToon(searchQuery, 0, 9, (data) => {setToonResult(data.cartoons)}, ()=>{setToonResult([])});
     }
   }, [searchQuery]);
 
@@ -35,19 +37,24 @@ const SearchPage = () => {
 
 
   useEffect(() => {
-    if(searchQuery)
-      searchUser(searchQuery, currentUserPage, 9, (data) => {
-        setUserResult([...userResult, ...data.users]);
-      });
+    if (searchQuery) {
+      if (currentUserPage > 0) {
+        searchUser(searchQuery, currentUserPage, 4, (data) => {
+          setUserResult([...userResult, ...data.users]);
+        });
+      }
+    }
   }, [currentUserPage]);
 
   useEffect(() => {
-    if(searchQuery)
-      searchToon(searchQuery, currentToonPage, 9, (data) => {
-        setToonResult([...toonResult, ...data.cartoons]);
-      });
+    if (searchQuery) {
+      if (currentToonPage > 0) {
+        searchToon(searchQuery, currentToonPage, 9, (data) => {
+          setToonResult([...toonResult, ...data.cartoons]);
+        });
+      }
+    }
   }, [currentToonPage]);
-
 
 
   const handleUserIntersect = () => {

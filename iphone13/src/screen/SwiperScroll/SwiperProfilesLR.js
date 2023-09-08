@@ -12,10 +12,10 @@ const SwiperProfilesLR = ({ users, style, handleIntersect}) => {
   const [observeTarget, setObserveTarget] = useState(false); // observe 상태 설정
 
   const options = {
-    threshold : 0.3,//targetRef가 30% 차지하면
-    root: document.querySelector(`.${styles.profileContainer}`)//viewport를 .thumbnails_scrollbar로 설정
+    threshold : 0.1,//targetRef가 30% 차지하면
+    root: document.querySelector(`.${styles['profiles-container']}`)//viewport 설정
   }
-  const { targetRef, observerRef } = useIntersectionObserver(
+  const { targetRef, observerRef,imageLoaded } = useIntersectionObserver(
     options,
     ()=>{
       if(observeTarget){
@@ -31,41 +31,65 @@ const SwiperProfilesLR = ({ users, style, handleIntersect}) => {
   };
 
   useEffect(()=>{
-    if (users.length !== 0 && users.length % 9 === 0) {//리로딩 필요할 때 다시 targetRef보이게
+    if (users.length !== 0 && users.length % 4 === 0) {//리로딩 필요할 때 다시 targetRef보이게
       setObserveTarget(true);
     }
   },[users])
 
   return (
-    <div className={styles.profilesContainer} style={style}>
+    <div className={styles['profiles-container']} style={style}>
       <Swiper
-        slidesPerView={4}
-        spaceBetween={8}
+        breakpoints={{
+          280: {
+            slidesPerView: 2,
+          },
+          300:{
+            slidesPerView: 3,
+          },
+          400:{
+            slidesPerView: 4,
+          },
+          600:{
+            slidesPerView: 5,
+          },
+          1000:{
+            slidesPerView: 7,
+          },
+        }}
         freeMode={true}
         modules={[FreeMode]}
-        className={styles.SwiperProf}
       >
         {users.map((user) => (
           <SwiperSlide key={user.id}>
-            <div className={styles.profile_info_wrapper}>
-              <div className={styles.profile_wrapper}>
-                <img
-                  src={`${process.env.REACT_APP_SERVER_IP}/resources/${user.profileImagePath}`}
-                  alt={user.nickname}
-                  onClick={() => handleImageClick(user.id)}
-                />
+            <div className={styles['profile-info-wrapper']}>
+              <div className={styles['profile-wrapper']}>
+                <div className={styles['profile-image']}>
+                  <img
+                    src={process.env.PUBLIC_URL + '/images/default_thumbnail.png'} 
+                    data-src={`${process.env.REACT_APP_SERVER_IP}/resources/${user.profileImagePath}`}
+                    alt={user.nickname}
+                    onClick={() => handleImageClick(user.id)}
+                    ref={targetRef}
+                  />
+                </div>
+                <div className={styles['profile-info']} style={{background: imageLoaded && 'transparent'}}>
+                  <p style={{ display: imageLoaded ? 'block' : 'none' }}>{user.nickname}</p>
+                </div>
               </div>
-              <p>{user.nickname}</p>
             </div>
           </SwiperSlide>
         ))}
         {!observeTarget ? null : (
-          <SwiperSlide ref={targetRef}>
-            <div className={styles.profile_wrapper}>
-              <div className={styles.profile_wrapper}>
-                loading...
+          <SwiperSlide ref={targetRef} api-reload-target={"true"}>
+            <div className={styles['profile-info-wrapper']}>
+              <div className={styles['profile-wrapper']}>
+                <div className={styles['profile-image']}>
+                  ...
+                </div>
+                <div className={styles['profile-info']}>
+                  ...
+                </div>
               </div>
-              <p>...</p>
             </div>
           </SwiperSlide>
         )}

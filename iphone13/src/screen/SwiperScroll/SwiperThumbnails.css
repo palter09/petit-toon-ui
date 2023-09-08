@@ -1,10 +1,8 @@
-.ThumbnailsContainer{
+.thumbnails-container{
   position: absolute;
-  justify-content: center;
-  /*썸네일 들어갈 영역 크기 지정*/
+  width: 100%;  
   top: 285px;
   left: 0px;
-  width: 100%;
   height: 100%;
   
   background:whitesmoke;
@@ -12,11 +10,11 @@
   overflow: hidden;
 }
 
-.thumbnails_scrollbar{
+.thumbnails-scrollbar{
   overflow-y: scroll;
   /*스크롤 기능은 썸네일 컨테이너 전체 영역*/
-  height: 100%;
   width: 100%;
+  height: 70%;
   display: flex;
   flex-direction: column;
 }
@@ -24,41 +22,61 @@
   display: none;
 }
 
-.thumbnails_row{
+.thumbnails-row{
   display: flex;
   flex-wrap: wrap;
   padding: 0.1rem;
   justify-content: flex-start;
   align-items: flex-start;
   /*썸네일 1 row 상의 영역 height*/
-  height: 175px;
+  height: 200px;
   transition: margin-top 0.3s;
 }
 
-.thumbnails_box {
+.thumbnails-box {
   text-align: center;
   font-size: 18px;
-  background: whitesmoke;
-  outline: 1px solid pink;
+
   /*썸네일 하나하나의 크기 지정*/
-  width: calc(33% - 0.5rem); /* 이 부분을 수정해서 간격 조절 */
+  width: 135px; /* 이 부분을 수정해서 간격 조절 */
   height: 100%;
-  box-shadow: 1px 1px 2px 2px rgb(217, 211, 211);
   margin: 4px; /* 추가: 각 박스 사이의 간격을 조절 */
   display: flex;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 
-.thumbnails_box img{
-  display: block;
+.thumbnails-box-thumbnail{
+  margin: 0.1rem;
+  border-radius: 5px;
+  background: #FBEFFB;
   width: 100%;
-  height: 100%;
+  height: 90%;
+}
+.thumbnails-box-thumbnail img{
+  width:100%;
+  height:100%;
   object-fit: cover;
+
+}
+.thumbnails-box-info{
+  margin:0.1rem;
+  border-radius: 5px;
+  width:100%;
+  height:8%;
+  background: #FBEFFB;
+}
+.thumbnails-box-info p{
+  margin: 0;
+  font-size: 0.5rem;
+  overflow:hidden;
+  text-overflow: ellipsis;
 }
 
-.swiperThumbnails_regNewButton{
+.thumbnails-register-button{
   background: white;
   width: 90%;
   height:30px;
@@ -70,7 +88,7 @@
   font-weight: bold;
 }
 
-.thumbnails_choose_wrapper{
+.thumbnails-choose-wrapper{
   width:100%;
   height:100%;
   display: flex;
@@ -81,7 +99,7 @@
   align-items: center;
   background: #DA5E9D;
 }
-.thumbnails_choose_wrapper button{
+.thumbnails-choose-wrapper button{
   border-radius: 2px;
   border: 1px solid #DA5E9D;
 }
