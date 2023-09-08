@@ -1,14 +1,30 @@
-.collection-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
 .collection-title {
   color: #DA5E9D;
 }
 
-.collecion-title-input {
-  width: 50px;
+.collection-input-container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+
+.collecion-input-title {
+  width: 100%;
+}
+
+.collection-input-setPublic {
+  position: relative;
+  width: 20%;
+  top: 10%;
+}
+
+.collection-input-button {
+  position: relative;
+  right: -58%;
+  border: 10%;
+  border-radius: 0.3rem;
+  color: white;
+  background: #DA5E9D;
+  border-color: #DA5E9D;
 }
