@@ -89,6 +89,10 @@
   padding-bottom: 16px;
 }
 
+.menu-button span {
+  vertical-align: middle;
+}
+
 .menu-button img {
   width: 24px;
   height: 24px;

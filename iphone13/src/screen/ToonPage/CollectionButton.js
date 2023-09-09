@@ -57,7 +57,6 @@ const CollectionButton = ({toonId, userId, isError}) => {
   return (
     <div>
       <img
-        className='collection-button'
         src={process.env.PUBLIC_URL + '/images/star_icon.png'}
         onClick={openModal}
         setBookmark={!bookmark}
@@ -80,15 +79,16 @@ const CollectionButton = ({toonId, userId, isError}) => {
             ))}
           </ul>
         </div>
-        <div>
+        <div className='collection-input-container'>
           <input
-            className='collection-title-input'
+            className='collection-input-title'
             type="text"
             placeholder="컬렉션 제목"
             value={newCollection.title}
             onChange={(e) => setNewCollection({ ...newCollection, title: e.target.value })}
           />
           <select
+            className='collection-input-setPublic'
             value = {selected}
             onChange={handleSelect}>
             {['공개', '비공개'].map((item) => (
@@ -97,7 +97,9 @@ const CollectionButton = ({toonId, userId, isError}) => {
               </option>
             ))}
           </select>
-          <button onClick={handleCreateCollection}>컬렉션 생성</button>
+          <button
+            className='collection-input-button'
+            onClick={handleCreateCollection}>컬렉션 생성</button>
         </div>
       </Modal>
     </div>
