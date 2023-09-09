@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from '../../hooks/useIconClick';
 import useIntersectionObserver from '../../hooks/useIntersectionOberserver';
-import "./ChatStyles.css";
+import "./CommentButton.css";
 import { GoPaperAirplane } from "react-icons/go";
 import { RiCoinsFill } from "react-icons/ri";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -146,24 +146,22 @@ const CommentButton = ({userId, toonId, isError}) => {
   };
 
   return (
-    <div className='comment-wrapper' ref={myRef}>
-      <div className="comment-container">
-        {/* 채팅 아이콘 */}
-        <div className='comment-button'
-          onClick={()=>{
-            myPageToggleHandler();
-            }
-          }
-          >
-            <img
-              src={
-                process.env.PUBLIC_URL +
+    <div ref={myRef}>
+      <img
+        src={
+          process.env.PUBLIC_URL +
                 (!isError ?
                 (chatIconClicked ? '/images/bubble_chat_icon_b&w.png' : '/images/bubble_chat_icon.png') :
                 '/images/bubble_chat_icon_b&w.png')
-              }
-              alt="채팅 아이콘"
-            />
+            }
+        onClick={()=>{
+          myPageToggleHandler();
+          }
+        }
+        alt="채팅 아이콘"
+      />
+      <div>
+        <div>
           </div> {/* dropdown-button */}
           <div className={`comment-menu ${myPageIsOpen ? 'open' : ''}`}>
             <div className='comment-menu-title'>댓글 및 후원</div>
