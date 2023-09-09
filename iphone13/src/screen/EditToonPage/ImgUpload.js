@@ -1,10 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './styles/ImgUpload.module.css';
 
 const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName, isDisabled }) => {
-  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(true);
   const imgRef = useRef();//input file에서 img 참조
   
+  useEffect(()=>{
+    if(imgFile===""){
+      setPreviewVisible(false);
+    }
+  },[imgFile])
   //input File에서 imgRef받아서 url읽고 setImg + 미리보기 세팅
   const handleImageUpload = () => {
     const file = imgRef.current.files[0];
@@ -32,7 +37,7 @@ const ImgUpload= ({ imgFile, setImgFile, imgSize, inputId, inputName, isDisabled
     <div className={styles.ImagesUpload_file_wrapper}>
       {previewVisible ? (
         <img
-          src={imgFile}
+          src={typeof imgFile ==="string" && !imgFile.startsWith('toons') ? imgFile : process.env.REACT_APP_SERVER_IP + "/resources/" + imgFile}
           alt="클릭후 파일 선택"
           onClick={handlePreviewClick}
         />
