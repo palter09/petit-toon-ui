@@ -1,7 +1,9 @@
 /*구조 header-rule-info-thumbnail-footer*/
 .content_wrapper {
-  width:100%;
+  min-width: 300px;
+  max-width: 1000px;
   height:100%;
+  width:100%;
   position:relative;
   top: 3%;
 }
@@ -16,24 +18,36 @@
   height: 6%;
 }
 .header_wrapper p{
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: bold;
   color: palevioletred;
 
   position:absolute;
-  left: 1rem;
+  left: 0.3rem;
 }
 .info_wrapper{
-  height: 25%;
+  height: 15%;
   max-width: 100%;
   margin: 0.5rem;
   background-color:	#FFF0F5;
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+}
+
+/*만화 제목*/
+.title-wrapper{
+  height: 5%;
+  margin: 0.5rem;
+  background-color: #FFF0F5;
+  border-radius: 0.1rem;
+
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*만화설명*/
@@ -41,26 +55,24 @@
   height: 25%;
   margin: 0.5rem;
   background-color: #FFF0F5;
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
 
   display:flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .ImagesUpload_wrapper{
   height: 30%;
   margin: 0.5rem;
   background-color: #FFF0F5;
-  border-radius: 0.5rem;
+  border-radius: 0.1rem;
 
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .ImagesUpload_wrapper span{
-  font-size: 15px;
   font-weight: bold;
   margin: 1rem;
   text-align: center;

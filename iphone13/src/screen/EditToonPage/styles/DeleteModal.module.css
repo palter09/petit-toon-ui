@@ -1,0 +1,43 @@
+.content-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.warning{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  height: 30%;
+}
+.warning p{
+  font-size: 1.5rem;
+}
+.warning-text{
+  height: 50%;
+  font-size: 1rem;
+}
+.footer-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.footer-cancel-button{
+  height:auto;
+}
+.footer-cancel-button button{
+  font-weight: bold;
+  border-radius: 2px;
+  border:1px solid;
+  padding: 3px 5px;
+}
+.footer-delete-button{
+  height: auto;
+}
+.footer-delete-button button{
+  background: #FFB4FF;
+  font-weight: bold;
+  border: 2px solid;
+  border-radius: 2px;
+  padding: 3px 5px;
+}

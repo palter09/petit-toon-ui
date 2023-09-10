@@ -91,7 +91,7 @@ const SwiperThumbnails = ({  toons,  containerStyle, scrollbarStyle,  handleInte
                     ref={targetRef}
                     />
                   </div>
-                  <div className='thumbnails-box-info'>
+                  <div className='thumbnails-box-info' style={{background:imageLoaded && 'transparent'}}>
                     <p style={{ display: imageLoaded ? 'block' : 'none' }}>{toon.title}</p>
                   </div>
                 </>
