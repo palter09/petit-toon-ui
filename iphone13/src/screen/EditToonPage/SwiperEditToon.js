@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import './styles/SwiperRegToon.css';
+import './styles/SwiperEditToon.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import ImgUpload from './ImgUpload';
 import { Pagination, Navigation } from 'swiper/modules';
 
-const SwiperRegToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) => {
+const SwiperEditToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) => {
+
+  useEffect(()=>{
+  //  console.log("swiperEditToon", imgFiles);
+  },[imgFiles])
+
   return (
       <Swiper
         slidesPerView={1}
@@ -30,7 +35,7 @@ const SwiperRegToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) =
                 imgSize={imgSize}
                 inputId={`${inputId}-${index}`}
                 inputName={`${inputName}-${index}`}
-                isDisabled={index > 0 && !imgFiles[index - 1]}
+                isDisabled={index > 0 && !imgFiles[index - 1]}                
               />
           </SwiperSlide>
         ))}
@@ -38,4 +43,4 @@ const SwiperRegToon = ({ imgFiles, setImgFiles, imgSize, inputId, inputName }) =
   );
 };
 
-export default SwiperRegToon;
+export default SwiperEditToon;

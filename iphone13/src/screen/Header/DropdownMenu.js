@@ -3,8 +3,9 @@ import useDetectClose from "../../hooks/useDetectClose";
 import useIconClick from "../../hooks/useIconClick";
 import { useNavigate } from 'react-router-dom';
 import "./DropdownMenu.css";
-import { getCookie } from "../../API/HandleTokens";
+import { getCookie, deleteCookie } from "../../API/HandleTokens";
 
+import { BiLogOut } from "react-icons/bi";
 
 const DropdownMenu = () => {
   const userId = parseInt(getCookie("loginUserId"));
@@ -17,7 +18,7 @@ const DropdownMenu = () => {
   const [petitIconClicked, handlePetitIconClicked] = useIconClick();
   const [eventIconClicked, handleEventIconClicked] = useIconClick();
   const [mypageIconClicked, handleMyPageIconClicked] = useIconClick();
-  
+  const [logoutIconClicked, handleLogoutIconClicked] = useIconClick();
 
   const handleSearchIconClick = () => {
     handleSearchIconClicked();
@@ -33,18 +34,30 @@ const DropdownMenu = () => {
     }, 150);
   };
 
-  const handleMyPageClick= ()=>{
+  const handleMyPageClick = () => {
     handleMyPageIconClicked();
     setTimeout(() => {
       navigate(`/userinfo/${userId}`);
     }, 150);
   };
-  const handlePetitClick= ()=>{
+
+  const handlePetitClick = () => {
     handlePetitIconClicked();
     setTimeout(() => {
       navigate(`/ranking`);
     }, 150);
   };
+
+  const handleLogoutClick = () => {
+    handleLogoutIconClicked();
+    setTimeout(() => {
+      deleteCookie('loginUserId');
+      deleteCookie('refreshToken');
+      deleteCookie('accessToken');
+      navigate('/');
+    }, 150);
+  }
+
   return (
     <div className="dropdown-wrapper" ref={myPageRef}>
       <img 
@@ -61,6 +74,18 @@ const DropdownMenu = () => {
           <div className="menu-title">메뉴|Menu</div>
           <hr className="dropdown-hr"></hr>
           <div className="menu-container">
+            <div className="menu-button" onClick={() => {handleMyPageClick(); myPageHandler();}}>
+              <img
+                src={
+                  process.env.PUBLIC_URL +
+                  (mypageIconClicked ? "/images/mypage_clicked.png" : "/images/mypage.png")
+                }
+                alt="mypage icon"
+              />
+              &nbsp;&nbsp;
+              <span>마이페이지</span>
+            </div>
+
             <div className="menu-button" onClick={() => {handleStoreIconClick();}}>
               <img
                 src={
@@ -120,18 +145,13 @@ const DropdownMenu = () => {
               &nbsp;&nbsp;
               <span>공지/이벤트</span>
             </div>
-
-            <div className="menu-button" onClick={() => {handleMyPageClick(); myPageHandler();}}>
-              <img
-                src={
-                  process.env.PUBLIC_URL +
-                  (mypageIconClicked ? "/images/mypage_clicked.png" : "/images/mypage.png")
-                }
-                alt="mypage icon"
-              />
+            
+            <div className="menu-button" onClick={() => {handleLogoutClick();}}>
+              <BiLogOut size="24px"/>
               &nbsp;&nbsp;
-              <span>마이페이지</span>
+              <span>로그아웃</span>
             </div>
+
           </div>
         </div>
       </div>

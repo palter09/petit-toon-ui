@@ -18,6 +18,7 @@
   width: 40%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 .footer_button_pink{
   margin: .5rem;
@@ -25,16 +26,6 @@
 .footer_button_pink button{
   font-weight: bold;
   background-color: #FFB4FF;
-  border-radius: .2rem;
-}
-
-.footer_button_pink button:disabled {
-  background-color: #ffb4ff;
-  border-radius: 0.2rem;
-  cursor: not-allowed;
-}
-.footer_button_pink button:hover{
-  background-color: #FF9BE6	;
   border-radius: .2rem;
 }
 .footer_button_pink_wrapper input{

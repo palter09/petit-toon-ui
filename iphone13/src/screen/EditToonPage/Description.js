@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles/Description.module.css';
 
-const Description = ({ handleDescription }) => {
-  const [inputCounter, setInputCounter] = useState(0);
+const Description = ({ description, handleDescription }) => {
+  const [inputCounter, setInputCounter] = useState();
 
+  useEffect(()=>{
+    setInputCounter(description.length);
+  },[description])
+  
   const onInputCounter = (e) => {
     const inputValue = e.target.value;
     setInputCounter(inputValue.length);
@@ -16,12 +20,11 @@ const Description = ({ handleDescription }) => {
       <textarea
         id="description"
         maxLength={150}
+        defaultValue={description}
         onChange={onInputCounter}
         required
       />
-      <p>
-        <span>{inputCounter}/150</span>
-      </p>
+      <span>{inputCounter}/150</span>
     </div>
   );
 };
