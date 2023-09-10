@@ -29,10 +29,10 @@ const Works = ({ accessUserId, userinfo, cartoons, collections, handleIntersect,
               toons={cartoons}
               containerStyle={{
                 top:'40px',
-                height: 'calc(100% - 40px)',
+                height: 'calc(100% - 200px)',
               }}
               scrollbarStyle={{
-                height: 'calc(100% - 40px)',
+                height: 'calc(100% - 100px)',
               }}
             />
           }
