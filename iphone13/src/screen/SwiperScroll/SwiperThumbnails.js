@@ -74,7 +74,7 @@ const SwiperThumbnails = ({  toons,  containerStyle, scrollbarStyle,  handleInte
       <div className='thumbnails-scrollbar' style={scrollbarStyle}>
         <div className='thumbnails-row'>
           {toons.map((toon) => (
-            <div className='thumbnails-box' key={toon.id} >
+            <div className='thumbnails-box ' key={toon.id} >
               {showChoose && selectedToonId === toon.id  ? (
                 <div className="thumbnails-choose-wrapper" onClick={()=>{setShowChoose(false)}}>
                   <button onClick={() => handleChooseClick('view')}>만화보기</button>

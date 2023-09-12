@@ -136,16 +136,16 @@
   padding: 0.1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  /*썸네일 1 row 상의 영역 height*/
-  height: 40%;
   transition: margin-top 0.3s;
+  height: 40%;
 }
+
+
 
 .collections_prevInfo_wrapper{
   text-align: center;
   font-size: 18px;
 
-  width:33%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -153,6 +153,27 @@
   justify-content: flex-start;
 
 }
+
+
+@media screen and (max-width: 1200px) {
+  .collections_prevInfo_wrapper-box {
+    width: calc(20% - 0.5rem); /* 화면 너비가 1200px 이하일 때 33%로 설정 */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .collections_prevInfo_wrapper-box {
+    width: calc(25% - 0.5rem); /* 화면 너비가 768px 이하일 때 25%로 설정 */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .collections_prevInfo_wrapper {
+    width: calc(33% - 0.5rem); /* 화면 너비가 480px 이하일 때 20%로 설정 */
+  }
+}
+
+
 .collections_preview {
   background: whitesmoke;
   outline: 1px solid pink;
