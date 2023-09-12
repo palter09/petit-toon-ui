@@ -2,11 +2,25 @@
   color: #DA5E9D;
 }
 
+.collection-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.collection-list {
+  position: relative;
+  width: 95%;
+  height: 60%;
+}
+
 .collection-input-container {
   position: relative;
   justify-content: center;
   align-items: center;
   width: 95%;
+  height: 15%;
+  top: 5%;
 }
 
 .collecion-input-title {
@@ -16,7 +30,7 @@
 .collection-input-setPublic {
   position: relative;
   width: 20%;
-  top: 10%;
+  top: 5%;
 }
 
 .collection-input-button {
@@ -27,4 +41,5 @@
   color: white;
   background: #DA5E9D;
   border-color: #DA5E9D;
+  top: 7%;
 }

@@ -63,44 +63,48 @@ const CollectionButton = ({toonId, userId, isError}) => {
        />  
 
       {/* 모달 */}
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal
+        modalStyle={{ width: "70%", height: "70%", borderRadius: "5px" }}
+        contentStyle={{ width: "100%", height: "100%"}}
+        confirmStyle={{ position: "relative", top: "-10%" }}
+        isOpen={isModalOpen} onClose={closeModal}>
         {/* 컬렉션 목록 */}
-        <div>
           <h2 className='collection-title'>컬렉션</h2>
-          <ul>
-            {collections.map((collection) => (
-              <li key={collection.id}>
-                {collection.title}{' '}
-                <button onClick={() => handleDeleteCollection(collection.id)}>삭제</button>
-                <button onClick={() => handleAddToCollection(collection.id, 'webtoonId')}>
-                  추가
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className='collection-input-container'>
-          <input
-            className='collection-input-title'
-            type="text"
-            placeholder="컬렉션 제목"
-            value={newCollection.title}
-            onChange={(e) => setNewCollection({ ...newCollection, title: e.target.value })}
-          />
-          <select
-            className='collection-input-setPublic'
-            value = {selected}
-            onChange={handleSelect}>
-            {['공개', '비공개'].map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-          <button
-            className='collection-input-button'
-            onClick={handleCreateCollection}>컬렉션 생성</button>
-        </div>
+          <div className='collection-list'>
+            <ul>
+              {collections.map((collection) => (
+                <li key={collection.id}>
+                  {collection.title}{' '}
+                  <button onClick={() => handleDeleteCollection(collection.id)}>삭제</button>
+                  <button onClick={() => handleAddToCollection(collection.id, 'webtoonId')}>
+                    추가
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className='collection-input-container'>
+            <input
+              className='collection-input-title'
+              type="text"
+              placeholder="컬렉션 제목"
+              value={newCollection.title}
+              onChange={(e) => setNewCollection({ ...newCollection, title: e.target.value })}
+            />
+            <select
+              className='collection-input-setPublic'
+              value = {selected}
+              onChange={handleSelect}>
+              {['공개', '비공개'].map((item) => (
+                <option value={item} key={item}>
+                  {item}
+                </option>
+              ))}
+            </select>
+            <button
+              className='collection-input-button'
+              onClick={handleCreateCollection}>컬렉션 생성</button>
+          </div>
       </Modal>
     </div>
   );
