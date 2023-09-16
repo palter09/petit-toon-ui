@@ -39,6 +39,8 @@ export async function fetchAPIAndExecute (url, options, callback, fallback) {
         // 정상 수행 되었음에도 JSON 데이터가 없는 경우 처리:ex) deleteWebtoon
         callback && callback(response.ok);
       }
+    }else{
+      console.log("response not ok url: ", url);
     }
   } catch (error) {
     console.error('An error occurred:', error);

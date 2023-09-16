@@ -62,7 +62,7 @@ const handleEditSubmit =  async () => {
   // 이미지들 수정 : originImgFiles와 imgFiles를 비교하며 api호출, 서버에서 자동 정렬하는 것 반영: origin, edit
   const origin = {images: [...originImgFiles]};
   const edit = {images: [...imgFiles]};
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < toonMaxLength; i++) {
     const originImg = origin.images[i];
     const editImg = edit.images[i];
     if (originImg === editImg) {

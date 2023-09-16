@@ -7,6 +7,7 @@ import { GoPaperAirplane } from "react-icons/go";
 import { RiCoinsFill } from "react-icons/ri";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { registerComment, getCommentsOfToon, deleteComment } from "../../API/CommentAPI.js";
+import { getUserInfo } from '../../API/UserAPI';
 
 
 const CommentButton = ({userId, toonId, isError}) => {
@@ -15,6 +16,7 @@ const CommentButton = ({userId, toonId, isError}) => {
   const [observeTarget, setObserveTarget] = useState(false); // observe 상태 설정
   const [comments, setComments] = useState([]);
   const [pageComment, setPageComment] = useState(0);
+  const [tmpUser, setTmpUser] = useState("");
   const {
     chatIconClicked,
     commentClicked,
@@ -42,11 +44,16 @@ const CommentButton = ({userId, toonId, isError}) => {
         }
       },
       () => {
-        console.log("comment정보 불러오기 실패");
+       // console.log("comment정보 불러오기 실패");
       }
     );
   }, [toonId, pageComment]);
 
+  // toonId가 변경될 때마다 댓글 배열을 초기화하고 새로운 데이터를 가져옴
+  useEffect(() => {
+    setComments([]);
+    setPageComment(0);
+  }, [toonId]);
   // 페이지 로드 시 댓글 데이터 가져오기
   useEffect(() => {
     fetchComments();
@@ -57,7 +64,12 @@ const CommentButton = ({userId, toonId, isError}) => {
       setObserveTarget(true);
     }
   },[comments]);
-
+  //유저 정보 받아오기
+  useEffect(()=>{
+    getUserInfo(userId,
+      (data)=>setTmpUser(data),
+      ()=>{console.log("유저 정보 조회 실패")})  
+  },[userId])
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -66,6 +78,7 @@ const CommentButton = ({userId, toonId, isError}) => {
   };
   const handleCommentSubmit = () => {
     if (commentInput.trim() !== "") {
+
       handleCreateComment(commentInput);
       setCommentInput("");
     }
@@ -104,12 +117,21 @@ const CommentButton = ({userId, toonId, isError}) => {
           const newCommentId = data.commentId;
           if (!comments.some((comment) => comment.commentId === newCommentId)) {
             console.log("댓글 입력 성공");
+            const currentDate = new Date(); // 현재 시간을 가져옵니다.    
+            const TIME_ZONE = 9 * 60 * 60 * 1000; // 9시간
+            const isoString = new Date(currentDate.getTime() + TIME_ZONE).toISOString().slice(0, -5); // ISO 8601 형식으로 변환합니다.
             setComments((prevComments) => {
               const newComment = {
                 commentId: newCommentId,
-                userId: userId,
+                userInfo:{
+                  id: userId,
+                  nickname: tmpUser.nickname,
+                  tag: tmpUser.tag,
+                  profileImagePath: tmpUser.profileImagePath
+                },
                 content: content,
                 myComment: true,
+                createdDateTime: isoString
               };
               return [newComment, ...prevComments];
             });
@@ -172,7 +194,7 @@ const CommentButton = ({userId, toonId, isError}) => {
                   <div className='comment-section-comment-wrapper' key={item.commentId}>
                     <div className='comment-section-comment-header-wrapper'>
                       <div className='comment-section-comment-header-nickname'>
-                        {item.userId}
+                        {item.userInfo.nickname}
                       </div>
                       <div className='comment-section-comment-header-delete'>
                         {!item.myComment ? null: (
@@ -184,12 +206,12 @@ const CommentButton = ({userId, toonId, isError}) => {
                       {item.content}
                     </div>
                     <div className='comment-section-comment-footer-wrapper'>
-                      {item.commentId}
+                      {item.createdDateTime}
                     </div>
                   </div>
                 ))}
                 {!myPageIsOpen || !observeTarget  ? null : (
-                  <div className='comment-section-comment-wrapper' ref={targetRef}>
+                  <div className='comment-section-comment-wrapper' api-reload-target={"true"} ref={targetRef}>
                     loading...
                   </div>
                 )}

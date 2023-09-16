@@ -1,28 +1,44 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import SwiperToon from "./ToonPage/SwiperToon.js";
 import Header from "./Header/Header.js";
-import BottomButtons from "./ToonPage/BottomButtons.js";
 import { useParams } from "react-router";
 import { getCookie } from "../API/HandleTokens.js";
+import { getFeed } from "../API/FeedAPI.js";
+import BottomButtons from "./ToonPage/BottomButtons.js";
 
 const ToonPage = () => {
   const param = useParams();
+  const pageSize = 2;
   const toonId = param.id;
   const loginUserId = parseInt(getCookie("loginUserId"));
   const [isError, setIsError] = useState(false);
-  const onIsError = useCallback(() => setIsError(true), []);//useCallback: 처음 렌더링 될때 함수 만들고 이후 안만듦
+  const onIsError = useCallback(() => setIsError((prev) => (!prev)), []);
+  const [feed, setFeed] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(()=>{
+    getFeed(currentPage, pageSize,
+       (data)=>{setFeed(data.feed);},
+       ()=>{console.log("feed재호출 실패");}
+        )
+  },[currentPage])
+
+  const handleIntersect = () =>{
+    setCurrentPage((prev)=>(prev+1));
+  }
+
   return (
     <div className="container">
-      <div className="item">
         <Header />
-        <div className="divLineHeader" />
         <SwiperToon
+          feed={feed}
+          userId={loginUserId}
           toonId={toonId}
+          pageSize={pageSize}
           onIsError={onIsError}
+          onIntersect={handleIntersect}
         />
-        <div className="divLineBottom" />
         <BottomButtons userId={loginUserId} toonId={toonId} isError={isError} />
-      </div>
     </div>
   );
 };
