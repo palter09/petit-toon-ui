@@ -1,61 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { defaultProfileImage, uploadProfileImage } from "../../API/ProfileAPI";
+import { defaultProfileImage, editProfile, uploadProfileImage } from "../../API/ProfileAPI";
+import useDetectClose from '../../hooks/useDetectClose';
 import styles from './Profile.module.css'; 
-import Modal from '../Modal/Modal.js';
-import ModalPortal from '../Modal/Portal.js';
-import ImgUpload from '../RegToonPage/ImgUpload';
+
+import EditModal from './EditModal';
 import { useNavigate } from 'react-router';
 
-const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, numFollowings, numFollowers, handleFollower, handleProfileImage, reload}) => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [modalStatusMessage, setModalStatusMessage] = useState("");
-	const [inputCounter, setInputCounter] = useState(0);
+const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons,handleFollower, handleProfileImage, reload}) => {
 	const navigate = useNavigate();
-
-	const handleStatusMessage = (message) =>{setModalStatusMessage(message);}
-
-	const onInputCounter = (e) => {
-		const inputValue = e.target.value;
-		setInputCounter(inputValue.length);
-		handleStatusMessage(inputValue);
-	};
+	const [isOpenModal, setIsOpenModal] = useState(false);
 
 	//프로필 수정 누를시
 	const handleOpenModal = () => {
-		setIsModalOpen(true);
+		setIsOpenModal(true);
 	};
 	//모달에서 프로필 수정 취소
 	const handleCloseModal = () => {
-		setIsModalOpen(false);
-		setModalStatusMessage(userinfo.statusMessage);
+		setIsOpenModal(false);
 	};
 	//모달에서 프로필 수정 확인
-	const handleEditProfile = () => {
-		setIsModalOpen(false);
-		if(profileImage===userinfo.profileImagePath||profileImage===""){//default profile로 설정
-			defaultProfileImage(
-				()=>{
-					reload();
-					console.log("default 프로필 이미지로 설정되었습니다.");
-				},
-				()=>{
-					console.log("default 프로필 설정 도중 실패");
-				}
-			);
-			
-		}else{
-			uploadProfileImage(
-				profileImage,
-				()=>{
-					reload();
-					console.log("프로필 이미지가 수정되었습니다.");
-				},
-				()=>{
-					console.log("프로필 이미지 수정 실패");
-				}
+	const handleEditProfile = (nickname, tag, password = "qwer1234!", statusMessage) => {
+		console.log(nickname,tag,password,statusMessage);
+		if(profileImage!==userinfo.profileImagePath){
+			uploadProfileImage(profileImage,
+				()=>{reload(); console.log("프로필 이미지 수정 성공");},
+				()=>{console.log("프로필 이미지 수정 실패");}
 			)
 		}
-		setModalStatusMessage(userinfo.statusMessage);
+		editProfile(nickname, tag, password, statusMessage,
+			()=>{reload(); console.log("프로필 정보 변경 성공")},
+			()=>{console.log("프로필 정보 변경 실패")}
+		)
+		handleCloseModal();
 	};
 		
 	return (
@@ -89,12 +65,12 @@ const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, 
 							<div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}
 										onClick={()=>{navigate(`/userinfo/follow/${userinfo.id}/0`)}}>
 										<p style={{margin:0}}>팔로워</p>
-                <p style={{margin:0}}><b>{numFollowers|| 0}</b></p>
+                <p style={{margin:0}}><b>{userinfo.followerCount|| 0}</b></p>
               </div>
               <div style={{display:'flex', width:'33%', flexDirection:'column', alignItems:'center',justifyContent:'flex-start'}}
 										onClick={()=>{navigate(`/userinfo/follow/${userinfo.id}/1`)}}>
                 <p style={{margin:0}}>팔로잉</p>
-                <p style={{margin:0}}><b>{numFollowings || 0}</b></p>
+                <p style={{margin:0}}><b>{userinfo.followCount || 0}</b></p>
               </div>
             </div>
 					</div>
@@ -121,45 +97,14 @@ const Profile = ({ accessUserId, userinfo, isFollow, profileImage, numCartoons, 
 						}
 						</div>
 						{/* 모달 */}
-						{isModalOpen && (
-						<ModalPortal>
-							<Modal 
-									modalStyle={{width:'250px',height:'250px',borderRadius:'1rem'}} 
-									contentStyle={{width: '100%', height:'100%', display:'flex',flexDirection:'column', alignItems:'center',justifyContent:'center'}}
-									confirmStyle={{display:'none'}}
-									isOpen={isModalOpen} onClose={handleCloseModal}
-							>
-								<div className={styles.modal_profileImage}>
-									<ImgUpload
-										style={{ width:'125px', height:'125px', margin:'0', borderRadius:'50%'}}
-										imgFile={profileImage}
-										setImgFile={(newImgFile) => {
-											handleProfileImage(newImgFile);
-										}}
-										inputId={'userinfo_profileImage'}
-										inputName={'userinfo_profileImage'}
-										isDisabled={false}
-									/>
-								</div>
-								<textarea
-								 	className={styles.modal_statusMessage}
-        					id="statusMessage"
-        					maxLength={40}
-									placeholder={modalStatusMessage}
-        					onChange={onInputCounter}
-        					required
-      					/>
-        				<span className={styles.modal_statusMessage_length}>{inputCounter}/40</span>
-								<div className={styles.modal_bottom_wrapper}>
-									<button className={styles.modal_cancel_button} onClick={handleCloseModal}>
-										취소
-									</button>
-									<button className={styles.modal_confirm_button} onClick={handleEditProfile}>
-										확인
-									</button>
-								</div>
-							</Modal>
-						</ModalPortal>
+						{isOpenModal && (
+							<EditModal 
+								isOpenModal={isOpenModal} 
+								onCloseModal={handleCloseModal} 
+								onSubmit={handleEditProfile}
+								userinfo={userinfo}
+								profileImage={profileImage}
+								onProfileImage={handleProfileImage}/>
 						)}
           </div>
 				</td>

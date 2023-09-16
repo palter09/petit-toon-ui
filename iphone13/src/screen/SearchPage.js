@@ -20,8 +20,8 @@ const SearchPage = () => {
     setCurrentUserPage(0);
     setCurrentToonPage(0);
     if (searchQuery) {
-      searchUser(searchQuery, 0, 4, (data) => {setUserResult(data.users)}, ()=>{setUserResult([])});
-      searchToon(searchQuery, 0, 9, (data) => {setToonResult(data.cartoons)}, ()=>{setToonResult([])});
+      searchUser(searchQuery, 0, 4, (data) => {setUserResult(data.users)}, (data)=>{console.log(data);setUserResult([])});
+      searchToon(searchQuery, 0, 9, (data) => {setToonResult(data.cartoons)}, (data)=>{console.log(data);setToonResult([])});
     }
   }, [searchQuery]);
 

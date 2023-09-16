@@ -1,28 +1,25 @@
 .dropdown-wrapper{
-  right: 0px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 19px;
-  position: absolute;
   font-weight: bold;
+  position:absolute;
+  right: 3px;
 }
 
 .dropdown-button {
-  position: absolute;
   cursor: pointer;
   z-index: 9;
-  right: 15px;
-  top: 48px;
+  right:15px;
+  top:48px;
 }
 
 .dropdown-container {
   position: absolute;
   text-align: center;
   z-index: 9;
-  right: -55px;
-  top: 48px;
 }
 
 .menu {

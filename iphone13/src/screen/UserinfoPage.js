@@ -16,8 +16,6 @@ const UserinfoPage = () => {
   const [userinfo, setUserinfo] = useState({});
   const [is404, setIs404] = useState(false);
   const [numCartoons, setNumCartoons] = useState(0);
-  const [numFollowers, setNumFollowers] = useState(0);
-  const [numFollowings, setNumFollowings] = useState(0);
   const [pageCollectionAPI, setPageCollectionAPI] = useState(0);
 
   const userid = useParams().id;
@@ -35,6 +33,7 @@ const UserinfoPage = () => {
 
   //404에러 핸들러
   const handleUndefinedUser = (errorResponseData) => {
+    console.log(errorResponseData);
     console.log("error code:", errorResponseData.code);
     console.log("error message:", errorResponseData.message);
     if (errorResponseData && errorResponseData.code === "404") {
@@ -43,7 +42,7 @@ const UserinfoPage = () => {
   };
 
   const loadInfo = () => {getUserInfo(userid, setUserinfo, handleUndefinedUser);}
-  const loadToons = () => {getWebtoons(userid, (data) =>{ setCartoons(data.cartoons); }, (_) =>{ console.error("웹툰 목록 불러오기 실패"); })}
+  const loadToons = () => {getWebtoons(userid, (data) =>{ setCartoons(data.cartoons); }, (_) =>{console.error("웹툰 목록 불러오기 실패"); })}
   const loadCollections = () => {
     getCollections(userid, pageCollectionAPI, 9,
       (data) =>{
@@ -117,9 +116,7 @@ const UserinfoPage = () => {
 
   return (
     <div className="container">
-      <div className="item">
         <Header />
-        <div className="divLineHeader" />
         {is404 ? (
           <Error404 what = {'유저를'} />
         ) : (
@@ -130,13 +127,10 @@ const UserinfoPage = () => {
               isFollow={isFollow}
               profileImage={profileImage}
               numCartoons={numCartoons} 
-              numFollowers={numFollowers}
-              numFollowings={numFollowings}
               handleFollower={handleFollower}
               handleProfileImage={handleProfileImage}
               reload={loadInfo}
             />
-            <div className="divLineMid" />
             <Works 
               accessUserId={accessUserId}
               userinfo={userinfo} 
@@ -147,11 +141,9 @@ const UserinfoPage = () => {
               followings={followings}
               followers={followers}
             />
-            <div className="divLineBottom" />
           </>
         )}
       </div>
-    </div>
   );
 };
 

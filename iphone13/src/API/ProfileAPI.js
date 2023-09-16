@@ -39,3 +39,27 @@ export async function defaultProfileImage(callback, fallback){
 
   fetchAPIAndExecute(url, options, callback, fallback);
 }
+
+/* 유저 프로필 정보 변경 */
+export async function editProfile(nickname, tag, password, statusMessage, callback, fallback) {
+  const url = `${process.env.REACT_APP_SERVER_IP}/api/v1/user`;
+  
+  const headers = new Headers({
+    'Content-Type': 'application/json;charset=UTF-8',
+    Authorization: `Bearer ${getCookie("accessToken")}`
+  });
+  const requestBody = {
+    nickname : nickname,
+    tag : tag,
+    password : password,
+    statusMessage : statusMessage,
+  };
+
+  const options = {
+    method: 'PATCH',
+    headers: headers,
+    body: JSON.stringify(requestBody)
+  };
+
+  fetchAPIAndExecute(url, options, callback, fallback);
+}
